@@ -3,6 +3,7 @@ import './ProductDisplay.css';
 import star_icon from '../Assets/star_icon.png';
 import star_dull_icon from '../Assets/star_dull_icon.png';
 import { ShopContext } from "../../Context/ShopContext";
+import { ToastContainer } from "react-toastify";
 
 const ProductDisplay = (props) => {
     const { product } = props;
@@ -50,6 +51,7 @@ const ProductDisplay = (props) => {
                     </div>
                 </div>
                 <button onClick={()=>{addToCart(product.id)}}>ADD TO CART</button>
+                <ToastContainer toastClassName="cart-toast" />
                 <p className='productdisplay-right-category'><span>Category :</span> {product.category} , T-shirt, Crop Top</p>
                 <p className='productdisplay-right-category'><span>Tags :</span> Modern , Latest</p>
             </div>

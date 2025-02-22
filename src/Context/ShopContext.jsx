@@ -1,5 +1,7 @@
 import React, { useState, createContext } from "react";
 import all_product from "../Components/Assets/all_product";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const ShopContext = createContext(null);
 
@@ -14,9 +16,17 @@ const getDefaultCart = () => {
 const ShopContextProvider = (props) => {
 
     const [cartItems, setCartItems] = useState(getDefaultCart());
-
-
+      
     const addToCart = (itemId) => {
+        toast.success('Item added to cart!', {
+            position: 'top-right',
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
+      
         setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
         console.log(cartItems);
     }
