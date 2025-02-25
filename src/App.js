@@ -11,7 +11,10 @@ import Signup from './Pages/Signup';
 import men_banner from './Components/Assets/banner_mens.png';
 import women_banner from './Components/Assets/banner_women.png';
 import kid_banner from './Components/Assets/banner_kids.png';
-
+import ForgotPassword from './Pages/ForgotPassword';
+import ResetPassword from './Pages/ResetPassword';
+import ContactUs from './Pages/ContactUs'
+import Favorites from "./Pages/Favorites"; // Import Favorites Page
 
 function App() {
   return (
@@ -23,12 +26,19 @@ function App() {
         <Route path='/men' element={<ShopCategory banner={men_banner} category="Men"/>}/>
         <Route path='/women' element={<ShopCategory banner={women_banner}category="Women"/>}/>
         <Route path='/kids' element={<ShopCategory banner={kid_banner} category="Kid"/>}/>
+        <Route path='/men' element={<ShopCategory banner={men_banner} category="Men"/>}/>
+        <Route path='/women' element={<ShopCategory banner={women_banner}category="Women"/>}/>
+        <Route path='/kids' element={<ShopCategory banner={kid_banner} category="Kid"/>}/>
         <Route path="/product" element={<Product/>}>
           <Route path=':productId' element={<Product/>}/>
         </Route>
         <Route path='/cart' element={<Cart/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/signup' element={<Signup/>}/>
+        <Route path='/forgot-password' element={<ForgotPassword/>}/>
+        <Route path='/reset-password' element={<ResetPassword/>}/>
+        <Route path='/contact-us' element={<ContactUs/>}/>
+        <Route path="/favorites" element={<Favorites />} />
       </Routes>
       <Footer/>
       </BrowserRouter>

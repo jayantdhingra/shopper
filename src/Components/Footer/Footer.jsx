@@ -4,8 +4,10 @@ import footer_logo from '../Assets/logo_big.png'
 import instagram_icon from '../Assets/instagram_icon.png'
 import pintester_icon from '../Assets/pintester_icon.png'
 import whatsapp_icon from '../Assets/whatsapp_icon.png'
+import { useNavigate } from "react-router-dom"; // For navigation
 
 const Footer = () => {
+  const navigate = useNavigate(); // Initialize navigation
   return (
     <div className='footer'>
         <div className="footer-logo">
@@ -17,7 +19,7 @@ const Footer = () => {
             <li>Products</li>
             <li>Offices</li>
             <li>About</li>
-            <li>Contact</li>
+            <li onClick={() => navigate("/contact-us")}>Contact</li>
         </ul>
         <div className="footer-social-icon">
             <div className="footer-icons-container">
