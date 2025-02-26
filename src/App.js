@@ -15,6 +15,7 @@ import ForgotPassword from './Pages/ForgotPassword';
 import ResetPassword from './Pages/ResetPassword';
 import ContactUs from './Pages/ContactUs'
 import Favorites from "./Pages/Favorites"; // Import Favorites Page
+import CheckOutAddress from './Pages/CheckOutAddress';
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
         <Route path='/reset-password' element={<ResetPassword/>}/>
         <Route path='/contact-us' element={<ContactUs/>}/>
         <Route path="/favorites" element={<Favorites />} />
+        <Route path="/checkout-address" element={<CheckOutAddress />} />
       </Routes>
       <Footer/>
       </BrowserRouter>
