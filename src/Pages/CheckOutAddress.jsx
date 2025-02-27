@@ -43,7 +43,12 @@ const CheckOutAddress = () => {
                 <label htmlFor="save-info">Save contact information</label>
             </div>
 
-            <button className="continue-button" onClick={() => Navigate('/checkout-shipping')}>Continue to shipping</button>
+            <button className="continue-button" onClick={(event) => { 
+                event.preventDefault(); 
+                Navigate('/checkout-shipping');
+            }}>
+            Continue to shipping
+            </button>
             </form>
         </div>
 

@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import "../Styles/CheckOutShipping.css"; // Import the CSS file
 import CheckOutItems from "../Components/CheckOutItems/CheckOutItems";
+import { useNavigate } from "react-router-dom";
 
 const CheckOutShipping = () => {
+  const Navigate = useNavigate();
   const [selectedShipping, setSelectedShipping] = useState("usps");
 
   return (
@@ -34,7 +36,7 @@ const CheckOutShipping = () => {
           </label>
         </div>
 
-        <button className="continue-button">Continue to payment</button>
+        <button className="continue-button" onClick={() => Navigate('/checkout-payment')}>Continue to payment</button>
       </div>
 
       {/* Right Side - Cart Summary */}
@@ -45,7 +47,7 @@ const CheckOutShipping = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CheckOutShipping;
+export default CheckOutShipping

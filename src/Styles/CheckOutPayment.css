@@ -1,4 +1,4 @@
-/* CheckOutAddress.css */
+/* CheckOutCredit.css */
 
 body {
     margin: 0;
@@ -36,14 +36,57 @@ body {
     color: black;
   }
   
-  .section-title {
-    font-size: 18px;
-    font-weight: bold;
+  /* Payment Method Buttons */
+  .payment-method {
+    display: flex;
     margin-top: 20px;
   }
   
-  .shipping-form {
+  .payment-method button {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid #000;
+    background-color: white;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .payment-method button.active {
+    background-color: black;
+    color: white;
+  }
+  
+  .payment-method button:first-child {
+    border-right: none;
+  }
+  
+  .paypal-logo {
+    width: 150px;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+  
+  /* Payment Form */
+  .payment-form {
     margin-top: 20px;
+  }
+  
+  .section-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .input-field {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+    height: 100px;
   }
   
   .input-row {
@@ -51,26 +94,27 @@ body {
     gap: 10px;
   }
   
-  .input-field {
-    flex: 1;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-  }
-  
-  .full-width {
-    width: 100%;
-    margin-top: 10px;
-  }
-  
-  .save-contact {
+  .save-card {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     margin: 15px 0;
   }
   
-  .continue-button {
+  .toggle-switch {
+    width: 40px;
+    height: 20px;
+    background-color: #ccc;
+    border-radius: 20px;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .toggle-switch:checked {
+    background-color: black;
+  }
+  
+  .pay-button {
     width: 100%;
     padding: 12px;
     background-color: black;
@@ -92,56 +136,5 @@ body {
   .cart-title {
     font-size: 18px;
     font-weight: bold;
-  }
-  
-  .cart-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px 0;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .item-name {
-    font-weight: bold;
-  }
-  
-  .item-price {
-    font-size: 16px;
-    font-weight: bold;
-    margin-top: 10px;
-  }
-  
-  .remove-link {
-    color: red;
-    text-decoration: none;
-    font-size: 12px;
-  }
-  
-  .remove-link:hover {
-    text-decoration: underline;
-  }
-  
-  .coupon-input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    margin-top: 20px;
-    border-radius: 5px;
-  }
-  
-  .price-summary {
-    margin-top: 20px;
-  }
-  
-  .price-summary p {
-    display: flex;
-    justify-content: space-between;
-    font-size: 14px;
-    margin: 5px 0;
-  }
-  
-  .total-price {
-    font-weight: bold;
-    font-size: 16px;
   }
   

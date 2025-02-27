@@ -21,12 +21,12 @@ body {
   }
   
   .checkout-title {
-    font-size: 24px;
+    font-size: 30px;
     font-weight: bold;
   }
   
   .checkout-steps {
-    font-size: 14px;
+    font-size: 20px;
     color: #6b7280;
     margin: 10px 0;
   }
@@ -40,6 +40,7 @@ body {
     font-size: 18px;
     font-weight: bold;
     margin-top: 20px;
+    margin-bottom: 20px;
   }
   
   .shipping-option {
@@ -48,9 +49,10 @@ body {
     border: 2px solid #000;
     border-radius: 5px;
     padding: 15px;
-    margin-bottom: 15px;
+    margin-bottom: 200px;
     cursor: pointer;
     background-color: #fff;
+    height: 100px;
   }
   
   .shipping-option input {

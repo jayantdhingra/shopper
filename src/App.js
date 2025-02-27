@@ -17,6 +17,7 @@ import ContactUs from './Pages/ContactUs'
 import Favorites from "./Pages/Favorites"; // Import Favorites Page
 import CheckOutAddress from './Pages/CheckOutAddress';
 import CheckOutShipping from './Pages/CheckOutShipping';
+import CheckOutPayment from './Pages/CheckOutPayment';
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/checkout-address" element={<CheckOutAddress />} />
         <Route path="/checkout-shipping" element={<CheckOutShipping />} />
+        <Route path="/checkout-payment" element={<CheckOutPayment />} />
       </Routes>
       <Footer/>
       </BrowserRouter>
