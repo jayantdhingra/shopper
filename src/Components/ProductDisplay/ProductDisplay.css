@@ -118,3 +118,23 @@
     color: black !important;
 }
 
+.size-option {
+    cursor: pointer;
+    padding: 5px 10px;
+    border: 1px solid black;
+    margin: 5px;
+    text-align: center;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .size-option:hover {
+    background-color: lightgray;
+  }
+  
+  .size-option.selected {
+    background-color: gray;
+    color: white;
+    font-weight: bold;
+  }
+  
+

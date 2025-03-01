@@ -13,28 +13,43 @@ const CheckOutItems = () => {
                 <p>Products</p>
                 <p>Title</p>
                 <p>Price</p>
+                <p>Size</p>
                 <p>Quantity</p>
                 <p>Total</p>
                 <p>Remove</p>
             </div>
             <hr />
-            {all_product.map((e) => {
-                if (cartItems[e.id] > 0) {
-                    return <div>
-                        <div className="CheckOutItems-format CheckOutItems-format-main">
-                            <img src={e.image} alt="" className='carticon-product-icon' />
-                            <p>{e.name}</p>
-                            <p>${e.new_price}</p>
-                            <button className='CheckOutItems-quantity'>{cartItems[e.id]}</button>
-                            <p>${e.new_price * cartItems[e.id]}</p>
-                            <img className='CheckOutItems-remove-icon' src={remove_icon} onClick={() => removeFromCart(e.id)} alt="" />
-                        </div>
-                        <hr />
-                    </div>
+            {Object.keys(cartItems)
+                .filter((cartKey) => cartItems[cartKey].quantity > 0) // ✅ Filter out unselected items
+                .map((cartKey) => {
+                    const [productId, size] = cartKey.split("_"); // ✅ Extract product ID and size
+                    const product = all_product.find((p) => p.id === Number(productId));
 
-                }
-                return null;
-            })}
+                    if (!product) return null; // ✅ Ensure product exists
+
+                    return (
+                        <div key={cartKey}>
+                            <div className="CheckOutItems-format CheckOutItems-format-main">
+                                <img src={product.image} alt="" className='carticon-product-icon' />
+                                <p>{product.name}</p>
+                                <p>${product.new_price}</p>
+                                <p>{size}</p> {/* ✅ Display selected size */}
+                                <button className='CheckOutItems-quantity'>{cartItems[cartKey].quantity}</button>
+                                <p>${(product.new_price * cartItems[cartKey].quantity).toFixed(2)}</p>
+                                <img
+                                    className='CheckOutItems-remove-icon'
+                                    src={remove_icon}
+                                    onClick={() => removeFromCart(product.id, size)}
+                                    alt="Remove"
+                                />
+                            </div>
+                            <hr />
+                        </div>
+                    );
+                })}
+
+
+
             <div className="CheckOutItems-down">
                 <div className="CheckOutItems-total">
                     <h1>Cart Totals</h1>
