@@ -13,7 +13,7 @@ const ContactUs = () => {
         <input type="input" placeholder="Phone" className="input-field" />
         <input type="input" placeholder="Message" className="input-field" />
 
-        <button className="contact-button">Reset Password</button>
+        <button className="contact-button">Send Enquiry</button>
       </div>
     </div>
   );

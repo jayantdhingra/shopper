@@ -1,5 +1,5 @@
 .CheckOutItems{
-    margin: 100px 170px;
+    margin: 100px 0px;
 }
 
 .CheckOutItems hr{
@@ -57,7 +57,7 @@
 .CheckOutItems-total-item{
     display: flex;
     justify-content: space-between;
-    padding: 15px 0px;
+    padding: 25px 0px;
 }
 
 .CheckOutItems-total button{
@@ -83,9 +83,9 @@
 }
 
 .CheckOutItems-promobox{
-    width:504px;
+    width:400px;
     margin-top: 15px;
-    padding-left: 20px;
+    padding-left: 0px;
     height: 58px;
     background: #eaeaea;
 
