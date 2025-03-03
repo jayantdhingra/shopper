@@ -1,7 +1,6 @@
-import React, { useContext, useState, useEffect, useRef } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "./ShopCategory.css";
 import { ShopContext } from "../../Context/ShopContext";
-import Item from "../Item/Item";
 import { Link } from "react-router-dom";
 
 const ShopCategory = ({ category, banner, searchQuery }) => {
@@ -14,41 +13,47 @@ const ShopCategory = ({ category, banner, searchQuery }) => {
   }, [category]);
 
   const handleExploreMore = () => {
-    const currentScroll = window.scrollY;  
     setShowAll(true);
-    setTimeout(() => {
-      window.scrollTo(0, currentScroll); 
-    }, 0);
   };
 
-  
-  const categoryProducts = all_product.filter(item =>
-    item.category.toLowerCase() === category.toLowerCase()
+  // ✅ Filter products by category
+  const categoryProducts = all_product.filter(
+    (item) => item.category.toLowerCase() === category.toLowerCase()
   );
 
-  let filteredProducts = categoryProducts.filter(item =>
-    !searchQuery || item.name.toLowerCase().includes(searchQuery.toLowerCase())
+  // ✅ Apply search filter
+  let filteredProducts = [...categoryProducts].filter(
+    (item) =>
+      !searchQuery || item.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-
-  if (sortOption === "price-low") {
-    filteredProducts.sort((a, b) => a.new_price - b.new_price);
-  } else if (sortOption === "price-high") {
-    filteredProducts.sort((a, b) => b.new_price - a.new_price);
-  } else if (sortOption === "name") {
-    filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+  // ✅ Sorting logic
+  switch (sortOption) {
+    case "price-low":
+      filteredProducts.sort((a, b) => a.new_price - b.new_price);
+      break;
+    case "price-high":
+      filteredProducts.sort((a, b) => b.new_price - a.new_price);
+      break;
+    case "name":
+      filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+      break;
+    default:
+      break;
   }
-
 
   const initialProducts = filteredProducts.slice(0, 9);
   const remainingProducts = filteredProducts.slice(9);
 
   return (
     <div className="shop-category">
-      <img className="shopcategory-banner" src={banner} alt="" />
+      <img className="shopcategory-banner" src={banner} alt="Category Banner" />
+
       <div className="shopcategory-indexSort">
         <p>
-          <span><strong>Showing {showAll ? filteredProducts.length : initialProducts.length}</strong></span>
+          <strong>
+            Showing {showAll ? filteredProducts.length : initialProducts.length}
+          </strong>
           out of <strong>{categoryProducts.length}</strong> products
         </p>
         <div className="shopcategory-sort">
@@ -62,36 +67,30 @@ const ShopCategory = ({ category, banner, searchQuery }) => {
         </div>
       </div>
 
-     
+      {/* ✅ Product List */}
       <div className="shopcategory-products">
-        {initialProducts.map((item) => (
-          <div key={item.id}>
+        {[...(showAll ? filteredProducts : initialProducts)].map((item) => (
+          <div key={item.id} className="product-item">
             <Link to={`/product/${item.id}`}>
-              <img src={item.image} alt={item.name} />
+              <img src={item.image} alt={item.name} className="product-image" />
             </Link>
+            <p className="product-name">{item.name}</p>
+            <div className="product-prices">
+              {item.old_price && (
+                <p className="product-price-old">${item.old_price.toFixed(2)}</p>
+              )}
+              <p className="product-price-new">${item.new_price.toFixed(2)}</p>
+            </div>
 
-            <p>{item.name}</p>
-            <p>${item.new_price}</p>
-          </div>
-        ))}
-        {showAll && remainingProducts.map((item) => (
-          <div key={item.id}>
-            <Link to={`/product/${item.id}`}>
-              <img src={item.image} alt={item.name} />
-            </Link>
-
-            <p>{item.name}</p>
-            <p>${item.new_price}</p>
           </div>
         ))}
       </div>
 
-
-     
+      {/* ✅ "Explore More" Button */}
       {!showAll && remainingProducts.length > 0 && (
-        <div className="shopcategory-loadmore" onClick={handleExploreMore}>
+        <button className="shopcategory-loadmore" onClick={handleExploreMore}>
           Explore More
-        </div>
+        </button>
       )}
     </div>
   );
