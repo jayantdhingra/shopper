@@ -2,11 +2,14 @@ import React, { useContext, useState, useEffect } from "react";
 import "./ShopCategory.css";
 import { ShopContext } from "../../Context/ShopContext";
 import { Link } from "react-router-dom";
+import favoriteIcon from "../Assets/favorite_icon.png"; // ✅ Import favorite icon
+import favoriteFilledIcon from "../Assets/fav_icon.png"; // ✅ Import filled heart icon
 
 const ShopCategory = ({ category, banner, searchQuery }) => {
   const { all_product } = useContext(ShopContext);
   const [sortOption, setSortOption] = useState("default");
   const [showAll, setShowAll] = useState(false);
+  const [favorites, setFavorites] = useState(new Set()); // ✅ Track favorites
 
   useEffect(() => {
     setShowAll(false);
@@ -14,6 +17,19 @@ const ShopCategory = ({ category, banner, searchQuery }) => {
 
   const handleExploreMore = () => {
     setShowAll(true);
+  };
+
+  // ✅ Toggle favorite status
+  const toggleFavorite = (itemId) => {
+    setFavorites((prevFavorites) => {
+      const newFavorites = new Set(prevFavorites);
+      if (newFavorites.has(itemId)) {
+        newFavorites.delete(itemId);
+      } else {
+        newFavorites.add(itemId);
+      }
+      return newFavorites;
+    });
   };
 
   // ✅ Filter products by category
@@ -71,6 +87,16 @@ const ShopCategory = ({ category, banner, searchQuery }) => {
       <div className="shopcategory-products">
         {[...(showAll ? filteredProducts : initialProducts)].map((item) => (
           <div key={item.id} className="product-item">
+            <button 
+              className={`favorite-btn ${favorites.has(item.id) ? "favorited" : ""}`} 
+              onClick={() => toggleFavorite(item.id)}
+            >
+              <img 
+                src={favorites.has(item.id) ? favoriteFilledIcon : favoriteIcon} 
+                alt="Favorite" 
+              />
+            </button>
+
             <Link to={`/product/${item.id}`}>
               <img src={item.image} alt={item.name} className="product-image" />
             </Link>

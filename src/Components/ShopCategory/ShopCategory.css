@@ -1,7 +1,7 @@
 .shopcategory-banner{
     display: block;
     margin: 30px auto;
-    width: 82%;
+    width: 100%;
 }
 .shopcategory-indexSort{
     display: flex;
@@ -29,6 +29,7 @@
     width: 233px;
     height: 69px;
     border-radius: 75px;
+    border: none;
     background: #ff4141;
     color: white;
     font-size: 18px;
@@ -80,7 +81,44 @@
     color: #e60023; /* Red color for discounted price */
     font-size: 16px;
   }
+
+  /* Ensure each product item has a relative position */
+.product-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; 
+    max-width: 350px;/* Adjust based on your layout */
+    padding: 10px;
+    text-align: center;
+  }
   
-
-
-
+  /* Favorite button styling */
+  .favorite-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 2;
+  }
+  
+  .favorite-btn img {
+    width: 25px; /* Adjust size */
+    height: 25px;
+    opacity: 0.7; /* Default transparency */
+    transition: opacity 0.3s ease, transform 0.2s ease;
+  }
+  
+  .favorite-btn:hover img {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  
+  /* When product is favorited */
+  .favorite-btn.favorited img {
+    opacity: 1;
+  }
+  

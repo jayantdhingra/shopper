@@ -33,9 +33,8 @@ function App() {
 }
 
 function MainContent({ searchQuery, setSearchQuery }) {
-  const location = useLocation(); // ✅ Get current route
+  const location = useLocation(); 
 
-  // ✅ Check if the current page belongs to Men, Women, or Kids categories
   const searchPages = ["/men", "/women", "/kids"];
   const isSearchNavbar = searchPages.some((path) => location.pathname.startsWith(path));
 

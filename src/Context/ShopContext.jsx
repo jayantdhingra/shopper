@@ -16,10 +16,22 @@ const getDefaultCart = () => {
 const ShopContextProvider = (props) => {
 
     const [cartItems, setCartItems] = useState(getDefaultCart());
-      
+    const [favorites, setFavorites] = useState([]); // ✅ Initialize favorites as an empty array
+
+    const addToFavorites = (productId) => {
+        if (!favorites.includes(productId)) {
+            setFavorites([...favorites, productId]);
+        }
+    };
+
+    const removeFromFavorites = (productId) => {
+        setFavorites(favorites.filter((id) => id !== productId));
+    };
+
+
     const addToCart = (itemId, size) => {
         const cartKey = `${itemId}_${size}`;
-    
+
         toast.success('Item added to cart!', {
             position: 'top-right',
             autoClose: 1000,
@@ -28,7 +40,7 @@ const ShopContextProvider = (props) => {
             pauseOnHover: true,
             draggable: true
         });
-    
+
         setCartItems((prev) => {
             const updatedCart = {
                 ...prev,
@@ -36,63 +48,66 @@ const ShopContextProvider = (props) => {
                     ? { ...prev[cartKey], quantity: prev[cartKey].quantity + 1 }
                     : { quantity: 1, size }
             };
-    
-            console.log("Updated Cart Items:", updatedCart); 
+
+            console.log("Updated Cart Items:", updatedCart);
             return updatedCart;
         });
     };
-    
+
 
     const removeFromCart = (itemId, size) => {
         const cartKey = `${itemId}_${size}`;
-    
+
         setCartItems((prev) => {
-            if (!prev[cartKey]) return prev; 
-    
+            if (!prev[cartKey]) return prev;
+
             const updatedCart = { ...prev };
-    
+
             if (updatedCart[cartKey].quantity > 1) {
                 updatedCart[cartKey] = { ...updatedCart[cartKey], quantity: updatedCart[cartKey].quantity - 1 };
             } else {
-                delete updatedCart[cartKey]; 
+                delete updatedCart[cartKey];
             }
-    
+
             return updatedCart;
         });
     };
-    
-    
+
+
 
     const getTotalCartAmount = () => {
         let totalAmount = 0;
-    
+
         for (const key in cartItems) {
-            if (cartItems[key].quantity > 0) { 
-                const [productId, size] = key.split("_"); 
+            if (cartItems[key].quantity > 0) {
+                const [productId, size] = key.split("_");
                 let itemInfo = all_product.find((product) => product.id === Number(productId));
-    
+
                 if (itemInfo) {
-                    totalAmount += itemInfo.new_price * cartItems[key].quantity; 
+                    totalAmount += itemInfo.new_price * cartItems[key].quantity;
                 }
             }
         }
-    
+
         return totalAmount.toFixed(2); // ✅ Format to 2 decimal places
     };
-    
+
     const getTotalCartItems = () => {
         let totalItems = 0;
-    
+
         for (const key in cartItems) {
-            if (cartItems[key].quantity > 0) { 
-                totalItems += cartItems[key].quantity; 
+            if (cartItems[key].quantity > 0) {
+                totalItems += cartItems[key].quantity;
             }
         }
-    
+
         return totalItems;
     };
-    
-    const contextValue = { getTotalCartItems, getTotalCartAmount, all_product, cartItems, addToCart, removeFromCart };
+
+    const contextValue = {
+        getTotalCartItems, getTotalCartAmount, all_product, cartItems, addToCart, removeFromCart, favorites,           // ✅ Expose favorites
+        addToFavorites, removeFromFavorites
+    };
     return (
         <ShopContext.Provider value={contextValue}>
             {props.children}

@@ -4,11 +4,14 @@ import star_icon from '../Assets/star_icon.png';
 import star_dull_icon from '../Assets/star_dull_icon.png';
 import { ShopContext } from "../../Context/ShopContext";
 import { ToastContainer } from "react-toastify";
+import favorite_filled from '../Assets/fav_icon.png';
+import favorite_outline from '../Assets/favorite_icon.png';
 
 const ProductDisplay = (props) => {
     const { product } = props;
-    const { addToCart } = useContext(ShopContext);
+    const { addToCart, addToFavorites, removeFromFavorites, favorites = [] } = useContext(ShopContext);
     const [selectedSize, setSelectedSize] = useState("");
+    const isFavorited = favorites.includes(product.id);
     return (
         <div className="productdisplay">
             <div className="productdisplay-left">
@@ -19,6 +22,16 @@ const ProductDisplay = (props) => {
                     <img src={product.image} alt="" />
                 </div>
                 <div className="productdisplay-img">
+                <div
+                    className="favorite-button"
+                    onClick={() => isFavorited ? removeFromFavorites(product.id) : addToFavorites(product.id)}
+                >
+                    <img
+                        src={isFavorited ? favorite_filled : favorite_outline}
+                        alt="Favorite Icon"
+                        className="favorite-icon"
+                    />
+                </div>
                     <img className='productdisplay-main-img' src={product.image} alt="" />
                 </div>
             </div>
@@ -34,6 +47,8 @@ const ProductDisplay = (props) => {
                     {/* 122 is total rating */}
                     <p>(122)</p>
                 </div>
+
+
                 <div className="productdisplay-right-prices">
                     <div className="productdisplay-right-price-old">${product.old_price}</div>
                     <div className="productdisplay-right-price-new">${product.new_price}</div>
@@ -66,6 +81,7 @@ const ProductDisplay = (props) => {
                 >
                     ADD TO CART
                 </button>
+               
                 <ToastContainer toastClassName="cart-toast" />
                 <p className='productdisplay-right-category'><span>Category :</span> {product.category} , T-shirt, Crop Top</p>
                 <p className='productdisplay-right-category'><span>Tags :</span> Modern , Latest</p>
