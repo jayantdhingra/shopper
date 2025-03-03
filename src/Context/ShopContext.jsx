@@ -17,8 +17,9 @@ const ShopContextProvider = (props) => {
 
     const [cartItems, setCartItems] = useState(getDefaultCart());
       
-    const addToCart = (itemId,size) => {
+    const addToCart = (itemId, size) => {
         const cartKey = `${itemId}_${size}`;
+    
         toast.success('Item added to cart!', {
             position: 'top-right',
             autoClose: 1000,
@@ -26,51 +27,37 @@ const ShopContextProvider = (props) => {
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true
-          });
-      
-        // setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
-        setCartItems((prev) => ({
-            ...prev,
-            [cartKey]: prev[cartKey]
-            ? { ...prev[cartKey], quantity: prev[cartKey].quantity + 1 }
-            : { quantity: 1, size }
-        }));
+        });
     
-        console.log(cartItems);
-    }
-
-    // const removeFromCart = (itemId) => {
-    //     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
-    // }
-
-    // const removeFromCart = (itemId) => {
-    //     setCartItems((prev) => {
-    //         if (!prev[itemId] || prev[itemId].quantity <= 1) {
-    //             // Remove item completely if quantity reaches 0
-    //             const newCart = { ...prev };
-    //             delete newCart[itemId];
-    //             return newCart;
-    //         }
-    //         return {
-    //             ...prev,
-    //             [itemId]: { ...prev[itemId], quantity: prev[itemId].quantity - 1 }
-    //         };
-    //     });
-    // };
+        setCartItems((prev) => {
+            const updatedCart = {
+                ...prev,
+                [cartKey]: prev[cartKey]
+                    ? { ...prev[cartKey], quantity: prev[cartKey].quantity + 1 }
+                    : { quantity: 1, size }
+            };
+    
+            console.log("Updated Cart Items:", updatedCart); 
+            return updatedCart;
+        });
+    };
+    
 
     const removeFromCart = (itemId, size) => {
         const cartKey = `${itemId}_${size}`;
     
         setCartItems((prev) => {
-            if (!prev[cartKey] || prev[cartKey].quantity <= 1) {
-                const newCart = { ...prev };
-                delete newCart[cartKey]; // Remove only the specific size
-                return newCart;
+            if (!prev[cartKey]) return prev; 
+    
+            const updatedCart = { ...prev };
+    
+            if (updatedCart[cartKey].quantity > 1) {
+                updatedCart[cartKey] = { ...updatedCart[cartKey], quantity: updatedCart[cartKey].quantity - 1 };
+            } else {
+                delete updatedCart[cartKey]; 
             }
-            return {
-                ...prev,
-                [cartKey]: { ...prev[cartKey], quantity: prev[cartKey].quantity - 1 }
-            };
+    
+            return updatedCart;
         });
     };
     
@@ -80,12 +67,12 @@ const ShopContextProvider = (props) => {
         let totalAmount = 0;
     
         for (const key in cartItems) {
-            if (cartItems[key].quantity > 0) { // ✅ Use .quantity to check
-                const [productId, size] = key.split("_"); // ✅ Extract ID and Size
+            if (cartItems[key].quantity > 0) { 
+                const [productId, size] = key.split("_"); 
                 let itemInfo = all_product.find((product) => product.id === Number(productId));
     
                 if (itemInfo) {
-                    totalAmount += itemInfo.new_price * cartItems[key].quantity; // ✅ Multiply correctly
+                    totalAmount += itemInfo.new_price * cartItems[key].quantity; 
                 }
             }
         }
@@ -97,8 +84,8 @@ const ShopContextProvider = (props) => {
         let totalItems = 0;
     
         for (const key in cartItems) {
-            if (cartItems[key].quantity > 0) { // ✅ Use .quantity
-                totalItems += cartItems[key].quantity; // ✅ Add quantity correctly
+            if (cartItems[key].quantity > 0) { 
+                totalItems += cartItems[key].quantity; 
             }
         }
     

@@ -80,3 +80,34 @@
     background: red;
     color: white
 }
+
+.searchbar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+.searchbar input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px 0 0 8px;
+    outline: none;
+    font-size: 16px;
+}
+
+.searchbar button {
+    padding: 10px 15px;
+    background-color: #ff4141;
+    color: white;
+    border: none;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.searchbar button:hover {
+    background-color: #45a049;
+}

@@ -2,7 +2,7 @@ import './App.css';
 import { Navbar } from './Components/Navbar/Navbar';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Shop from './Pages/Shop';
-import ShopCategory from './Pages/ShopCategory';
+import ShopCategory from './Components/ShopCategory/ShopCategory';
 import Product from './Pages/Product';
 import Cart from './Pages/Cart';
 import Login from './Pages/Login';
@@ -18,20 +18,35 @@ import Favorites from "./Pages/Favorites"; // Import Favorites Page
 import CheckOutAddress from './Pages/CheckOutAddress';
 import CheckOutShipping from './Pages/CheckOutShipping';
 import CheckOutPayment from './Pages/CheckOutPayment';
+import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { SearchNavBar } from './Components/SearchNavbar/SearchNavBar';
 
 function App() {
+
+  const [searchQuery, setSearchQuery] = useState("");
+  return (
+    <BrowserRouter>
+      <MainContent searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+    </BrowserRouter>
+  );
+}
+
+function MainContent({ searchQuery, setSearchQuery }) {
+  const location = useLocation(); // ✅ Get current route
+
+  // ✅ Check if the current page belongs to Men, Women, or Kids categories
+  const searchPages = ["/men", "/women", "/kids"];
+  const isSearchNavbar = searchPages.some((path) => location.pathname.startsWith(path));
+
   return (
     <div>
-      <BrowserRouter>
-      <Navbar/>
+      {isSearchNavbar ? ( <SearchNavBar onSearch={setSearchQuery} />) : (<Navbar />)}
       <Routes>
-        <Route path='/' element={<Shop/>}/>
-        <Route path='/men' element={<ShopCategory banner={men_banner} category="Men"/>}/>
-        <Route path='/women' element={<ShopCategory banner={women_banner}category="Women"/>}/>
-        <Route path='/kids' element={<ShopCategory banner={kid_banner} category="Kid"/>}/>
-        <Route path='/men' element={<ShopCategory banner={men_banner} category="Men"/>}/>
-        <Route path='/women' element={<ShopCategory banner={women_banner}category="Women"/>}/>
-        <Route path='/kids' element={<ShopCategory banner={kid_banner} category="Kid"/>}/>
+        <Route path='/' element={<Shop searchQuery={searchQuery} />}/>
+        <Route path='/men' element={<ShopCategory banner={men_banner} category="Men" searchQuery={searchQuery}/>}/>
+        <Route path='/women' element={<ShopCategory banner={women_banner}category="Women" searchQuery={searchQuery}/>}/>
+        <Route path='/kids' element={<ShopCategory banner={kid_banner} category="Kid" searchQuery={searchQuery}/>}/>
         <Route path="/product" element={<Product/>}>
           <Route path=':productId' element={<Product/>}/>
         </Route>
@@ -47,7 +62,6 @@ function App() {
         <Route path="/checkout-payment" element={<CheckOutPayment />} />
       </Routes>
       <Footer/>
-      </BrowserRouter>
     </div>
   );
 }
