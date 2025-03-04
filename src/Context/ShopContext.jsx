@@ -19,13 +19,25 @@ const ShopContextProvider = (props) => {
     const [favorites, setFavorites] = useState([]); // ✅ Initialize favorites as an empty array
 
     const addToFavorites = (productId) => {
+        console.log("Adding to favorites:", productId);
+        toast.success('Item added to favorites!', {
+            position: 'top-right',
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+        });
+
         if (!favorites.includes(productId)) {
-            setFavorites([...favorites, productId]);
+            setFavorites([...favorites,  all_product.find((product) => product.id === Number(productId)) ]);
         }
+        
     };
 
     const removeFromFavorites = (productId) => {
-        setFavorites(favorites.filter((id) => id !== productId));
+        console.log("Removing from favorites:", productId);
+        setFavorites(favorites.filter((product) => product.id !== productId));
     };
 
 

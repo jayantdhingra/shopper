@@ -11,7 +11,7 @@ const ProductDisplay = (props) => {
     const { product } = props;
     const { addToCart, addToFavorites, removeFromFavorites, favorites = [] } = useContext(ShopContext);
     const [selectedSize, setSelectedSize] = useState("");
-    const isFavorited = favorites.includes(product.id);
+    const isFavorited = favorites.includes(product);
     return (
         <div className="productdisplay">
             <div className="productdisplay-left">
