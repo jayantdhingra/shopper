@@ -116,9 +116,14 @@ const ShopContextProvider = (props) => {
         return totalItems;
     };
 
+    const getTotalFavoriteItems = () => {
+        return favorites.length; // ✅ Returns total favorite items count
+    };
+    
+
     const contextValue = {
         getTotalCartItems, getTotalCartAmount, all_product, cartItems, addToCart, removeFromCart, favorites,           // ✅ Expose favorites
-        addToFavorites, removeFromFavorites
+        addToFavorites, removeFromFavorites, getTotalFavoriteItems
     };
     return (
         <ShopContext.Provider value={contextValue}>

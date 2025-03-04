@@ -9,6 +9,7 @@ import { ShopContext } from '../../Context/ShopContext';
 export const Navbar = () => {
     const [menu, setMenu] = useState("shop");
     const { getTotalCartItems } = useContext(ShopContext);
+    const {getTotalFavoriteItems} = useContext(ShopContext);
     
     return (
         <div className='navbar'>
@@ -43,6 +44,8 @@ export const Navbar = () => {
                 <Link to='/favorites'>
                     <img src={favorite_icon} alt="Favorites" className="nav-icon" />
                 </Link>
+                
+                <div className="nav-cart-count">{getTotalFavoriteItems()}</div>
 
                 {/* Cart Icon */}
                 <Link to='/cart'>
