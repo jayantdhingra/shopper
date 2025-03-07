@@ -1,13 +1,16 @@
-import React, {useState} from 'react'
+import React, {useState,useContext} from 'react'
 import './Item.css'
 import { Link } from 'react-router-dom'
 import favoriteIcon from "../Assets/favorite_icon.png"; 
 import favoriteFilledIcon from "../Assets/fav_icon.png";
+import { ShopContext } from '../../Context/ShopContext';
 
 const Item = (props) => {
-    const [favorites, setFavorites] = useState(new Set()); //  Track favorites
+    const [fav, setFav] = useState(new Set()); //  Track favorites
+    const { addToCart, addToFavorites, removeFromFavorites, favorites = [] } = useContext(ShopContext);
+    const isFavorited = favorites.find((product) => product.id === Number(props.id))
     const toggleFavorite = (itemId) => {
-      setFavorites((prevFavorites) => {
+      setFav((prevFavorites) => {
         const newFavorites = new Set(prevFavorites);
         if (newFavorites.has(itemId)) {
           newFavorites.delete(itemId);
@@ -30,9 +33,10 @@ const Item = (props) => {
                 ${props.new_price}
             </div>
             <button type="button" 
-                className={`favorite-btn ${favorites.has(props.id) ? "favorited" : ""}`}   
-                onClick={() => toggleFavorite(props.id)}>
-                  <img src={favorites.has(props.id) ? favoriteFilledIcon : favoriteIcon} alt="Favorite Icon" className="favorite-icon" />
+                className={`favorite-btn ${fav.has(props.id) ? "favorited" : ""}`}   
+                onClick={() => {toggleFavorite(props.id) ;
+                 isFavorited ? removeFromFavorites(props.id) : addToFavorites(props.id)}}>
+                  <img src={fav.has(props.id) ? favoriteFilledIcon : favoriteIcon} alt="Favorite Icon" className="favorite-icon" />
               </button>
         </div>
     </div>
