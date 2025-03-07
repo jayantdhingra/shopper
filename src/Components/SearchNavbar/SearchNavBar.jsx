@@ -42,6 +42,10 @@ export const SearchNavBar = ({ onSearch }) => {
                 <li onClick={() => setMenu("kid")}>
                     <Link style={{ textDecoration: 'none' }} to="/kids">Kids</Link>
                     {menu === "kid" && <hr />}
+                </li>                
+                <li onClick={() => setMenu("Settings")}>
+                    <Link style={{ textDecoration: 'none' }} to="/user-settings">Settings</Link>
+                    {menu === "Settings" && <hr />}
                 </li>
             </ul>
 

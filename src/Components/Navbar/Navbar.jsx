@@ -35,6 +35,10 @@ export const Navbar = () => {
                     <Link style={{ textDecoration: 'none' }} to="/kids">Kids</Link>
                     {menu === "kid" && <hr />}
                 </li>
+                <li onClick={() => setMenu("Settings")}>
+                    <Link style={{ textDecoration: 'none' }} to="/user-settings">Settings</Link>
+                    {menu === "Settings" && <hr />}
+                </li>
             </ul>
 
             <div className="nav-login-cart">

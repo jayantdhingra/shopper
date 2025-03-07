@@ -21,6 +21,7 @@ import CheckOutPayment from './Pages/CheckOutPayment';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { SearchNavBar } from './Components/SearchNavbar/SearchNavBar';
+import UserSettings from './Pages/UserSettings';
 
 function App() {
 
@@ -59,6 +60,7 @@ function MainContent({ searchQuery, setSearchQuery }) {
         <Route path="/checkout-address" element={<CheckOutAddress />} />
         <Route path="/checkout-shipping" element={<CheckOutShipping />} />
         <Route path="/checkout-payment" element={<CheckOutPayment />} />
+        <Route path="/user-settings" element={<UserSettings />} />
       </Routes>
       <Footer/>
     </div>
