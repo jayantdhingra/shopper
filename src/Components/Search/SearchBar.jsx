@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import "./SearchBar.css"; // ✅ Import CSS file
+import "./SearchBar.css"; //  Import CSS file
 
 const SearchBar = ({ onSearch }) => {
     const [query, setQuery] = useState("");
 
     const handleSearch = () => {
-        onSearch(query.toLowerCase()); // ✅ Pass search query to parent
+        onSearch(query.toLowerCase()); //  Pass search query to parent
     };
 
     return (

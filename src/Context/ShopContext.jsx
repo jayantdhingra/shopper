@@ -16,7 +16,7 @@ const getDefaultCart = () => {
 const ShopContextProvider = (props) => {
 
     const [cartItems, setCartItems] = useState(getDefaultCart());
-    const [favorites, setFavorites] = useState([]); // ✅ Initialize favorites as an empty array
+    const [favorites, setFavorites] = useState([]); //  Initialize favorites as an empty array
 
     const addToFavorites = (productId) => {
         console.log("Adding to favorites:", productId);
@@ -101,7 +101,7 @@ const ShopContextProvider = (props) => {
             }
         }
 
-        return totalAmount.toFixed(2); // ✅ Format to 2 decimal places
+        return totalAmount.toFixed(2); //  Format to 2 decimal places
     };
 
     const getTotalCartItems = () => {
@@ -117,12 +117,12 @@ const ShopContextProvider = (props) => {
     };
 
     const getTotalFavoriteItems = () => {
-        return favorites.length; // ✅ Returns total favorite items count
+        return favorites.length; //  Returns total favorite items count
     };
     
 
     const contextValue = {
-        getTotalCartItems, getTotalCartAmount, all_product, cartItems, addToCart, removeFromCart, favorites,           // ✅ Expose favorites
+        getTotalCartItems, getTotalCartAmount, all_product, cartItems, addToCart, removeFromCart, favorites,           //  Expose favorites
         addToFavorites, removeFromFavorites, getTotalFavoriteItems
     };
     return (

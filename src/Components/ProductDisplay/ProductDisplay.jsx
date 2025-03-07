@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { use, useContext, useState, useEffect } from "react";
 import './ProductDisplay.css';
 import star_icon from '../Assets/star_icon.png';
 import star_dull_icon from '../Assets/star_dull_icon.png';
@@ -12,6 +12,11 @@ const ProductDisplay = (props) => {
     const { addToCart, addToFavorites, removeFromFavorites, favorites = [] } = useContext(ShopContext);
     const [selectedSize, setSelectedSize] = useState("");
     const isFavorited = favorites.includes(product);
+
+    useEffect(() => {
+        window.scrollTo(0,0);
+    }, []);
+
     return (
         <div className="productdisplay">
             <div className="productdisplay-left">
@@ -22,16 +27,16 @@ const ProductDisplay = (props) => {
                     <img src={product.image} alt="" />
                 </div>
                 <div className="productdisplay-img">
-                <div
-                    className="favorite-button"
-                    onClick={() => isFavorited ? removeFromFavorites(product.id) : addToFavorites(product.id)}
-                >
-                    <img
-                        src={isFavorited ? favorite_filled : favorite_outline}
-                        alt="Favorite Icon"
-                        className="favorite-icon"
-                    />
-                </div>
+                    <div
+                        className="favorite-button"
+                        onClick={() => isFavorited ? removeFromFavorites(product.id) : addToFavorites(product.id)}
+                    >
+                        <img
+                            src={isFavorited ? favorite_filled : favorite_outline}
+                            alt="Favorite Icon"
+                            className="favorite-icon"
+                        />
+                    </div>
                     <img className='productdisplay-main-img' src={product.image} alt="" />
                 </div>
             </div>
@@ -44,8 +49,8 @@ const ProductDisplay = (props) => {
                     <img src={star_icon} alt="" />
                     <img src={star_icon} alt="" />
                     <img src={star_dull_icon} alt="" />
-                    {/* 122 is total rating */}
-                    <p>(122)</p>
+                    {/* 2 is total rating */}
+                    <p>(2)</p>
                 </div>
 
 
@@ -81,7 +86,7 @@ const ProductDisplay = (props) => {
                 >
                     ADD TO CART
                 </button>
-               
+
                 <ToastContainer toastClassName="cart-toast" />
                 <p className='productdisplay-right-category'><span>Category :</span> {product.category} , T-shirt, Crop Top</p>
                 <p className='productdisplay-right-category'><span>Tags :</span> Modern , Latest</p>

@@ -20,12 +20,12 @@ const CheckOutItems = () => {
             </div>
             <hr />
             {Object.keys(cartItems)
-                .filter((cartKey) => cartItems[cartKey].quantity > 0) // ✅ Filter out unselected items
+                .filter((cartKey) => cartItems[cartKey].quantity > 0) //  Filter out unselected items
                 .map((cartKey) => {
-                    const [productId, size] = cartKey.split("_"); // ✅ Extract product ID and size
+                    const [productId, size] = cartKey.split("_"); //  Extract product ID and size
                     const product = all_product.find((p) => p.id === Number(productId));
 
-                    if (!product) return null; // ✅ Ensure product exists
+                    if (!product) return null; //  Ensure product exists
 
                     return (
                         <div key={cartKey}>
@@ -33,7 +33,7 @@ const CheckOutItems = () => {
                                 <img src={product.image} alt="" className='carticon-product-icon' />
                                 <p>{product.name}</p>
                                 <p>${product.new_price}</p>
-                                <p>{size}</p> {/* ✅ Display selected size */}
+                                <p>{size}</p> {/*  Display selected size */}
                                 <button className='CheckOutItems-quantity'>{cartItems[cartKey].quantity}</button>
                                 <p>${(product.new_price * cartItems[cartKey].quantity).toFixed(2)}</p>
                                 <img

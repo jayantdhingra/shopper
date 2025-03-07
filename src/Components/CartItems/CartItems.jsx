@@ -15,7 +15,7 @@ const CartItems = () => {
     return (
         <div className='cartitems'>
             {isCartEmpty ? (
-                // ✅ Display this when cart is empty
+                //  Display this when cart is empty
                 <div className="cart-empty">
                     <h2>Your Cart is Empty</h2>
                     <p>Browse our categories and discover our best deals!</p>
@@ -46,7 +46,7 @@ const CartItems = () => {
                                     <img src={product.image} alt="" className='carticon-product-icon' />
                                     <p>{product.name}</p>
                                     <p>${product.new_price}</p>
-                                    <p>{size}</p> {/* ✅ Display the correct size */}
+                                    <p>{size}</p> {/*  Display the correct size */}
                                     <button className='cartitems-quantity'>{cartItems[cartKey].quantity}</button>
                                     <p>${(product.new_price * cartItems[cartKey].quantity).toFixed(2)}</p>
                                     <img

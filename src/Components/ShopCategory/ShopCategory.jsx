@@ -1,15 +1,12 @@
 import React, { useContext, useState, useEffect } from "react";
 import "./ShopCategory.css";
 import { ShopContext } from "../../Context/ShopContext";
-import { Link } from "react-router-dom";
-import favoriteIcon from "../Assets/favorite_icon.png"; // ✅ Import favorite icon
-import favoriteFilledIcon from "../Assets/fav_icon.png"; // ✅ Import filled heart icon
+import Item from '../Item/Item'
 
 const ShopCategory = ({ category, banner, searchQuery }) => {
   const { all_product } = useContext(ShopContext);
   const [sortOption, setSortOption] = useState("default");
   const [showAll, setShowAll] = useState(false);
-  const [favorites, setFavorites] = useState(new Set()); // ✅ Track favorites
 
   useEffect(() => {
     setShowAll(false);
@@ -19,31 +16,19 @@ const ShopCategory = ({ category, banner, searchQuery }) => {
     setShowAll(true);
   };
 
-  // ✅ Toggle favorite status
-  const toggleFavorite = (itemId) => {
-    setFavorites((prevFavorites) => {
-      const newFavorites = new Set(prevFavorites);
-      if (newFavorites.has(itemId)) {
-        newFavorites.delete(itemId);
-      } else {
-        newFavorites.add(itemId);
-      }
-      return newFavorites;
-    });
-  };
 
-  // ✅ Filter products by category
+  //  Filter products by category
   const categoryProducts = all_product.filter(
     (item) => item.category.toLowerCase() === category.toLowerCase()
   );
 
-  // ✅ Apply search filter
+  //  Apply search filter
   let filteredProducts = [...categoryProducts].filter(
     (item) =>
       !searchQuery || item.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  // ✅ Sorting logic
+  //  Sorting logic
   switch (sortOption) {
     case "price-low":
       filteredProducts.sort((a, b) => a.new_price - b.new_price);
@@ -83,36 +68,16 @@ const ShopCategory = ({ category, banner, searchQuery }) => {
         </div>
       </div>
 
-      {/* ✅ Product List */}
+      {/*  Product List */}
       <div className="shopcategory-products">
-        {[...(showAll ? filteredProducts : initialProducts)].map((item) => (
-          <div key={item.id} className="product-item">
-            <button 
-              className={`favorite-btn ${favorites.has(item.id) ? "favorited" : ""}`} 
-              onClick={() => toggleFavorite(item.id)}
-            >
-              <img 
-                src={favorites.has(item.id) ? favoriteFilledIcon : favoriteIcon} 
-                alt="Favorite" 
-              />
-            </button>
+        {[...(showAll ? filteredProducts : initialProducts)].map((item,i) => {
+          return <Item key={i} id={item.id} name={item.name} image={item.image} new_price={item.new_price} old_price={item.old_price} />
+        })}
 
-            <Link to={`/product/${item.id}`}>
-              <img src={item.image} alt={item.name} className="product-image" />
-            </Link>
-            <p className="product-name">{item.name}</p>
-            <div className="product-prices">
-              {item.old_price && (
-                <p className="product-price-old">${item.old_price.toFixed(2)}</p>
-              )}
-              <p className="product-price-new">${item.new_price.toFixed(2)}</p>
-            </div>
 
-          </div>
-        ))}
       </div>
 
-      {/* ✅ "Explore More" Button */}
+      {/*  "Explore More" Button */}
       {!showAll && remainingProducts.length > 0 && (
         <button className="shopcategory-loadmore" onClick={handleExploreMore}>
           Explore More
