@@ -30,3 +30,31 @@
     padding: 48px;
     padding-bottom: 70px;
 }
+
+.descriptionbox-reviews{
+    display: flex;
+    flex-direction: column;
+    gap:25px;
+    border: 1px solid #D0D0D0;
+    padding: 48px;
+    padding-bottom: 70px;
+}
+
+.star-rating {
+    margin-bottom: 8px;
+  }
+  
+  .star {
+    color: #e0e0e0;
+    font-size: 20px;
+  }
+  
+  .star.filled {
+    color: #ffc107;
+  }
+  
+  .review-item {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+  }
