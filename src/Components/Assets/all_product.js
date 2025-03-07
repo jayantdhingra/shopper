@@ -34,6 +34,7 @@ import p33_img from "./product_33.png";
 import p34_img from "./product_34.png";
 import p35_img from "./product_35.png";
 import p36_img from "./product_36.png";
+import fav_icon from './fav_icon.png'
 
 let all_product = [
   {
@@ -43,6 +44,7 @@ let all_product = [
     image: p1_img,
     new_price: 89.99,
     old_price: 129.99,
+    fav_icon: fav_icon,
   },
   {
     id: 2,
@@ -51,6 +53,7 @@ let all_product = [
     image: p2_img,
     new_price: 45.99,
     old_price: 75.99,
+    fav_icon: fav_icon,
   },
   {
     id: 3,
@@ -59,6 +62,7 @@ let all_product = [
     image: p3_img,
     new_price: 35.99,
     old_price: 55.99,
+    fav_icon: fav_icon,
   },
   {
     id: 4,
@@ -67,6 +71,7 @@ let all_product = [
     image: p4_img,
     new_price: 79.99,
     old_price: 110.99,
+    fav_icon: fav_icon,
   },
   {
     id: 5,
@@ -75,6 +80,7 @@ let all_product = [
     image: p5_img,
     new_price: 95.99,
     old_price: 135.99,
+    fav_icon: fav_icon,
   },
   {
     id: 6,
@@ -83,6 +89,7 @@ let all_product = [
     image: p6_img,
     new_price: 65.99,
     old_price: 95.99,
+    fav_icon: fav_icon,
   },
   {
     id: 7,
@@ -91,6 +98,7 @@ let all_product = [
     image: p7_img,
     new_price: 55.99,
     old_price: 85.99,
+    fav_icon: fav_icon,
   },
   {
     id: 8,
@@ -99,6 +107,7 @@ let all_product = [
     image: p8_img,
     new_price: 42.99,
     old_price: 65.99,
+    fav_icon: fav_icon,
   },
   {
     id: 9,
@@ -107,6 +116,7 @@ let all_product = [
     image: p9_img,
     new_price: 115.99,
     old_price: 159.99,
+    fav_icon: fav_icon,
   },
   {
     id: 10,
@@ -115,6 +125,7 @@ let all_product = [
     image: p10_img,
     new_price: 69.99,
     old_price: 99.99,
+    fav_icon: fav_icon,
   },
   {
     id: 11,
@@ -123,6 +134,7 @@ let all_product = [
     image: p11_img,
     new_price: 159.99,
     old_price: 229.99,
+    fav_icon: fav_icon,
   },
   {
     id: 12,
@@ -131,6 +143,7 @@ let all_product = [
     image: p12_img,
     new_price: 189.99,
     old_price: 259.99,
+    fav_icon: fav_icon,
   },
   {
     id: 13,
@@ -139,6 +152,7 @@ let all_product = [
     image: p13_img,
     new_price: 45.99,
     old_price: 69.99,
+    fav_icon: fav_icon,
   },
   {
     id: 14,
@@ -147,6 +161,7 @@ let all_product = [
     image: p14_img,
     new_price: 55.99,
     old_price: 85.99,
+    fav_icon: fav_icon,
   },
   {
     id: 15,
@@ -155,6 +170,7 @@ let all_product = [
     image: p15_img,
     new_price: 89.99,
     old_price: 129.99,
+    fav_icon: fav_icon,
   },
   {
     id: 16,
@@ -163,6 +179,7 @@ let all_product = [
     image: p16_img,
     new_price: 75.99,
     old_price: 115.99,
+    fav_icon: fav_icon,
   },
   {
     id: 17,
@@ -171,6 +188,7 @@ let all_product = [
     image: p17_img,
     new_price: 39.99,
     old_price: 59.99,
+    fav_icon: fav_icon,
   },
   {
     id: 18,
@@ -179,6 +197,7 @@ let all_product = [
     image: p18_img,
     new_price: 195.99,
     old_price: 279.99,
+    fav_icon: fav_icon,
   },
   {
     id: 19,
@@ -187,6 +206,7 @@ let all_product = [
     image: p19_img,
     new_price: 29.99,
     old_price: 45.99,
+    fav_icon: fav_icon,
   },
   {
     id: 20,
@@ -195,6 +215,7 @@ let all_product = [
     image: p20_img,
     new_price: 79.99,
     old_price: 119.99,
+    fav_icon: fav_icon,
   },
   {
     id: 21,
@@ -203,6 +224,7 @@ let all_product = [
     image: p21_img,
     new_price: 129.99,
     old_price: 189.99,
+    fav_icon: fav_icon,
   },
   {
     id: 22,
@@ -211,6 +233,7 @@ let all_product = [
     image: p22_img,
     new_price: 35.99,
     old_price: 55.99,
+    fav_icon: fav_icon,
   },
   {
     id: 23,
@@ -219,6 +242,7 @@ let all_product = [
     image: p23_img,
     new_price: 65.99,
     old_price: 95.99,
+    fav_icon: fav_icon,
   },
   {
     id: 24,
@@ -227,6 +251,7 @@ let all_product = [
     image: p24_img,
     new_price: 49.99,
     old_price: 75.99,
+    fav_icon: fav_icon,
   },
   {
     id: 25,
@@ -235,6 +260,7 @@ let all_product = [
     image: p25_img,
     new_price: 25.99,
     old_price: 39.99,
+    fav_icon: fav_icon,
   },
   {
     id: 26,
@@ -243,6 +269,7 @@ let all_product = [
     image: p26_img,
     new_price: 19.99,
     old_price: 29.99,
+    fav_icon: fav_icon,
   },
   {
     id: 27,
@@ -251,6 +278,7 @@ let all_product = [
     image: p27_img,
     new_price: 35.99,
     old_price: 49.99,
+    fav_icon: fav_icon,
   },
   {
     id: 28,
@@ -259,6 +287,7 @@ let all_product = [
     image: p28_img,
     new_price: 22.99,
     old_price: 32.99,
+    fav_icon: fav_icon,
   },
   {
     id: 29,
@@ -267,6 +296,7 @@ let all_product = [
     image: p29_img,
     new_price: 45.99,
     old_price: 65.99,
+    fav_icon: fav_icon,
   },
   {
     id: 30,
@@ -275,6 +305,7 @@ let all_product = [
     image: p30_img,
     new_price: 15.99,
     old_price: 24.99,
+    fav_icon: fav_icon,
   },
   {
     id: 31,
@@ -283,6 +314,7 @@ let all_product = [
     image: p31_img,
     new_price: 29.99,
     old_price: 45.99,
+    fav_icon: fav_icon,
   },
   {
     id: 32,
@@ -291,6 +323,7 @@ let all_product = [
     image: p32_img,
     new_price: 39.99,
     old_price: 59.99,
+    fav_icon: fav_icon,
   },
   {
     id: 33,
@@ -299,6 +332,7 @@ let all_product = [
     image: p33_img,
     new_price: 32.99,
     old_price: 48.99,
+    fav_icon: fav_icon,
   },
   {
     id: 34,
@@ -307,6 +341,7 @@ let all_product = [
     image: p34_img,
     new_price: 49.99,
     old_price: 75.99,
+    fav_icon: fav_icon,
   },
   {
     id: 35,
@@ -315,6 +350,7 @@ let all_product = [
     image: p35_img,
     new_price: 28.99,
     old_price: 42.99,
+    fav_icon: fav_icon,
   },
   {
     id: 36,
@@ -323,6 +359,7 @@ let all_product = [
     image: p36_img,
     new_price: 18.99,
     old_price: 29.99,
+    fav_icon: fav_icon,
   },
 ];
 

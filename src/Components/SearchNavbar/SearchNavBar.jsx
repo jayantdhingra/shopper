@@ -9,6 +9,7 @@ import { ShopContext } from '../../Context/ShopContext';
 export const SearchNavBar = ({ onSearch }) => {
     const [menu, setMenu] = useState("shop");
     const { getTotalCartItems } = useContext(ShopContext);
+    const { getTotalFavoriteItems } = useContext(ShopContext);
     const [query, setQuery] = useState("");
 
     
@@ -22,7 +23,7 @@ export const SearchNavBar = ({ onSearch }) => {
         <div className='navbar'>
             <div className="nav-logo">
                 <img src={logo} alt="Shop Logo" />
-                <p>SHOPPER</p>
+                <p>JUST BUY</p>
             </div>
 
             <ul className="nav-menu">
@@ -59,6 +60,8 @@ export const SearchNavBar = ({ onSearch }) => {
                 <Link to='/favorites'>
                     <img src={favorite_icon} alt="Favorites" className="nav-icon" />
                 </Link>
+                
+                <div className="nav-cart-count">{getTotalFavoriteItems()}</div>
 
                 <Link to='/cart'>
                     <img src={cart_icon} alt="Cart" className="nav-icon" />

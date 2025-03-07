@@ -1,10 +1,14 @@
 import React from 'react'
+import { useContext } from 'react'
 import '../Styles/Favorites.css'
-import favorites from '../Components/Assets/favorites'
 import FavItem from '../Components/FavItem/FavItem'
+import { ShopContext } from '../Context/ShopContext'
 
 
 const Favorites = () => {
+
+  const { all_product, favorites, removeFromFavorites } = useContext(ShopContext);
+  console.log('FAV: ',favorites)
   return (
     <div className='favorites-list'>
         <h1>Favorites</h1>
