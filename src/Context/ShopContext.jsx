@@ -2,6 +2,10 @@ import React, { useState, createContext } from "react";
 import all_product from "../Components/Assets/all_product";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import './ShopContext.css'
+
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const ShopContext = createContext(null);
 
@@ -27,7 +31,9 @@ const ShopContextProvider = (props) => {
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
+            style: { width:"450px" , height: "50px", marginRight: "-100px"}
         });
+
 
         if (!favorites.includes(productId)) {
             setFavorites([...favorites,  all_product.find((product) => product.id === Number(productId)) ]);
@@ -50,7 +56,8 @@ const ShopContextProvider = (props) => {
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
-            draggable: true
+            draggable: true,
+            style: { width:"450px" , height: "50px", marginRight: "-100px"}
         });
 
         setCartItems((prev) => {

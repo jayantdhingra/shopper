@@ -1,0 +1,16 @@
+/* ✅ Align text and close button properly */
+.Toastify__toast {
+    display: flex;
+    align-items: center !important;
+    justify-content: space-between; /* Ensures proper spacing */
+    font-size: 16px;
+}
+
+/* ✅ Ensure the close button is vertically centered */
+.Toastify__close-button {
+    position: relative;
+    margin-top: 30px ; /* Adjusts vertical alignment */
+    align-self: center !important; 
+    font-size: 18px !important; /* Ensure the size is appropriate */
+    margin-left: -12px !important; /* Adds spacing from text */
+}
