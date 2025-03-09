@@ -21,12 +21,13 @@ import CheckOutPayment from './Pages/CheckOutPayment';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { SearchNavBar } from './Components/SearchNavbar/SearchNavBar';
+import { Router } from 'react-router-dom';
 
 function App() {
 
   const [searchQuery, setSearchQuery] = useState("");
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/WDM_Team8">
       <MainContent searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
     </BrowserRouter>
   );
