@@ -11,6 +11,7 @@ import Signup from './Pages/Signup';
 import men_banner from './Components/Assets/banner_mens.png';
 import women_banner from './Components/Assets/banner_women.png';
 import kid_banner from './Components/Assets/banner_kids.png';
+import MyOrders from './Pages/MyOrders';
 import ForgotPassword from './Pages/ForgotPassword';
 import ResetPassword from './Pages/ResetPassword';
 import ContactUs from './Pages/ContactUs'
@@ -43,6 +44,7 @@ function MainContent({ searchQuery, setSearchQuery }) {
     <div>
       {isSearchNavbar ? ( <SearchNavBar onSearch={setSearchQuery} />) : (<Navbar />)}
       <Routes>
+      <Route path="/orders" element={<MyOrders/>}></Route>
         <Route path='/' element={<Shop searchQuery={searchQuery} />}/>
         <Route path='/men' element={<ShopCategory banner={men_banner} category="Men" searchQuery={searchQuery}/>}/>
         <Route path='/women' element={<ShopCategory banner={women_banner}category="Women" searchQuery={searchQuery}/>}/>
