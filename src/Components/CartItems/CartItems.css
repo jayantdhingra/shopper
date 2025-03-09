@@ -8,16 +8,6 @@
     border: 0;
 }
 
-.cartitems-format-main{
-    display: grid;
-    grid-template-columns: 0.5fr 2fr 1fr 1fr 1fr 1fr 0.5fr;
-    align-items: center;
-    gap: 50px;
-    padding: 20px 0px;
-    color:#454545;
-    font-size:18px;
-    font-weight: 600;
-}
 
 .cartitems-format{
     font-size: 17px;
@@ -28,18 +18,61 @@
     height: 62px;
 }
 
-.cartitems-remove-icon{
-    width: 15px;
-    margin: 0px 40px;
-    cursor:pointer;
-}
+/* Existing CSS remains the same */
 
-.cartitems-quantity{
-    width: 64px;
-    height: 50px;
+/* Modify these classes to fix quantity controls alignment */
+.cartitems-format-main {
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 1fr 0.5fr 1.5fr 1fr;
+    align-items: center;
+    gap: 50px;
+    padding: 20px 0px;
+    color: #454545;
+    text-align: center;
+  }
+  
+  /* Adjusted styling for quantity control container */
+  .quantity-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  
+  .cartitems-quantity {
+    width: 50px;
+    height: 40px;
     border: 2px solid #ebebeb;
     background: #000000;
-}
+    color: white;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 5px;
+    line-height: 40px; /* Ensures text inside is centered */
+    padding: 0;
+    margin: 0;
+  }
+  
+  .cartitems-add-icon,
+  .cartitems-remove-icon {
+      cursor: pointer;
+      width: 24px;
+      height: 24px;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+  
+  /* Ensure all three elements (plus, quantity box, minus) are aligned */
+  .quantity-control img,
+  .quantity-control .cartitems-quantity {
+      display: flex;
+      align-items: center;
+  }
 
 .cartitems-down{
     display: flex;

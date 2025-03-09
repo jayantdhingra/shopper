@@ -1,6 +1,7 @@
 .navbar {
     display: flex;
-    justify-content: space-around;
+    align-items: center; /* Align all navbar items */
+    justify-content: space-between;
     padding: 16px;
     box-shadow: 0 1px 3px -2px black;
 }
@@ -8,7 +9,7 @@
 .nav-logo {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 30px;
 }
 
 .nav-logo p {
@@ -21,7 +22,7 @@
     display: flex;
     align-items: center;
     list-style: none;
-    gap: 50px;
+    gap: 20px;
     color: #626262;
     font-size: 20px;
     font-weight: 500;
@@ -84,30 +85,45 @@
 .searchbar {
     display: flex;
     align-items: center;
-    width: 100%;
-    max-width: 400px;
-    margin: 20px auto;
+    width: 300px; 
+    height: 40px; 
+    border-radius: 8px; 
+    border: 1px solid #ccc;
+    background: white;
+    overflow: hidden; 
+}
+
+.search-input-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding-left: 10px;
 }
 
 .searchbar input {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px 0 0 8px;
+    width: 100%;
+    border: none;
     outline: none;
     font-size: 16px;
+    background: transparent;
+    padding-right: 10px;
 }
 
 .searchbar button {
-    padding: 10px 15px;
-    background-color: #ff4141;
+    padding: 10px 15px; 
+    background-color: #FF4141;
     color: white;
     border: none;
-    border-radius: 0 8px 8px 0;
     cursor: pointer;
     font-size: 16px;
+    white-space: nowrap; 
+    display: flex;
+    height: 60px;
+    border-radius: 0; 
 }
 
 .searchbar button:hover {
     background-color: #45a049;
 }
+

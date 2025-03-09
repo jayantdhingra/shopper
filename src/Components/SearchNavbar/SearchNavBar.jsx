@@ -3,7 +3,7 @@ import './SearchNavBar.css';
 import logo from '../Assets/logo.png';
 import cart_icon from '../Assets/cart_icon.png';
 import favorite_icon from '../Assets/favorite_icon.png';
-import { Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ShopContext } from '../../Context/ShopContext';
 
 export const SearchNavBar = ({ onSearch }) => {
@@ -12,11 +12,11 @@ export const SearchNavBar = ({ onSearch }) => {
     const { getTotalFavoriteItems } = useContext(ShopContext);
     const [query, setQuery] = useState("");
 
-    
+
     const handleInputChange = (e) => {
         const value = e.target.value;
         setQuery(value);
-        onSearch(value.trim());  
+        onSearch(value.trim());
     };
 
     return (
@@ -42,7 +42,7 @@ export const SearchNavBar = ({ onSearch }) => {
                 <li onClick={() => setMenu("kid")}>
                     <Link style={{ textDecoration: 'none' }} to="/kids">Kids</Link>
                     {menu === "kid" && <hr />}
-                </li>                
+                </li>
                 <li onClick={() => setMenu("Settings")}>
                     <Link style={{ textDecoration: 'none' }} to="/user-settings">Settings</Link>
                     {menu === "Settings" && <hr />}
@@ -50,12 +50,14 @@ export const SearchNavBar = ({ onSearch }) => {
             </ul>
 
             <div className="searchbar">
-                <input
-                    type="text"
-                    placeholder="Search for products"
-                    value={query}
-                    onChange={handleInputChange} 
-                />
+                <div className="search-input-container">
+                    <input
+                        type="text"
+                        placeholder="Search for products"
+                        value={query}
+                        onChange={handleInputChange}
+                    />
+                </div>
                 <button onClick={() => onSearch(query.trim())}>Search</button>
             </div>
 
@@ -64,7 +66,7 @@ export const SearchNavBar = ({ onSearch }) => {
                 <Link to='/favorites'>
                     <img src={favorite_icon} alt="Favorites" className="nav-icon" />
                 </Link>
-                
+
                 <div className="nav-cart-count">{getTotalFavoriteItems()}</div>
 
                 <Link to='/cart'>

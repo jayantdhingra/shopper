@@ -1,12 +1,13 @@
 import React, { useContext } from "react";
 import './CartItems.css';
 import { ShopContext } from "../../Context/ShopContext";
-import remove_icon from '../Assets/cart_cross_icon.png';
+import Minus from "../Assets/minus-icon.svg"
+import Plus from "../Assets/plus-icon.svg"
 import { useNavigate } from "react-router-dom";
 
 const CartItems = () => {
     const Navigate = useNavigate();
-    const { getTotalCartAmount, all_product, cartItems, removeFromCart } = useContext(ShopContext);
+    const { getTotalCartAmount, all_product, cartItems, addToCart, removeFromCart } = useContext(ShopContext);
     const isCartEmpty = Object.keys(cartItems).filter(key => cartItems[key].quantity > 0).length === 0;
 
 
@@ -30,7 +31,6 @@ const CartItems = () => {
                         <p>Size</p>
                         <p>Quantity</p>
                         <p>Total</p>
-                        <p>Remove</p>
                     </div>
                     <hr />
 
@@ -46,15 +46,22 @@ const CartItems = () => {
                                     <img src={product.image} alt="" className='carticon-product-icon' />
                                     <p>{product.name}</p>
                                     <p>${product.new_price}</p>
-                                    <p>{size}</p> {/*  Display the correct size */}
-                                    <button className='cartitems-quantity'>{cartItems[cartKey].quantity}</button>
+                                    <p>{size}</p>
+                                    <div className="quantity-control">
+                                        <img
+                                            className='cartitems-remove-icon'
+                                            src={Minus}
+                                            onClick={() => removeFromCart(product.id, size)}
+                                            alt="Remove"
+                                        />
+                                        <button className='cartitems-quantity'>{cartItems[cartKey].quantity}</button>
+                                        <img className='cartitems-add-icon'
+                                            src={Plus}
+                                            onClick={() => addToCart(product.id, size)}
+                                            alt="Add"
+                                        />
+                                    </div>
                                     <p>${(product.new_price * cartItems[cartKey].quantity).toFixed(2)}</p>
-                                    <img
-                                        className='cartitems-remove-icon'
-                                        src={remove_icon}
-                                        onClick={() => removeFromCart(product.id, size)}
-                                        alt="Remove"
-                                    />
                                 </div>
                                 <hr />
                             </div>
@@ -91,10 +98,10 @@ const CartItems = () => {
                             </div>
                         </div>
                     </div >
-                    </>
+                </>
             )}
-                </div>
-            )
+        </div>
+    )
 }
 
-            export default CartItems
+export default CartItems
