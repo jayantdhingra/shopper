@@ -1,8 +1,8 @@
 import React, {useState,useContext} from 'react'
 import './Item.css'
 import { Link } from 'react-router-dom'
-import favoriteIcon from "../Assets/favorite_icon.png"; 
-import favoriteFilledIcon from "../Assets/fav_icon.png";
+import favoriteIcon from "../Assets/unfilled-favIcon.svg"; 
+import favoriteFilledIcon from "../Assets/filled-heart.svg";
 import { ShopContext } from '../../Context/ShopContext';
 
 const Item = (props) => {
