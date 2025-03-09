@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import './Navbar.css';
 import logo from '../Assets/logo.png';
 import cart_icon from '../Assets/cart_icon.png';
@@ -10,6 +10,12 @@ export const Navbar = () => {
     const [menu, setMenu] = useState("shop");
     const { getTotalCartItems } = useContext(ShopContext);
     const {getTotalFavoriteItems} = useContext(ShopContext);
+
+    useEffect(() => {
+        if(localStorage.getItem('menu')){
+            setMenu(localStorage.getItem('menu'));
+        }
+    })
     
     return (
         <div className='navbar'>
@@ -19,23 +25,23 @@ export const Navbar = () => {
             </div>
 
             <ul className="nav-menu">
-                <li onClick={() => setMenu("shop")}>
+                <li onClick={() => {setMenu("shop"), localStorage.setItem('menu','shop')}}>
                     <Link style={{ textDecoration: 'none' }} to='/'>Shop</Link> 
                     {menu === "shop" && <hr />}
                 </li>
-                <li onClick={() => setMenu("men")}>
+                <li onClick={() => {setMenu("men"), localStorage.setItem('menu','men')}}>
                     <Link style={{ textDecoration: 'none' }} to="/men">Men</Link> 
                     {menu === "men" && <hr />}
                 </li>
-                <li onClick={() => setMenu("women")}>
+                <li onClick={() => {setMenu("women"), localStorage.setItem('menu','women')}}>
                     <Link style={{ textDecoration: 'none' }} to="/women">Women</Link>  
                     {menu === "women" && <hr />}
                 </li>
-                <li onClick={() => setMenu("kid")}>
+                <li onClick={() => {setMenu("kid"), localStorage.setItem('menu','kid')}}>
                     <Link style={{ textDecoration: 'none' }} to="/kids">Kids</Link>
                     {menu === "kid" && <hr />}
                 </li>
-                <li onClick={() => setMenu("Settings")}>
+                <li onClick={() => {setMenu("Settings"), localStorage.setItem('menu','Settings')}}>
                     <Link style={{ textDecoration: 'none' }} to="/user-settings">Settings</Link>
                     {menu === "Settings" && <hr />}
                 </li>
