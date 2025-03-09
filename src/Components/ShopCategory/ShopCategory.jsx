@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import "./ShopCategory.css";
 import { ShopContext } from "../../Context/ShopContext";
 import Item from '../Item/Item'
+import { ToastContainer } from "react-toastify";
 
 const ShopCategory = ({ category, banner, searchQuery }) => {
   const { all_product } = useContext(ShopContext);
@@ -48,6 +49,7 @@ const ShopCategory = ({ category, banner, searchQuery }) => {
 
   return (
     <div className="shop-category">
+      <ToastContainer toastClassName="cart-toast" />
       <img className="shopcategory-banner" src={banner} alt="Category Banner" />
 
       <div className="shopcategory-indexSort">
