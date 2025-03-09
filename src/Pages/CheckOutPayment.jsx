@@ -72,7 +72,7 @@ const CheckOutPayment = () => {
 
       {/* Right Side - Cart Summary */}
       <div className="checkout-right">
-        <h3 className="cart-title">Your cart</h3>
+        <h3 className="cart-title">Your Cart</h3>
         <CheckOutItems />
       </div>
     </div>

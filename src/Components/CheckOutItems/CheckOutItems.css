@@ -1,5 +1,5 @@
 .CheckOutItems{
-    margin: 100px 0px;
+    margin: 70px 0px;
 }
 
 .CheckOutItems hr{
@@ -10,7 +10,7 @@
 
 .CheckOutItems-format-main{
     display: grid;
-    grid-template-columns: 0.5fr 2fr 1fr 1fr 1fr 1fr 0.5fr;
+    grid-template-columns: 0.5fr 2fr 1fr 0.5fr 1fr 1fr ;
     align-items: center;
     gap: 50px;
     padding: 20px 0px;
@@ -50,7 +50,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    margin-right: 200px;
+    margin-right: 100px;
     gap: 40px;
 }
 
@@ -83,7 +83,7 @@
 }
 
 .CheckOutItems-promobox{
-    width:400px;
+    width:350px;
     margin-top: 15px;
     padding-left: 0px;
     height: 58px;

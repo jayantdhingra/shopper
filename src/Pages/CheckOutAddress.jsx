@@ -54,7 +54,7 @@ const CheckOutAddress = () => {
 
         {/* Right Side - Cart Summary */}
         <div className="checkout-right">
-            <h3 className="cart-title">Your cart</h3>
+            <h3 className="cart-title">Review Cart</h3>
             <div>
                 <CheckOutItems/>
             </div>

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const CheckOutItems = () => {
     const Navigate = useNavigate();
-    const { getTotalCartAmount, all_product, cartItems, removeFromCart } = useContext(ShopContext);
+    const { getTotalCartAmount, all_product, cartItems } = useContext(ShopContext);
     return (
         <div className='CheckOutItems'>
             <div className="CheckOutItems-format-main">
@@ -16,7 +16,6 @@ const CheckOutItems = () => {
                 <p>Size</p>
                 <p>Quantity</p>
                 <p>Total</p>
-                <p>Remove</p>
             </div>
             <hr />
             {Object.keys(cartItems)
@@ -33,15 +32,9 @@ const CheckOutItems = () => {
                                 <img src={product.image} alt="" className='carticon-product-icon' />
                                 <p>{product.name}</p>
                                 <p>${product.new_price}</p>
-                                <p>{size}</p> {/*  Display selected size */}
+                                <p>{size}</p> 
                                 <button className='CheckOutItems-quantity'>{cartItems[cartKey].quantity}</button>
                                 <p>${(product.new_price * cartItems[cartKey].quantity).toFixed(2)}</p>
-                                <img
-                                    className='CheckOutItems-remove-icon'
-                                    src={remove_icon}
-                                    onClick={() => removeFromCart(product.id, size)}
-                                    alt="Remove"
-                                />
                             </div>
                             <hr />
                         </div>
