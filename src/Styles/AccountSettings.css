@@ -9,28 +9,28 @@
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   }
   
-  h2 {
+  .heading {
     text-align: center;
     margin-bottom: 20px;
   }
   
-  form {
+  .form {
     display: flex;
     flex-direction: column;
   }
   
-  h3 {
+  .miniHeading {
     margin-top: 20px;
     font-size: 18px;
   }
   
-  label {
+  .label {
     font-size: 14px;
     margin: 10px 0 5px;
   }
   
-  input {
-    width: 100%;
+  .input {
+    width: 95%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -41,7 +41,7 @@
     margin-right: 8px;
   }
   
-  button {
+  .saveButton {
     margin-top: 20px;
     padding: 12px;
     background-color: black;
@@ -52,7 +52,7 @@
     border-radius: 5px;
   }
   
-  button:hover {
+  .saveButton:hover {
     background-color: #333;
   }
   
