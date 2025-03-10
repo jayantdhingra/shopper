@@ -33,23 +33,23 @@ export const SearchNavBar = ({ onSearch }) => {
             </div>
 
             <ul className="nav-menu">
-                <li onClick={() => {setMenu("shop"), localStorage.setItem('menu','shop')}}>
+                <li onClick={() => {setMenu("shop"); localStorage.setItem('menu','shop')}}>
                     <Link style={{ textDecoration: 'none' }} to='/'>Shop</Link> 
                     {menu === "shop" && <hr />}
                 </li>
-                <li onClick={() => {setMenu("men"), localStorage.setItem('menu','men')}}>
+                <li onClick={() => {setMenu("men"); localStorage.setItem('menu','men')}}>
                     <Link style={{ textDecoration: 'none' }} to="/men">Men</Link> 
                     {menu === "men" && <hr />}
                 </li>
-                <li onClick={() => {setMenu("women"), localStorage.setItem('menu','women')}}>
+                <li onClick={() => {setMenu("women"); localStorage.setItem('menu','women')}}>
                     <Link style={{ textDecoration: 'none' }} to="/women">Women</Link>  
                     {menu === "women" && <hr />}
                 </li>
-                <li onClick={() => {setMenu("kid"), localStorage.setItem('menu','kid')}}>
+                <li onClick={() => {setMenu("kid"); localStorage.setItem('menu','kid')}}>
                     <Link style={{ textDecoration: 'none' }} to="/kids">Kids</Link>
                     {menu === "kid" && <hr />}
                 </li>
-                <li onClick={() => {setMenu("Settings"), localStorage.setItem('menu','Settings')}}>
+                <li onClick={() => {setMenu("Settings"); localStorage.setItem('menu','Settings')}}>
                     <Link style={{ textDecoration: 'none' }} to="/user-settings">Settings</Link>
                     {menu === "Settings" && <hr />}
                 </li>
