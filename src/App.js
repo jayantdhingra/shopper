@@ -22,7 +22,7 @@ import CheckOutPayment from './Pages/CheckOutPayment';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { SearchNavBar } from './Components/SearchNavbar/SearchNavBar';
-import UserSettings from './Pages/UserSettings';
+import AccountSettings from './Pages/AccountSettings';
 import Company from './Components/FooterContent/Company';
 import Offices from './Components/FooterContent/Offices';
 import About from './Components/FooterContent/About';
@@ -68,7 +68,7 @@ function MainContent({ searchQuery, setSearchQuery }) {
         <Route path="/checkout-address" element={<CheckOutAddress />} />
         <Route path="/checkout-shipping" element={<CheckOutShipping />} />
         <Route path="/checkout-payment" element={<CheckOutPayment />} />
-        <Route path="/user-settings" element={<UserSettings />} />
+        <Route path="/user-settings" element={<AccountSettings />} />
         <Route path="/company" element={<Company />} />
         <Route path="/offices" element={<Offices />} />
         <Route path="/about" element={<About />} />

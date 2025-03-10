@@ -2,9 +2,9 @@ import React from 'react'
 import './CSS/MyOrders.css'
 
 const ordersData = [
-  { id: 1, product: 'Laptop', quantity: 1, price: 1200 },
-  { id: 2, product: 'Smartphone', quantity: 2, price: 600 },
-  { id: 3, product: 'Headphones', quantity: 1, price: 150 },
+  { id: 1, product: 'Cozy Fleece Zip-Up Hoodie', quantity: 1, price: 1200 },
+  { id: 2, product: 'Waterproof Rain Jacket with Hood', quantity: 2, price: 600 },
+  { id: 3, product: 'Adventure Time Cargo Shorts', quantity: 1, price: 150 },
 ];
 
 export const MyOrders = () => {

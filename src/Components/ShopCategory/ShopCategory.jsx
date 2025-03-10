@@ -55,9 +55,9 @@ const ShopCategory = ({ category, banner, searchQuery }) => {
       <div className="shopcategory-indexSort">
         <p>
           <strong>
-            Showing {showAll ? filteredProducts.length : initialProducts.length}
+            Showing {showAll ? filteredProducts.length : initialProducts.length} 
           </strong>
-          out of <strong>{categoryProducts.length}</strong> products
+           <nbsp /> out of <strong>{categoryProducts.length}</strong> products
         </p>
         <div className="shopcategory-sort">
           <label>Sort by:</label>
