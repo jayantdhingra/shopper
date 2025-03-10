@@ -15,11 +15,11 @@ const Footer = () => {
             <p>JUST BUY</p>
         </div>
         <ul className='footer-links'>
-            <li onClick={() => navigate("/company")}>Company</li>
+            <li onClick={() => navigate("/JustBuy/company")}>Company</li>
             {/* <li onClick={() => navigate("/company")}>Products</li> */}
-            <li onClick={() => navigate("/offices")}>Offices</li>
-            <li onClick={() => navigate("/about")}>About</li>
-            <li onClick={() => navigate("/contact-us")}>Contact</li>
+            <li onClick={() => navigate("/JustBuy/offices")}>Offices</li>
+            <li onClick={() => navigate("/JustBuy/about")}>About</li>
+            <li onClick={() => navigate("/JustBuy/contact-us")}>Contact</li>
         </ul>
         <div className="footer-social-icon">
             <div className="footer-icons-container" onClick={() => window.open("https://www.instagram.com/", "_blank")}>

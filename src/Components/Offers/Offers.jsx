@@ -7,10 +7,10 @@ const Offers = () => {
   const navigate = useNavigate();
   const handleOffers = () =>{
       if(localStorage.getItem("userToken")){
-          navigate("/women")
+          navigate("/JustBuy/women")
       }
       else{
-          navigate("/login")
+          navigate("/JustBuy/login")
       }
   }
   return (

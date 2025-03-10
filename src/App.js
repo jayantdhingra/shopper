@@ -34,7 +34,7 @@ function App() {
 
   const [searchQuery, setSearchQuery] = useState("");
   return (
-    <BrowserRouter basename="/WDM_Team8/JustBuy">
+    <BrowserRouter basename="/WDM_Team8">
       <MainContent searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
     </BrowserRouter>
   );
@@ -43,7 +43,7 @@ function App() {
 function MainContent({ searchQuery, setSearchQuery }) {
   const location = useLocation(); 
 
-  const searchPages = ["/men", "/women", "/kids"];
+  const searchPages = ["/JustBuy/men", "/JustBuy/women", "/JustBuy/kids"];
   const isSearchNavbar = searchPages.some((path) => location.pathname.startsWith(path));
   
   // Simulating user login status (Replace with actual authentication logic)
@@ -57,30 +57,30 @@ function MainContent({ searchQuery, setSearchQuery }) {
         <HomeNavBar />
       )}
       <Routes>
-      <Route path="/orders" element={<MyOrders/>}></Route>
-        <Route path='/' element={<Shop searchQuery={searchQuery} />}/>
-        <Route path='/men' element={<ShopCategory banner={men_banner} category="Men" searchQuery={searchQuery}/>}/>
-        <Route path='/women' element={<ShopCategory banner={women_banner}category="Women" searchQuery={searchQuery}/>}/>
-        <Route path='/kids' element={<ShopCategory banner={kid_banner} category="Kid" searchQuery={searchQuery}/>}/>
-        <Route path="/product" element={<Product/>}>
+      <Route path="/JustBuy/orders" element={<MyOrders/>}></Route>
+        <Route path='/JustBuy/' element={<Shop searchQuery={searchQuery} />}/>
+        <Route path='/JustBuy/men' element={<ShopCategory banner={men_banner} category="Men" searchQuery={searchQuery}/>}/>
+        <Route path='/JustBuy/women' element={<ShopCategory banner={women_banner}category="Women" searchQuery={searchQuery}/>}/>
+        <Route path='/JustBuy/kids' element={<ShopCategory banner={kid_banner} category="Kid" searchQuery={searchQuery}/>}/>
+        <Route path="/JustBuy/product" element={<Product/>}>
           <Route path=':productId' element={<Product/>}/>
         </Route>
-        <Route path='/cart' element={<Cart/>}/>
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/signup' element={<Signup/>}/>
-        <Route path='/forgot-password' element={<ForgotPassword/>}/>
-        <Route path='/reset-password' element={<ResetPassword/>}/>
-        <Route path='/contact-us' element={<ContactUs/>}/>
-        <Route path="/favorites" element={<Favorites />} />
-        <Route path="/checkout-address" element={<CheckOutAddress />} />
-        <Route path="/checkout-shipping" element={<CheckOutShipping />} />
-        <Route path="/checkout-payment" element={<CheckOutPayment />} />
-        <Route path="/user-settings" element={<AccountSettings />} />
-        <Route path="/company" element={<Company />} />
-        <Route path="/offices" element={<Offices />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/confirmation" element={<Confirmation />} />
+        <Route path='/JustBuy/cart' element={<Cart/>}/>
+        <Route path='/JustBuy/login' element={<Login/>}/>
+        <Route path='/JustBuy/signup' element={<Signup/>}/>
+        <Route path='/JustBuy/forgot-password' element={<ForgotPassword/>}/>
+        <Route path='/JustBuy/reset-password' element={<ResetPassword/>}/>
+        <Route path='/JustBuy/contact-us' element={<ContactUs/>}/>
+        <Route path="/JustBuy/favorites" element={<Favorites />} />
+        <Route path="/JustBuy/checkout-address" element={<CheckOutAddress />} />
+        <Route path="/JustBuy/checkout-shipping" element={<CheckOutShipping />} />
+        <Route path="/JustBuy/checkout-payment" element={<CheckOutPayment />} />
+        <Route path="/JustBuy/user-settings" element={<AccountSettings />} />
+        <Route path="/JustBuy/company" element={<Company />} />
+        <Route path="/JustBuy/offices" element={<Offices />} />
+        <Route path="/JustBuy/about" element={<About />} />
+        <Route path="/JustBuy/contact" element={<Contact />} />
+        <Route path="/JustBuy/confirmation" element={<Confirmation />} />
       </Routes>
       <Footer/>
     </div>

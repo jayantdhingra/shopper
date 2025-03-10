@@ -28,8 +28,8 @@ const Item = (props) => {
 
   return (
     <div className = 'item'>
-        {isLoggedIn && <Link to={`/product/${props.id}`}><img src = { props.image } alt = " "/></Link> }
-        {!isLoggedIn && <Link to={'/login'}><img src = { props.image } alt = " "/></Link> }
+        {isLoggedIn && <Link to={`/JustBuy/product/${props.id}`}><img src = { props.image } alt = " "/></Link> }
+        {!isLoggedIn && <Link to={'/JustBuy/login'}><img src = { props.image } alt = " "/></Link> }
         <p>{props.name}</p>
         <div className="item-prices">
         <div className="item-price-old">

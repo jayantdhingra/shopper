@@ -9,10 +9,10 @@ const Hero = () => {
     const navigate = useNavigate();
     const handleLatestCollection = () =>{
         if(localStorage.getItem("userToken")){
-            navigate("/men")
+            navigate("/JustBuy/men")
         }
         else{
-            navigate("/login")
+            navigate("/JustBuy/login")
         }
     }
 
