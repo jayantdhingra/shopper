@@ -34,7 +34,7 @@
 .nav-login-cart {
     display: flex;
     align-items: center;
-    gap: 35px; /* Reduce spacing */
+    gap: 15px;
 }
 
 .nav-login-cart button {
@@ -139,4 +139,21 @@
         height: 14px;
         font-size: 9px;
     }
+}
+
+.nav-orders-btn{
+    width: 157px;
+    height: 58px;
+    outline: none;
+    border: 1px solid #7a7a7a;
+    border-radius: 75px;
+    color: #515151;
+    font-size: 20px;
+    font-weight: 500;
+    background: white;
+    cursor: pointer;
+}
+
+.nav-orders-btn:active{
+    background: #f3f3f3;
 }

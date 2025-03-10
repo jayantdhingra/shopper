@@ -15,20 +15,20 @@ const Footer = () => {
             <p>JUST BUY</p>
         </div>
         <ul className='footer-links'>
-            <li>Company</li>
-            <li>Products</li>
-            <li>Offices</li>
-            <li>About</li>
+            <li onClick={() => navigate("/company")}>Company</li>
+            {/* <li onClick={() => navigate("/company")}>Products</li> */}
+            <li onClick={() => navigate("/offices")}>Offices</li>
+            <li onClick={() => navigate("/about")}>About</li>
             <li onClick={() => navigate("/contact-us")}>Contact</li>
         </ul>
         <div className="footer-social-icon">
-            <div className="footer-icons-container">
+            <div className="footer-icons-container" onClick={() => window.open("https://www.instagram.com/", "_blank")}>
                 <img src = {instagram_icon} alt = "" />
             </div>
-            <div className="footer-icons-container">
+            <div className="footer-icons-container" onClick={() => window.open("https://www.pinterest.com/", "_blank")}>
                 <img src = {pintester_icon} alt = "" />
             </div>
-            <div className="footer-icons-container">
+            <div className="footer-icons-container" onClick={() => window.open("https://www.whatsapp.com/", "_blank")}>
                 <img src = {whatsapp_icon} alt = "" />
             </div>
         </div>

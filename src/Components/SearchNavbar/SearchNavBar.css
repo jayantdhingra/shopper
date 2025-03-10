@@ -81,7 +81,6 @@
     background: red;
     color: white
 }
-
 .searchbar {
     display: flex;
     align-items: center;
@@ -93,6 +92,7 @@
     overflow: hidden; 
 }
 
+/* Input Container */
 .search-input-container {
     flex: 1;
     display: flex;
@@ -101,6 +101,7 @@
     padding-left: 10px;
 }
 
+/* Input Field */
 .searchbar input {
     width: 100%;
     border: none;
@@ -110,8 +111,9 @@
     padding-right: 10px;
 }
 
+/* Search Button */
 .searchbar button {
-    padding: 10px 15px; 
+    padding: 8px 12px; /* Reduce button padding */
     background-color: #FF4141;
     color: white;
     border: none;
@@ -119,11 +121,20 @@
     font-size: 16px;
     white-space: nowrap; 
     display: flex;
-    height: 60px;
+    align-items: center;
+    justify-content: center;
+    height: 40px; /* Adjust height to match input */
     border-radius: 0; 
 }
 
-.searchbar button:hover {
-    background-color: #45a049;
+/* Reduce the image size inside the button */
+.searchbar button img {
+    width: 18px;  /* Smaller image size */
+    height: 18px;
+    filter: brightness(0) invert(1); /* Makes the icon white */
 }
 
+/* Button Hover Effect */
+.searchbar button:hover {
+    background-color: #D63A3A; /* Slightly darker red */
+}
