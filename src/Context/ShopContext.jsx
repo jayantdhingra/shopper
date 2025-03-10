@@ -31,14 +31,14 @@ const ShopContextProvider = (props) => {
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
-            style: { width:"450px" , height: "50px", marginRight: "-100px"}
+            style: { width: "450px", height: "50px", marginRight: "-100px" }
         });
 
 
         if (!favorites.includes(productId)) {
-            setFavorites([...favorites,  all_product.find((product) => product.id === Number(productId)) ]);
+            setFavorites([...favorites, all_product.find((product) => product.id === Number(productId))]);
         }
-        
+
     };
 
     const removeFromFavorites = (productId) => {
@@ -57,9 +57,24 @@ const ShopContextProvider = (props) => {
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
-            style: { width:"450px" , height: "50px", marginRight: "-100px"}
+            style: { width: "450px", height: "50px", marginRight: "-100px" }
         });
 
+        setCartItems((prev) => {
+            const updatedCart = {
+                ...prev,
+                [cartKey]: prev[cartKey]
+                    ? { ...prev[cartKey], quantity: prev[cartKey].quantity + 1 }
+                    : { quantity: 1, size }
+            };
+
+            console.log("Updated Cart Items:", updatedCart);
+            return updatedCart;
+        });
+    };
+
+    const addProduct = (itemId, size) => {
+        const cartKey = `${itemId}_${size}`;
         setCartItems((prev) => {
             const updatedCart = {
                 ...prev,
@@ -126,10 +141,10 @@ const ShopContextProvider = (props) => {
     const getTotalFavoriteItems = () => {
         return favorites.length; //  Returns total favorite items count
     };
-    
+
 
     const contextValue = {
-        getTotalCartItems, getTotalCartAmount, all_product, cartItems, addToCart, removeFromCart, favorites,           //  Expose favorites
+        getTotalCartItems, getTotalCartAmount, all_product, cartItems, addToCart, addProduct, removeFromCart, favorites,           //  Expose favorites
         addToFavorites, removeFromFavorites, getTotalFavoriteItems
     };
     return (

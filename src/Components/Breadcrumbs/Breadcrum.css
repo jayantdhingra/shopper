@@ -1,4 +1,4 @@
-.breadcrum{
+.breadcrum {
     display: flex;
     align-items: center;
     justify-content: left;
@@ -6,6 +6,23 @@
     color: #5e5e5e;
     font-size: 16px;
     font-weight: 600;
-    margin:60px 170px;
-    text-transform:capitalize;
+    margin: 60px 170px;
+    text-transform: capitalize;
+}
+
+/* Mobile View */
+@media (max-width: 768px) {
+    .breadcrum {
+        flex-direction: column; /* Stack items vertically */
+        align-items: flex-start; /* Align to left */
+        font-size: 14px; /* Reduce font size */
+        margin: 40px 20px; /* Reduce margin for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .breadcrum {
+        font-size: 12px; /* Further reduce font size for very small screens */
+        margin: 20px 10px; /* Reduce margin */
+    }
 }

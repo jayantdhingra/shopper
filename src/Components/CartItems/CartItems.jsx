@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const CartItems = () => {
     const Navigate = useNavigate();
-    const { getTotalCartAmount, all_product, cartItems, addToCart, removeFromCart } = useContext(ShopContext);
+    const { getTotalCartAmount, all_product, cartItems, addProduct, removeFromCart } = useContext(ShopContext);
     const isCartEmpty = Object.keys(cartItems).filter(key => cartItems[key].quantity > 0).length === 0;
 
 
@@ -57,7 +57,7 @@ const CartItems = () => {
                                         <button className='cartitems-quantity'>{cartItems[cartKey].quantity}</button>
                                         <img className='cartitems-add-icon'
                                             src={Plus}
-                                            onClick={() => addToCart(product.id, size)}
+                                            onClick={() => addProduct(product.id, size)}
                                             alt="Add"
                                         />
                                     </div>
