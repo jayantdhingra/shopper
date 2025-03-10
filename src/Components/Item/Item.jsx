@@ -38,12 +38,13 @@ const Item = (props) => {
             <div className="item-price-new">
                 ${props.new_price}
             </div>
-            <button type="button" 
+            {isLoggedIn && <button type="button" 
                 className={`favorite-btn ${fav.has(props.id) ? "favorited" : ""}`}   
                 onClick={() => {toggleFavorite(props.id) ;
                  isFavorited ? removeFromFavorites(props.id) : addToFavorites(props.id)}}>
                   <img src={fav.has(props.id) ? favoriteFilledIcon : favoriteIcon} alt="Favorite Icon" className="favorite-icon" />
               </button>
+            }
         </div>
     </div>
   )
