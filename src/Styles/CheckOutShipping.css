@@ -53,12 +53,10 @@ body {
     cursor: pointer;
     background-color: #fff;
     height: 100px;
-    padding: 0% !important;
   }
   
   .shipping-option input {
-    margin-right: -450px;
-    margin-left: -450px !important;
+    margin-right: 20px;
   }
   
   .shipping-option label {
