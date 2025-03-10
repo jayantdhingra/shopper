@@ -81,4 +81,10 @@ body {
   .signup-link:hover {
     text-decoration: underline;
   }
+
+  .error-message{
+    font-weight: bolder;
+    margin-bottom: 20px;
+    color: red;
+  }
   

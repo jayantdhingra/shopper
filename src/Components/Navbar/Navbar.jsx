@@ -16,6 +16,11 @@ export const Navbar = () => {
             setMenu(localStorage.getItem('menu'));
         }
     })
+
+    const handleLogout = () => {
+        localStorage.removeItem('userToken');
+        alert('Successfully Logged Out')
+    }
     
     return (
         <div className='navbar'>
@@ -51,9 +56,6 @@ export const Navbar = () => {
             <Link to='/orders'>
                 <button className='nav-orders-btn'>My Orders</button>
             </Link>
-                <Link to='/login'>
-                <button>Login</button>
-            </Link>
                 
                 {/* Favorites Icon */}
                 <Link to='/favorites'>
@@ -71,6 +73,10 @@ export const Navbar = () => {
                 
                 <div className="nav-cart-count">{getTotalCartItems()}</div>
             
+                
+                <Link to='/' onClick={handleLogout}>
+                    <button>Logout</button>
+                </Link>
             </div>
         </div>
     );

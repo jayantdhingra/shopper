@@ -1,21 +1,63 @@
-import React from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../Styles/Login.css"; // Import the CSS file
 
 const Login = () => {
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleLogin = () => {
+    // Basic email validation
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email.match(emailPattern)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
+    // Password validation (at least 8 characters)
+    if (password.length < 8) {
+      setError("Password must be at least 8 characters.");
+      return;
+    }
+
+    // Save userToken in localStorage (simulating login)
+    localStorage.setItem("userToken", "authenticated");
+    
+    // Redirect to /shop
+    navigate("/");
+
+    alert('Login Successful')
+  };
 
   return (
     <div className="login-container">
       <div className="login-box">
         <h2 className="login-title">Login</h2>
 
-        <input type="text" placeholder="Username" className="input-field" />
-        <input type="password" placeholder="Password" className="input-field" />
+        {error && <p className="error-message">{error}</p>}
 
-        <span className="forgot-password" onClick={() => navigate("/forgot-password")}>Forgot Password?</span>
+        <input
+          type="text"
+          placeholder="Email"
+          className="input-field"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          className="input-field"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
 
-        <button className="login-button">Login</button>
+        <span className="forgot-password" onClick={() => navigate("/forgot-password")}>
+          Forgot Password?
+        </span>
+
+        <button className="login-button" onClick={handleLogin}>Login</button>
 
         <p className="signup-text">
           Don't have an account?{" "}
