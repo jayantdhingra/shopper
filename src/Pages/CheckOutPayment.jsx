@@ -5,6 +5,9 @@ import PayPal from "../Components/Assets/PayPal.png"
 
 const CheckOutPayment = () => {
   const [paymentMethod, setPaymentMethod] = useState("credit");
+  const handlePay = () =>{
+    alert('Payment successful')
+  }
 
   return (
     <div className="checkout-container">
@@ -39,7 +42,7 @@ const CheckOutPayment = () => {
             <h3 className="section-title">Payment Details</h3>
             <input type="email" placeholder="Email" className="input-field full-width" />
             <input type="text" placeholder="Card Number" className="input-field full-width" />
-            <button className="pay-button">Pay Now</button>
+            <button className="pay-button" onClick={handlePay}>Pay Now</button>
           </div>
         )}
 
@@ -65,7 +68,7 @@ const CheckOutPayment = () => {
               <input type="checkbox" className="toggle-switch" />
             </div>
 
-            <button className="pay-button">Pay with card</button>
+            <button className="pay-button" onClick={handlePay}>Pay with card</button>
           </div>
         )}
       </div>
