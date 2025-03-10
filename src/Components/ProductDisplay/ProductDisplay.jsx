@@ -4,8 +4,8 @@ import star_icon from '../Assets/star_icon.png';
 import star_dull_icon from '../Assets/star_dull_icon.png';
 import { ShopContext } from "../../Context/ShopContext";
 import { ToastContainer } from "react-toastify";
-import favorite_filled from '../Assets/fav_icon.png';
-import favorite_outline from '../Assets/favorite_icon.png';
+import favorite_filled from '../Assets/filled-heart.svg';
+import favorite_outline from '../Assets/unfilled-favIcon.svg';
 
 const ProductDisplay = (props) => {
     const { product } = props;

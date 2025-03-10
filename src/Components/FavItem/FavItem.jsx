@@ -3,8 +3,8 @@ import { useContext } from 'react'
 import './FavItem.css'
 import { Link } from 'react-router-dom'
 import { ShopContext } from '../../Context/ShopContext'
-import favorite_filled from '../Assets/fav_icon.png';
-import favorite_outline from '../Assets/favorite_icon.png';
+import favorite_filled from '../Assets/filled-heart.svg';
+import favorite_outline from '../Assets/unfilled-favIcon.svg';
 
 const FavItem = (props) => {
   const { product } = props;
