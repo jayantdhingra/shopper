@@ -1,7 +1,7 @@
 {
   "name": "ecommercereactjs",
   "version": "0.1.0",
-  "homepage": "https://dxs8368.uta.cloud/WDM_Team8",
+  "homepage": "https://dxs8368.uta.cloud/WDM_Team8/JustBuy",
   "private": true,
   "dependencies": {
     "cra-template": "1.2.0",

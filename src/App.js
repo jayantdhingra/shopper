@@ -34,7 +34,7 @@ function App() {
 
   const [searchQuery, setSearchQuery] = useState("");
   return (
-    <BrowserRouter basename="/WDM_Team8">
+    <BrowserRouter basename="/WDM_Team8/JustBuy">
       <MainContent searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
     </BrowserRouter>
   );
