@@ -11,6 +11,7 @@ import Signup from './Pages/Signup';
 import men_banner from './Components/Assets/banner_mens.png';
 import women_banner from './Components/Assets/banner_women.png';
 import kid_banner from './Components/Assets/banner_kids.png';
+import MyOrders from './Pages/MyOrders';
 import ForgotPassword from './Pages/ForgotPassword';
 import ResetPassword from './Pages/ResetPassword';
 import ContactUs from './Pages/ContactUs'
@@ -21,7 +22,13 @@ import CheckOutPayment from './Pages/CheckOutPayment';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { SearchNavBar } from './Components/SearchNavbar/SearchNavBar';
-import AccountSettings from './Pages/AccountSettings';
+import UserSettings from './Pages/UserSettings';
+import Company from './Components/FooterContent/Company';
+import Offices from './Components/FooterContent/Offices';
+import About from './Components/FooterContent/About';
+import Contact from './Components/FooterContent/Contact';
+import Confirmation from './Components/NewsLetter/Confirmation';
+
 
 function App() {
 
@@ -43,6 +50,7 @@ function MainContent({ searchQuery, setSearchQuery }) {
     <div>
       {isSearchNavbar ? ( <SearchNavBar onSearch={setSearchQuery} />) : (<Navbar />)}
       <Routes>
+      <Route path="/orders" element={<MyOrders/>}></Route>
         <Route path='/' element={<Shop searchQuery={searchQuery} />}/>
         <Route path='/men' element={<ShopCategory banner={men_banner} category="Men" searchQuery={searchQuery}/>}/>
         <Route path='/women' element={<ShopCategory banner={women_banner}category="Women" searchQuery={searchQuery}/>}/>
@@ -60,7 +68,12 @@ function MainContent({ searchQuery, setSearchQuery }) {
         <Route path="/checkout-address" element={<CheckOutAddress />} />
         <Route path="/checkout-shipping" element={<CheckOutShipping />} />
         <Route path="/checkout-payment" element={<CheckOutPayment />} />
-        <Route path="/user-settings" element={<AccountSettings />} />
+        <Route path="/user-settings" element={<UserSettings />} />
+        <Route path="/company" element={<Company />} />
+        <Route path="/offices" element={<Offices />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/confirmation" element={<Confirmation />} />
       </Routes>
       <Footer/>
     </div>

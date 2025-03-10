@@ -60,6 +60,13 @@
     color: white;
     font-size: 22px;
     font-weight: 500;
+    cursor: pointer;
+}
+
+.hero-latest-btn:hover{
+    background: #d93636;
+    transform: scale(1.05);
+
 }
 
 .hero-right {

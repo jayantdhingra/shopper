@@ -68,6 +68,9 @@ export const SearchNavBar = ({ onSearch }) => {
             </div>
 
             <div className="nav-login-cart">
+                <Link to='/orders'>
+                                <button className='nav-orders-btn'>My Orders</button>
+                            </Link>
                 <Link to='/login'><button>Login</button></Link>
                 <Link to='/favorites'>
                     <img src={favorite_icon} alt="Favorites" className="nav-icon" />
