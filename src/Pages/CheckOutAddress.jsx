@@ -39,7 +39,7 @@ const CheckOutAddress = () => {
             <input type="text" placeholder="Optional" className="input-field full-width" />
 
             <div className="save-contact">
-                <input type="checkbox" id="save-info" />
+                <input type="checkbox" id="save-info" />&nbsp;
                 <label htmlFor="save-info">Save contact information</label>
             </div>
 
