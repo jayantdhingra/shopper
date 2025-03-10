@@ -1,4 +1,4 @@
-import React, {useState,useContext} from 'react'
+import React, {useState,useContext, useEffect} from 'react'
 import './Item.css'
 import { Link } from 'react-router-dom'
 import favoriteIcon from "../Assets/unfilled-favIcon.svg"; 
@@ -6,6 +6,7 @@ import favoriteFilledIcon from "../Assets/filled-heart.svg";
 import { ShopContext } from '../../Context/ShopContext';
 
 const Item = (props) => {
+    const [isLoggedIn, setIsLoggedIn] = useState(); //  Track favorites
     const [fav, setFav] = useState(new Set()); //  Track favorites
     const { addToCart, addToFavorites, removeFromFavorites, favorites = [] } = useContext(ShopContext);
     const isFavorited = favorites.find((product) => product.id === Number(props.id))
@@ -21,9 +22,14 @@ const Item = (props) => {
       });
     };
 
+    useEffect(()=>{
+      setIsLoggedIn(localStorage.getItem("userToken") !== null);  
+    })
+
   return (
     <div className = 'item'>
-        <Link to={`/product/${props.id}`}><img src = { props.image } alt = " "/></Link>
+        {isLoggedIn && <Link to={`/product/${props.id}`}><img src = { props.image } alt = " "/></Link> }
+        {!isLoggedIn && <Link to={'/login'}><img src = { props.image } alt = " "/></Link> }
         <p>{props.name}</p>
         <div className="item-prices">
         <div className="item-price-old">
@@ -32,12 +38,13 @@ const Item = (props) => {
             <div className="item-price-new">
                 ${props.new_price}
             </div>
-            <button type="button" 
+            {isLoggedIn && <button type="button" 
                 className={`favorite-btn ${fav.has(props.id) ? "favorited" : ""}`}   
                 onClick={() => {toggleFavorite(props.id) ;
                  isFavorited ? removeFromFavorites(props.id) : addToFavorites(props.id)}}>
                   <img src={fav.has(props.id) ? favoriteFilledIcon : favoriteIcon} alt="Favorite Icon" className="favorite-icon" />
               </button>
+            }
         </div>
     </div>
   )

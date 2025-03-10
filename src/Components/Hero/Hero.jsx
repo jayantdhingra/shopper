@@ -7,6 +7,15 @@ import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
     const navigate = useNavigate();
+    const handleLatestCollection = () =>{
+        if(localStorage.getItem("userToken")){
+            navigate("/men")
+        }
+        else{
+            navigate("/login")
+        }
+    }
+
   return (
     <div className='hero'>
         <div className="hero-left">
@@ -19,7 +28,7 @@ const Hero = () => {
                 <p>collections</p>
                 <p>for everyone</p>
             </div>
-            <div className="hero-latest-btn" onClick={() => navigate("/men")}>
+            <div className="hero-latest-btn" onClick={handleLatestCollection}>
                 <div>Latest Collection</div>
                 <img src={arrow_icon} alt="" />
             </div>

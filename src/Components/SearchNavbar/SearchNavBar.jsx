@@ -26,6 +26,11 @@ export const SearchNavBar = ({ onSearch }) => {
         }
     })
 
+    const handleLogout = () => {
+        localStorage.removeItem('userToken');
+        alert('Successfully Logged Out')
+    }
+
     return (
         <div className='navbar'>
             <div className="nav-logo">
@@ -73,7 +78,6 @@ export const SearchNavBar = ({ onSearch }) => {
                 <Link to='/orders'>
                                 <button className='nav-orders-btn'>My Orders</button>
                             </Link>
-                <Link to='/login'><button>Login</button></Link>
                 <Link to='/favorites'>
                     <img src={favorite_icon} alt="Favorites" className="nav-icon" />
                 </Link>
@@ -85,6 +89,11 @@ export const SearchNavBar = ({ onSearch }) => {
                 </Link>
 
                 <div className="nav-cart-count">{getTotalCartItems()}</div>
+
+                
+                <Link to='/' onClick={handleLogout}>
+                    <button>Logout</button>
+                </Link>
             </div>
         </div>
     );

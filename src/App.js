@@ -28,7 +28,7 @@ import Offices from './Components/FooterContent/Offices';
 import About from './Components/FooterContent/About';
 import Contact from './Components/FooterContent/Contact';
 import Confirmation from './Components/NewsLetter/Confirmation';
-
+import HomeNavBar from './Components/HomeNavBar/HomeNavBar';
 
 function App() {
 
@@ -45,10 +45,17 @@ function MainContent({ searchQuery, setSearchQuery }) {
 
   const searchPages = ["/men", "/women", "/kids"];
   const isSearchNavbar = searchPages.some((path) => location.pathname.startsWith(path));
+  
+  // Simulating user login status (Replace with actual authentication logic)
+  const isLoggedIn = localStorage.getItem("userToken") !== null;  
 
   return (
     <div>
-      {isSearchNavbar ? ( <SearchNavBar onSearch={setSearchQuery} />) : (<Navbar />)}
+      {isLoggedIn ? (
+        isSearchNavbar ? <SearchNavBar onSearch={setSearchQuery} /> : <Navbar />
+      ) : (
+        <HomeNavBar />
+      )}
       <Routes>
       <Route path="/orders" element={<MyOrders/>}></Route>
         <Route path='/' element={<Shop searchQuery={searchQuery} />}/>
