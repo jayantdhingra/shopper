@@ -1,7 +1,7 @@
 .breadcrum {
     display: flex;
     align-items: center;
-    justify-content: left;
+    flex-wrap: wrap; /* Ensures text wraps properly */
     gap: 8px;
     color: #5e5e5e;
     font-size: 16px;
@@ -10,19 +10,50 @@
     text-transform: capitalize;
 }
 
-/* Mobile View */
-@media (max-width: 768px) {
+/* Adjust icon size for better scaling */
+.breadcrum img {
+    width: 12px;
+    height: 12px;
+}
+
+/* Tablet View */
+@media (max-width: 1024px) {
     .breadcrum {
-        flex-direction: column; /* Stack items vertically */
-        align-items: flex-start; /* Align to left */
-        font-size: 14px; /* Reduce font size */
-        margin: 40px 20px; /* Reduce margin for smaller screens */
+        font-size: 14px;
+        margin: 40px 50px;
+    }
+
+    .breadcrum img {
+        width: 10px;
+        height: 10px;
     }
 }
 
+/* Mobile View */
+@media (max-width: 768px) {
+    .breadcrum {
+        flex-direction: row; /* Keeps items inline on small screens */
+        flex-wrap: wrap; /* Allows wrapping */
+        font-size: 13px;
+        margin: 30px 20px;
+    }
+
+    .breadcrum img {
+        width: 9px;
+        height: 9px;
+    }
+}
+
+/* Very Small Screens */
 @media (max-width: 480px) {
     .breadcrum {
-        font-size: 12px; /* Further reduce font size for very small screens */
-        margin: 20px 10px; /* Reduce margin */
+        font-size: 12px;
+        margin: 20px 10px;
+        gap: 5px; /* Reduce space for better fit */
+    }
+
+    .breadcrum img {
+        width: 8px;
+        height: 8px;
     }
 }
