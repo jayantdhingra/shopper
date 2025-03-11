@@ -28,7 +28,7 @@ export const HomeNavBar = () => {
           <Link style={{ textDecoration: "none" }} to="/contact-us">Contact</Link>
         </li>
         <li>
-          <Link style={{ textDecoration: "none" }} to="/blog/blog-for-ecommerce-website-team8">Blog</Link>
+          <Link style={{ textDecoration: "none" }} to="/blog/blog-for-ecommerce-website-team8/">Blog</Link>
         </li>
       </ul>
 
