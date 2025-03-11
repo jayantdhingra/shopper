@@ -26,7 +26,7 @@ const Login = () => {
     localStorage.setItem("userToken", "authenticated");
     
     // Redirect to /shop
-    navigate("/");
+    navigate("/JustBuy/");
 
     alert('Login Successful')
   };
@@ -53,7 +53,7 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <span className="forgot-password" onClick={() => navigate("/forgot-password")}>
+        <span className="forgot-password" onClick={() => navigate("/JustBuy/forgot-password")}>
           Forgot Password?
         </span>
 
@@ -61,7 +61,7 @@ const Login = () => {
 
         <p className="signup-text">
           Don't have an account?{" "}
-          <span className="signup-link" onClick={() => navigate("/signup")}>
+          <span className="signup-link" onClick={() => navigate("/JustBuy/signup")}>
             Sign Up
           </span>
         </p>
