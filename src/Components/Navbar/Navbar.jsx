@@ -74,7 +74,7 @@ export const Navbar = () => {
                 <div className="nav-cart-count">{getTotalCartItems()}</div>
             
                 
-                <Link to='/' onClick={handleLogout}>
+                <Link to='/JustBuy/' onClick={handleLogout}>
                     <button>Logout</button>
                 </Link>
             </div>
