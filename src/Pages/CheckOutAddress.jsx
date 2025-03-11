@@ -45,7 +45,7 @@ const CheckOutAddress = () => {
 
             <button className="continue-button" onClick={(event) => { 
                 event.preventDefault(); 
-                Navigate('/JustBuy/checkout-shipping');
+                Navigate('/checkout-shipping');
             }}>
             Continue to shipping
             </button>

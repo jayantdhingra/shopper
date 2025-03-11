@@ -16,7 +16,7 @@ export const Signup = () => {
             <button className="signup-button">Sign Up</button>
     
             <p className="login-text">
-              Already have an account? <span className="login-link" onClick={() => navigate("/JustBuy/login")}>Login</span>
+              Already have an account? <span className="login-link" onClick={() => navigate("/login")}>Login</span>
             </p>
           </div>
         </div>

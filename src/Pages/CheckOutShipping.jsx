@@ -36,7 +36,7 @@ const CheckOutShipping = () => {
           </label>
         </div>
 
-        <button className="continue-button" onClick={() => Navigate('/JustBuy/checkout-payment')}>Continue to payment</button>
+        <button className="continue-button" onClick={() => Navigate('/checkout-payment')}>Continue to payment</button>
       </div>
 
       {/* Right Side - Cart Summary */}

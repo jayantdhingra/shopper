@@ -31,41 +31,41 @@ export const Navbar = () => {
 
             <ul className="nav-menu">
                 <li onClick={() => {setMenu("shop"); localStorage.setItem('menu','shop')}}>
-                    <Link style={{ textDecoration: 'none' }} to='/JustBuy/'>Shop</Link> 
+                    <Link style={{ textDecoration: 'none' }} to='/'>Shop</Link> 
                     {menu === "shop" && <hr />}
                 </li>
                 <li onClick={() => {setMenu("men"); localStorage.setItem('menu','men')}}>
-                    <Link style={{ textDecoration: 'none' }} to="/JustBuy/men">Men</Link> 
+                    <Link style={{ textDecoration: 'none' }} to="/men">Men</Link> 
                     {menu === "men" && <hr />}
                 </li>
                 <li onClick={() => {setMenu("women"); localStorage.setItem('menu','women')}}>
-                    <Link style={{ textDecoration: 'none' }} to="/JustBuy/women">Women</Link>  
+                    <Link style={{ textDecoration: 'none' }} to="/women">Women</Link>  
                     {menu === "women" && <hr />}
                 </li>
                 <li onClick={() => {setMenu("kid"); localStorage.setItem('menu','kid')}}>
-                    <Link style={{ textDecoration: 'none' }} to="/JustBuy/kids">Kids</Link>
+                    <Link style={{ textDecoration: 'none' }} to="/kids">Kids</Link>
                     {menu === "kid" && <hr />}
                 </li>
                 <li onClick={() => {setMenu("Settings"); localStorage.setItem('menu','Settings')}}>
-                    <Link style={{ textDecoration: 'none' }} to="/JustBuy/user-settings">Settings</Link>
+                    <Link style={{ textDecoration: 'none' }} to="/user-settings">Settings</Link>
                     {menu === "Settings" && <hr />}
                 </li>
             </ul>
 
             <div className="nav-login-cart">
-            <Link to='/JustBuy/orders'>
+            <Link to='/orders'>
                 <button className='nav-orders-btn'>My Orders</button>
             </Link>
                 
                 {/* Favorites Icon */}
-                <Link to='/JustBuy/favorites'>
+                <Link to='/favorites'>
                     <img src={favorite_icon} alt="Favorites" className="nav-icon" />
                 </Link>
                 
                 <div className="nav-cart-count">{getTotalFavoriteItems()}</div>
 
                 {/* Cart Icon */}
-                <Link to='/JustBuy/cart'>
+                <Link to='/cart'>
                     
                 <img src={cart_icon} alt="Cart" className="nav-icon" />
             

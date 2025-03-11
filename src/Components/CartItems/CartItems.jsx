@@ -88,7 +88,7 @@ const CartItems = () => {
                                     <h3>${getTotalCartAmount()}</h3>
                                 </div>
                             </div>
-                            <button onClick={() => Navigate('/JustBuy/checkout-address')}>Proceed to Checkout</button>
+                            <button onClick={() => Navigate('/checkout-address')}>Proceed to Checkout</button>
                         </div>
                         <div className="cartitems-promocode">
                             <p>If you have a promo code, Enter it here</p>

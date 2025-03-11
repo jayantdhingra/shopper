@@ -18,7 +18,7 @@ const ForgotPassword = () => {
 
         <button className="reset-button">Request Reset Link</button>
 
-        <p className="back-to-login" onClick={() => navigate("/JustBuy/login")}>Back to Login</p>
+        <p className="back-to-login" onClick={() => navigate("/login")}>Back to Login</p>
       </div>
     </div>
   );

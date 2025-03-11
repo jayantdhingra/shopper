@@ -13,30 +13,30 @@ export const HomeNavBar = () => {
 
       <ul className="nav-menu">
         <li>
-          <Link style={{ textDecoration: "none" }} to="/JustBuy/">Shop</Link>
+          <Link style={{ textDecoration: "none" }} to="/">Shop</Link>
         </li>
         <li>
-          <Link style={{ textDecoration: "none" }} to="/JustBuy/company">Company</Link>
+          <Link style={{ textDecoration: "none" }} to="/company">Company</Link>
         </li>
         <li>
-          <Link style={{ textDecoration: "none" }} to="/JustBuy/offices">Offices</Link>
+          <Link style={{ textDecoration: "none" }} to="/offices">Offices</Link>
         </li>
         <li>
-          <Link style={{ textDecoration: "none" }} to="/JustBuy/about">About</Link>
+          <Link style={{ textDecoration: "none" }} to="/about">About</Link>
         </li>
         <li>
-          <Link style={{ textDecoration: "none" }} to="/JustBuy/contact-us">Contact</Link>
+          <Link style={{ textDecoration: "none" }} to="/contact-us">Contact</Link>
         </li>
         <li>
-          <Link style={{ textDecoration: "none" }} to="/JustBuy/blog-for-ecommerce-website-team8">Blog</Link>
+          <Link style={{ textDecoration: "none" }} to="/blog/blog-for-ecommerce-website-team8">Blog</Link>
         </li>
       </ul>
 
       <div className="nav-login-cart">
-        <Link to="/JustBuy/login">
+        <Link to="/login">
           <button>Login</button>
         </Link>
-        <Link to="/JustBuy/signup">
+        <Link to="/signup">
           <button>Signup</button>
         </Link>
       </div>
