@@ -26,7 +26,6 @@ import AccountSettings from './Pages/AccountSettings';
 import Company from './Components/FooterContent/Company';
 import Offices from './Components/FooterContent/Offices';
 import About from './Components/FooterContent/About';
-import Contact from './Components/FooterContent/Contact';
 import Confirmation from './Components/NewsLetter/Confirmation';
 import HomeNavBar from './Components/HomeNavBar/HomeNavBar';
 
@@ -79,7 +78,6 @@ function MainContent({ searchQuery, setSearchQuery }) {
         <Route path="/company" element={<Company />} />
         <Route path="/offices" element={<Offices />} />
         <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
         <Route path="/confirmation" element={<Confirmation />} />
       </Routes>
       <Footer/>
