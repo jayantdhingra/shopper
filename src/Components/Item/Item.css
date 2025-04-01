@@ -1,45 +1,61 @@
 .item {
-    width: 350px;
+    width: 100%; /* Make items take full width */
+    max-width: 350px; /* Prevent overflow on large screens */
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 10px;
+    transition: transform 0.3s ease-in-out;
 }
 
 .item p {
     margin: 6px 0px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.item img {
+    width: 100%;
+    height: auto;
+    max-height: 450px; /* Limit image height */
+    object-fit: contain;
+    border-radius: 10px;
 }
 
 .item-prices {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    align-items: flex-start;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
 }
 
 .item-price-new {
     font-weight: bold;
     color: #ff4141; 
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .item-price-old {
     color: #818181;
     text-decoration: line-through;
+    font-size: 14px;
 }
 
+/* Hover Effect */
 .item:hover {
-    transform: scale(1.05);
-    transition: 0.6s;
+    transform: scale(1.03);
 }
 
+/* Favorite Button */
 .favorite-btn {
     background: none !important;
     border: none;
     cursor: pointer;
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 20px;
+    right: 20px;
     z-index: 10;
     padding: 0;
 }
@@ -54,30 +70,59 @@
     transform: scale(1.1);
 }
 
-.favorite-icon {
-    width: 24px;
-    height: 24px;
+/* Mobile Responsive */
+@media screen and (max-width: 768px) {
+    .item {
+        max-width: 300px; /* Reduce item size */
+    }
+
+    .item img {
+        max-height: 220px; /* Adjust image height */
+    }
+
+    .item p {
+        font-size: 14px;
+    }
+
+    .item-price-new {
+        font-size: 16px;
+    }
+
+    .favorite-btn {
+        top: 15px;
+        right: 15px;
+    }
+
+    .favorite-btn img {
+        width: 20px;
+        height: 20px;
+    }
 }
 
+@media screen and (max-width: 480px) {
+    .item {
+        max-width: 250px;
+    }
 
-.favorite-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 10;
-}
+    .item img {
+        max-height: 180px;
+    }
 
-.favorite-btn img {
-    width: 24px;
-    height: 24px;
-    transition: transform 0.2s ease-in-out;
-    vertical-align: middle;
-}
+    .item p {
+        font-size: 12px;
+    }
 
-.favorite-btn.favorited img {
-    transform: scale(1.1);
-    /* Slight zoom effect */
+    .item-price-new {
+        font-size: 14px;
+    }
+
+    .favorite-btn {
+        top: 10px;
+        right: 10px;
+    }
+
+    .favorite-btn img {
+        width: 18px;
+        height: 18px;
+    }
 }
