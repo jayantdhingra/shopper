@@ -1,34 +1,46 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../Styles/Login.css"; // Import the CSS file
+import "../Styles/Login.css";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
 
-  const handleLogin = () => {
-    // Basic email validation
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email.match(emailPattern)) {
-      setError("Please enter a valid email address.");
-      return;
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleLogin = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        localStorage.setItem("token", data.token); // Store token
+        localStorage.setItem("role", data.role); // Store user role
+        localStorage.setItem("userToken", "authenticated");
+        
+        // Emit event to notify Navbar of login change
+        window.dispatchEvent(new Event("authChange"));
+
+        alert('Login Successful')
+        navigate(data.role === "Admin" ? "/" : "/");
+      } else {
+        alert(data.message || "Login failed");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      alert("An error occurred. Please try again.");
     }
-
-    // Password validation (at least 8 characters)
-    if (password.length < 8) {
-      setError("Password must be at least 8 characters.");
-      return;
-    }
-
-    // Save userToken in localStorage (simulating login)
-    localStorage.setItem("userToken", "authenticated");
-    
-    // Redirect to /shop
-    navigate("/");
-
-    alert('Login Successful')
   };
 
   return (
@@ -36,26 +48,10 @@ const Login = () => {
       <div className="login-box">
         <h2 className="login-title">Login</h2>
 
-        {error && <p className="error-message">{error}</p>}
+        <input type="email" name="email" placeholder="Email" className="input-field" onChange={handleChange} />
+        <input type="password" name="password" placeholder="Password" className="input-field" onChange={handleChange} />
 
-        <input
-          type="text"
-          placeholder="Email"
-          className="input-field"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          className="input-field"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-
-        <span className="forgot-password" onClick={() => navigate("/forgot-password")}>
-          Forgot Password?
-        </span>
+        <span className="forgot-password" onClick={() => navigate("/forgot-password")}>Forgot Password?</span>
 
         <button className="login-button" onClick={handleLogin}>Login</button>
 

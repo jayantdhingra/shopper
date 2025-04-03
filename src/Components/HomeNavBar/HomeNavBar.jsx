@@ -1,9 +1,36 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../Navbar/Navbar.css";
 import logo from "../Assets/logo.png";
+import { useState, useEffect } from "react";
 
 export const HomeNavBar = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
+  const navigate = useNavigate();
+  
+      useEffect(() => {
+          const checkAuthStatus = () => {
+              setIsLoggedIn(!!localStorage.getItem("token"));
+          };
+  
+          // Listen for login/logout events
+          window.addEventListener("authChange", checkAuthStatus);
+          
+          return () => {
+              window.removeEventListener("authChange", checkAuthStatus);
+          };
+      }, []);
+  
+      const handleLogout = () => {
+          localStorage.removeItem("token");
+          localStorage.removeItem("role");
+  
+          // Emit event to notify other components
+          window.dispatchEvent(new Event("authChange"));
+  
+          navigate("/");
+      };
+
   return (
     <div className="navbar">
       <div className="nav-logo">
@@ -36,9 +63,11 @@ export const HomeNavBar = () => {
       </ul>
 
       <div className="nav-login-cart">
-        <Link to="/login">
-          <button>Login</button>
-        </Link>
+        {isLoggedIn ? (
+            <button onClick={handleLogout}>Logout</button>
+        ) : (
+            <Link to='/login'><button>Login</button></Link>
+        )}
         <Link to="/signup">
           <button>Signup</button>
         </Link>
