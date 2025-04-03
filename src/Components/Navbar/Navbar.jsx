@@ -27,6 +27,12 @@ export const Navbar = () => {
         };
     }, []);
 
+    useEffect(()=>{        
+            if(localStorage.getItem('menu')){
+                setMenu(localStorage.getItem('menu'));
+            }
+    })
+        
     const handleLogout = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("role");
@@ -34,7 +40,8 @@ export const Navbar = () => {
         // Emit event to notify other components
         window.dispatchEvent(new Event("authChange"));
 
-        navigate("/");
+        navigate("/login");
+        alert('You have logged out!')
     };
 
     return (

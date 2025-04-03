@@ -3,7 +3,7 @@ import './SearchNavBar.css';
 import logo from '../Assets/logo.png';
 import cart_icon from '../Assets/cart_icon.png';
 import favorite_icon from '../Assets/favorite_icon.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ShopContext } from '../../Context/ShopContext';
 import SearchIcon from '../Assets/search-icon.svg'
 
@@ -12,6 +12,22 @@ export const SearchNavBar = ({ onSearch }) => {
     const { getTotalCartItems } = useContext(ShopContext);
     const { getTotalFavoriteItems } = useContext(ShopContext);
     const [query, setQuery] = useState("");
+    const navigate = useNavigate();
+
+    const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
+
+    useEffect(() => {
+        const checkAuthStatus = () => {
+            setIsLoggedIn(!!localStorage.getItem("token"));
+        };
+
+        // Listen for login/logout events
+        window.addEventListener("authChange", checkAuthStatus);
+        
+        return () => {
+            window.removeEventListener("authChange", checkAuthStatus);
+        };
+    }, []);
 
 
     const handleInputChange = (e) => {
@@ -27,9 +43,15 @@ export const SearchNavBar = ({ onSearch }) => {
     })
 
     const handleLogout = () => {
-        localStorage.removeItem('userToken');
-        alert('Successfully Logged Out')
-    }
+        localStorage.removeItem("token");
+        localStorage.removeItem("role");
+
+        // Emit event to notify other components
+        window.dispatchEvent(new Event("authChange"));
+
+        navigate("/login");
+        alert('You have logged out!')
+    };
 
     return (
         <div className='navbar'>
@@ -91,9 +113,11 @@ export const SearchNavBar = ({ onSearch }) => {
                 <div className="nav-cart-count">{getTotalCartItems()}</div>
 
                 
-                <Link to='/' onClick={handleLogout}>
-                    <button>Logout</button>
-                </Link>
+                {isLoggedIn ? (
+                    <button onClick={handleLogout}>Logout</button>
+                ) : (
+                    <Link to='/login'><button>Login</button></Link>
+                )}
             </div>
         </div>
     );

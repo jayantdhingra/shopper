@@ -46,7 +46,7 @@ function MainContent({ searchQuery, setSearchQuery }) {
   const isSearchNavbar = searchPages.some((path) => location.pathname.startsWith(path));
   
   // Simulating user login status (Replace with actual authentication logic)
-  const isLoggedIn = localStorage.getItem("userToken") !== null;  
+  const isLoggedIn = localStorage.getItem("token") !== null;  
 
   return (
     <div>
