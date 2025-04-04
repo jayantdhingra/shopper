@@ -68,7 +68,7 @@ function MainContent({ searchQuery, setSearchQuery }) {
         <Route path='/login' element={<Login/>}/>
         <Route path='/signup' element={<Signup/>}/>
         <Route path='/forgot-password' element={<ForgotPassword/>}/>
-        <Route path='/reset-password' element={<ResetPassword/>}/>
+        <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
         <Route path='/contact-us' element={<ContactUs/>}/>
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/checkout-address" element={<CheckOutAddress />} />

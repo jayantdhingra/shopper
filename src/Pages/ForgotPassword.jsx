@@ -1,27 +1,42 @@
-import React from "react";
-import { useNavigate } from "react-router-dom"; // For navigation
-import "../Styles/ForgotPassword.css"; // Import the CSS file
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import "../Styles/ForgotPassword.css";
 
 const ForgotPassword = () => {
-  const navigate = useNavigate(); // Initialize navigation
+    const [email, setEmail] = useState("");
+    const [message, setMessage] = useState("");
+    const navigate = useNavigate();
 
-  return (
-    <div className="forgot-password-container">
-      <div className="forgot-password-box">
-        <h2 className="forgot-password-title">Forgot Password</h2>
+    const handleForgotPassword = async () => {
+        try {
+            const response = await axios.post("http://localhost:5000/api/auth/forgot-password", { email });
+            console.log('response: ',response)
+            alert(response.data.message);
+        } catch (error) {
+          console.log('ERROR: ',error)
+            alert(error.response?.data?.message || "Error occurred");
+        }
+    };
 
-        <p className="forgot-password-text">
-          Please enter the email address you'd like your password reset information sent to.
-        </p>
-
-        <input type="email" placeholder="Email" className="input-field" />
-
-        <button className="reset-button">Request Reset Link</button>
-
-        <p className="back-to-login" onClick={() => navigate("/login")}>Back to Login</p>
-      </div>
-    </div>
-  );
+    return (
+        <div className="forgot-password-container">
+            <div className="forgot-password-box">
+                <h2 className="forgot-password-title">Forgot Password</h2>
+                <p className="forgot-password-text">Enter your email to reset your password.</p>
+                <input
+                    type="email"
+                    placeholder="Email"
+                    className="input-field"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                <button className="reset-button" onClick={handleForgotPassword}>Request Reset Link</button>
+                <p className="message">{message}</p>
+                <p className="back-to-login" onClick={() => navigate("/login")}>Back to Login</p>
+            </div>
+        </div>
+    );
 };
 
 export default ForgotPassword;
