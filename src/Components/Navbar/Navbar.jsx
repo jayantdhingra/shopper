@@ -52,10 +52,14 @@ export const Navbar = () => {
             </div>
 
             <ul className="nav-menu">
-                <li onClick={() => setMenu("shop")}><Link to='/'>Shop</Link> {menu === "shop" && <hr />}</li>
-                <li onClick={() => setMenu("men")}><Link to="/men">Men</Link> {menu === "men" && <hr />}</li>
-                <li onClick={() => setMenu("women")}><Link to="/women">Women</Link> {menu === "women" && <hr />}</li>
-                <li onClick={() => setMenu("kid")}><Link to="/kids">Kids</Link> {menu === "kid" && <hr />}</li>
+                <li onClick={() => setMenu("shop")}><Link style={{ textDecoration: 'none' }}  to='/'>Shop</Link> {menu === "shop" && <hr />}</li>
+                <li onClick={() => setMenu("men")}><Link style={{ textDecoration: 'none' }}  to="/men">Men</Link> {menu === "men" && <hr />}</li>
+                <li onClick={() => setMenu("women")}><Link style={{ textDecoration: 'none' }}  to="/women">Women</Link> {menu === "women" && <hr />}</li>
+                <li onClick={() => setMenu("kid")}><Link style={{ textDecoration: 'none' }}  to="/kids">Kids</Link> {menu === "kid" && <hr />}</li>
+                <li onClick={() => {setMenu("Settings"); localStorage.setItem('menu','Settings')}}>
+                    <Link style={{ textDecoration: 'none' }} to="/user-settings">Settings</Link>
+                    {menu === "Settings" && <hr />}
+                </li>
             </ul>
 
             <div className="nav-login-cart">
