@@ -1,17 +1,24 @@
 import React, { useState } from 'react';
 import './NewsLetter.css'
 import { useNavigate } from 'react-router-dom';
+import axios from "axios"
 
 const NewsLetter = () => {
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
 
-  const handleSubscribe = () => {
+  const handleSubscribe = async () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
-
-    if (emailRegex.test(email)){
-      navigate('/confirmation', {state:{email}});
-    }else{
+  
+    if (emailRegex.test(email)) {
+      try {
+        await axios.post("http://localhost:5000/api/auth/subscribe", { email });
+        navigate('/confirmation', { state: { email } });
+      } catch (err) {
+        console.error("Failed to subscribe:", err);
+        alert("Subscription failed. Please try again later.");
+      }
+    } else {
       alert("Please enter a valid email address");
     }
   };
