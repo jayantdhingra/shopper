@@ -1,0 +1,149 @@
+.admin-dashboard {
+    font-family: 'Inter', sans-serif;
+    padding: 3rem;
+    background: #f9fafb;
+    color: #1f2937;
+    min-height: 100vh;
+  }
+  
+  .admin-dashboard h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: #111827;
+  }
+  
+  /* Reusable Card */
+  .admin-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .admin-card h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: #1f2937;
+  }
+  
+  /* Select Inputs */
+  .select-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    align-items: center;
+  }
+  
+  .select-row label {
+    font-weight: 500;
+    font-size: 1rem;
+  }
+  
+  .select-row select,
+  .select-row button {
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    background-color: white;
+    transition: all 0.2s ease;
+  }
+  
+  .select-row button {
+    background-color: #2563eb;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  
+  .select-row button:hover {
+    background-color: #1e40af;
+  }
+  
+  /* Product Form */
+  .product-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.2rem;
+  }
+  
+  .product-form input,
+  .product-form textarea {
+    padding: 0.7rem 1rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    background-color: #f9fafb;
+    transition: border 0.2s ease;
+  }
+  
+  .product-form input:focus,
+  .product-form textarea:focus {
+    outline: none;
+    border-color: #3b82f6;
+    background-color: #fff;
+  }
+  
+  .submit-button {
+    margin-top: 1rem;
+    background-color: #10b981;
+    color: white;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    grid-column: span 2;
+  }
+  
+  .submit-button:hover {
+    background-color: #059669;
+  }
+  
+  /* Upload Section */
+  .upload-section input[type="file"],
+  .upload-section input[type="text"],
+  .upload-section button {
+    margin-top: 1rem;
+    padding: 0.7rem 1rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    border: 1px solid #d1d5db;
+  }
+  
+  .upload-section button {
+    background-color: #f97316;
+    color: white;
+    border: none;
+    font-weight: bold;
+    margin-top: 1.5rem;
+    cursor: pointer;
+  }
+  
+  .upload-section button:hover {
+    background-color: #ea580c;
+  }
+  
+  /* Seller List */
+  .seller-list {
+    margin-top: 1rem;
+  }
+  
+  .seller-item {
+    background-color: #f3f4f6;
+    padding: 1rem;
+    border-left: 5px solid #3b82f6;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+  
+  
+  

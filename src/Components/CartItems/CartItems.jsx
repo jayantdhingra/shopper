@@ -1,31 +1,36 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import './CartItems.css';
 import { ShopContext } from "../../Context/ShopContext";
-import Minus from "../Assets/minus-icon.svg"
-import Plus from "../Assets/plus-icon.svg"
+import Minus from "../Assets/minus-icon.svg";
+import Plus from "../Assets/plus-icon.svg";
 import { useNavigate } from "react-router-dom";
 
 const CartItems = () => {
-    const Navigate = useNavigate();
-    const { getTotalCartAmount, all_product, cartItems, addProduct, removeFromCart } = useContext(ShopContext);
+    const navigate = useNavigate();
+    const { cartItems, addProduct, removeFromCart, getTotalCartAmount } = useContext(ShopContext);
+    const [totalAmount, setTotalAmount] = useState("0.00");
+
     const isCartEmpty = Object.keys(cartItems).filter(key => cartItems[key].quantity > 0).length === 0;
 
-
-    console.log(isCartEmpty)
+    useEffect(() => {
+        const fetchTotal = async () => {
+            const total = await getTotalCartAmount();
+            setTotalAmount(total);
+        };
+        fetchTotal();
+    }, [cartItems]);
 
     return (
         <div className='cartitems'>
             {isCartEmpty ? (
-                //  Display this when cart is empty
                 <div className="cart-empty">
                     <h2>Your Cart is Empty</h2>
                     <p>Browse our categories and discover our best deals!</p>
-                    <button onClick={() => Navigate('/')}>Continue Shopping</button>
+                    <button onClick={() => navigate('/')}>Continue Shopping</button>
                 </div>
             ) : (
                 <>
                     <div className="cartitems-format-main">
-                        <p>Products</p>
                         <p>Title</p>
                         <p>Price</p>
                         <p>Size</p>
@@ -35,39 +40,35 @@ const CartItems = () => {
                     <hr />
 
                     {Object.keys(cartItems).map((cartKey) => {
-                        const [productId, size] = cartKey.split("_"); // Extract product ID and size
-                        const product = all_product.find((p) => p.id === parseInt(productId));
-
-                        if (!product || !cartItems[cartKey] || cartItems[cartKey].quantity <= 0) return null;
-
+                        const cartItem = cartItems[cartKey];
                         return (
                             <div key={cartKey}>
                                 <div className="cartitems-format cartitems-format-main">
-                                    <img src={product.image} alt="" className='carticon-product-icon' />
-                                    <p>{product.name}</p>
-                                    <p>${product.new_price}</p>
-                                    <p>{size}</p>
+                                    {/* Image removed */}
+                                    <p>{cartItem.Name}</p>
+                                    <p>${parseFloat(cartItem.Price).toFixed(2)}</p>
+                                    <p>{cartItem.Size}</p>
                                     <div className="quantity-control">
                                         <img
                                             className='cartitems-remove-icon'
                                             src={Minus}
-                                            onClick={() => removeFromCart(product.id, size)}
+                                            onClick={() => removeFromCart(cartItem.Product_ID, cartItem.Size)}
                                             alt="Remove"
                                         />
-                                        <button className='cartitems-quantity'>{cartItems[cartKey].quantity}</button>
-                                        <img className='cartitems-add-icon'
+                                        <button className='cartitems-quantity'>{cartItem.quantity}</button>
+                                        <img
+                                            className='cartitems-add-icon'
                                             src={Plus}
-                                            onClick={() => addProduct(product.id, size)}
+                                            onClick={() => addProduct(cartItem.Product_ID, cartItem.Size)}
                                             alt="Add"
                                         />
                                     </div>
-                                    <p>${(product.new_price * cartItems[cartKey].quantity).toFixed(2)}</p>
+                                    <p>${(parseFloat(cartItem.Price) * cartItem.quantity).toFixed(2)}</p>
                                 </div>
                                 <hr />
                             </div>
                         );
                     })}
-
 
                     <div className="cartitems-down">
                         <div className="cartitems-total">
@@ -75,7 +76,7 @@ const CartItems = () => {
                             <div>
                                 <div className="cartitems-total-item">
                                     <p>Subtotal</p>
-                                    <p>${getTotalCartAmount()}</p>
+                                    <p>${totalAmount}</p>
                                 </div>
                                 <hr />
                                 <div className="cartitems-total-item">
@@ -85,23 +86,23 @@ const CartItems = () => {
                                 <hr />
                                 <div className="cartitems-total-item">
                                     <h3>Total</h3>
-                                    <h3>${getTotalCartAmount()}</h3>
+                                    <h3>${totalAmount}</h3>
                                 </div>
                             </div>
-                            <button onClick={() => Navigate('/checkout-address')}>Proceed to Checkout</button>
+                            <button onClick={() => navigate('/checkout-address')}>Proceed to Checkout</button>
                         </div>
                         <div className="cartitems-promocode">
-                            <p>If you have a promo code, Enter it here</p>
+                            <p>If you have a promo code, enter it here</p>
                             <div className="cartitems-promobox">
                                 <input type="text" placeholder='Enter Promo Code' />
                                 <button>Apply</button>
                             </div>
                         </div>
-                    </div >
+                    </div>
                 </>
             )}
         </div>
-    )
-}
+    );
+};
 
-export default CartItems
+export default CartItems;

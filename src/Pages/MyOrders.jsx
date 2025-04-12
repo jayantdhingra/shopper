@@ -1,38 +1,94 @@
-import React from 'react'
-import './CSS/MyOrders.css'
+import React, { useEffect, useState } from "react";
+import "./CSS/MyOrders.css";
+import { jwtDecode } from 'jwt-decode';
 
-const ordersData = [
-  { id: 1, product: 'Cozy Fleece Zip-Up Hoodie', quantity: 1, price: 1200 },
-  { id: 2, product: 'Waterproof Rain Jacket with Hood', quantity: 2, price: 600 },
-  { id: 3, product: 'Adventure Time Cargo Shorts', quantity: 1, price: 150 },
-];
+const MyOrders = () => {
+  const [orders, setOrders] = useState([]);
+  const [orderItemsMap, setOrderItemsMap] = useState({});
+  // const userId = 1; // TODO: Replace with dynamic logged-in user ID
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userId, setUserId] = useState(null);
 
-export const MyOrders = () => {
+  useEffect(() => {
+            const token = localStorage.getItem("token");
+            if (token) {
+              try {
+                const decoded = jwtDecode(token);
+                setUserId(decoded.userId || decoded.id || decoded.sub);
+                setIsLoggedIn(true);
+              } catch (err) {
+                console.error("Invalid token:", err);
+              }
+            }
+          }, []);
+
+  useEffect(() => {
+    if (!userId) return;
+    const fetchOrders = async () => {
+      try {
+        const ordersRes = await fetch(`http://localhost:8081/api/orders/user/${userId}`);
+        const ordersData = await ordersRes.json();
+        setOrders(ordersData);
+
+        // Fetch items for each order
+        const itemsMap = {};
+        for (const order of ordersData) {
+          const itemsRes = await fetch(`http://localhost:8081/api/orders/${order.Order_ID}/items`);
+          const itemsData = await itemsRes.json();
+          itemsMap[order.Order_ID] = itemsData;
+        }
+
+        setOrderItemsMap(itemsMap);
+      } catch (err) {
+        console.error("Error fetching orders:", err);
+      }
+    };
+
+    fetchOrders();
+  }, [userId]);
+
   return (
     <div className="orders-container">
       <h1>Your Orders</h1>
-      <table className="orders-table">
-        <thead>
-          <tr>
-            <th>Order ID</th>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          {ordersData.map((order) => (
-            <tr key={order.id}>
-              <td>{order.id}</td>
-              <td>{order.product}</td>
-              <td>{order.quantity}</td>
-              <td>${order.price}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      {orders.length === 0 ? (
+        <p>No orders found.</p>
+      ) : (
+        orders.map((order) => (
+          <div key={order.Order_ID} className="order-block">
+            <h2>Order ID: {order.Order_ID}</h2>
+            <p><strong>Status:</strong> {order.Order_Status}</p>
+            <p><strong>Date:</strong> {new Date(order.Order_Date).toLocaleString()}</p>
+            <table className="orders-table">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Size</th>
+                  <th>Color</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                  <th>Subtotal</th>
+                </tr>
+              </thead>
+              <tbody>
+                {orderItemsMap[order.Order_ID]?.map((item) => (
+                  <tr key={item.Order_Item_ID}>
+                    <td>{item.Name}</td>
+                    <td>{item.Size}</td>
+                    <td>{item.Color}</td>
+                    <td>{item.Quantity}</td>
+                    <td>${parseFloat(item.Price).toFixed(2)}</td>
+                    <td>${parseFloat(item.Subtotal || 0).toFixed(2)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <hr />
+          </div>
+        ))
+      )}
     </div>
   );
 };
 
 export default MyOrders;
+

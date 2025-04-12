@@ -28,6 +28,8 @@ import Offices from './Components/FooterContent/Offices';
 import About from './Components/FooterContent/About';
 import Confirmation from './Components/NewsLetter/Confirmation';
 import HomeNavBar from './Components/HomeNavBar/HomeNavBar';
+import AdminDashboard from './Components/AdminDashboard/AdminDashboard';
+
 
 function App() {
 
@@ -60,7 +62,7 @@ function MainContent({ searchQuery, setSearchQuery }) {
         <Route path='/' element={<Shop searchQuery={searchQuery} />}/>
         <Route path='/men' element={<ShopCategory banner={men_banner} category="Men" searchQuery={searchQuery}/>}/>
         <Route path='/women' element={<ShopCategory banner={women_banner}category="Women" searchQuery={searchQuery}/>}/>
-        <Route path='/kids' element={<ShopCategory banner={kid_banner} category="Kid" searchQuery={searchQuery}/>}/>
+        <Route path='/kids' element={<ShopCategory banner={kid_banner} category="Kids" searchQuery={searchQuery}/>}/>
         <Route path="/product" element={<Product/>}>
           <Route path=':productId' element={<Product/>}/>
         </Route>
@@ -79,6 +81,7 @@ function MainContent({ searchQuery, setSearchQuery }) {
         <Route path="/offices" element={<Offices />} />
         <Route path="/about" element={<About />} />
         <Route path="/confirmation" element={<Confirmation />} />
+        <Route path="/admin-dashboard" element={<AdminDashboard />} />
       </Routes>
       <Footer/>
     </div>

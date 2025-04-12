@@ -1,53 +1,91 @@
-import React, {useState,useContext, useEffect} from 'react'
-import './Item.css'
-import { Link } from 'react-router-dom'
-import favoriteIcon from "../Assets/unfilled-favIcon.svg"; 
+import React, { useContext, useEffect, useState } from 'react';
+import './Item.css';
+import { Link } from 'react-router-dom';
+import favoriteIcon from "../Assets/unfilled-favIcon.svg";
 import favoriteFilledIcon from "../Assets/filled-heart.svg";
 import { ShopContext } from '../../Context/ShopContext';
+import { jwtDecode } from 'jwt-decode';
 
-const Item = (props) => {
-    const [isLoggedIn, setIsLoggedIn] = useState(); //  Track favorites
-    const [fav, setFav] = useState(new Set()); //  Track favorites
-    const { addToCart, addToFavorites, removeFromFavorites, favorites = [] } = useContext(ShopContext);
-    const isFavorited = favorites.find((product) => product.id === Number(props.id))
-    const toggleFavorite = (itemId) => {
-      setFav((prevFavorites) => {
-        const newFavorites = new Set(prevFavorites);
-        if (newFavorites.has(itemId)) {
-          newFavorites.delete(itemId);
-        } else {
-          newFavorites.add(itemId);
-        }
-        return new Set(newFavorites);
-      });
-    };
+const Item = ({ id, name, image, new_price, old_price }) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userId, setUserId] = useState(null);
+  const {
+    favorites = [],
+    addToFavorites,
+    removeFromFavorites
+  } = useContext(ShopContext);
 
-    useEffect(()=>{
-      setIsLoggedIn(localStorage.getItem("userToken") !== null);  
-    })
+  // const userId = 1; // 🔒 Replace later with dynamic user
+  // ✅ Get user ID from token
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        const decoded = jwtDecode(token);
+        setUserId(decoded.userId || decoded.id || decoded.sub);
+        setIsLoggedIn(true);
+      } catch (err) {
+        console.error("Invalid token:", err);
+      }
+    }
+  }, []);
+  
+  const isFavorited = favorites.some(product => product.Product_ID === Number(id));
+
+  const toggleFavorite = async () => {
+    if (isFavorited) {
+      removeFromFavorites(id);
+      try {
+        await fetch('http://localhost:8081/api/favourites', {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ User_ID: userId, Product_ID: id }),
+        });
+      } catch (err) {
+        console.error("Error removing favorite:", err);
+      }
+    } else {
+      addToFavorites(id);
+      try {
+        await fetch('http://localhost:8081/api/favourites', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ User_ID: userId, Product_ID: id }),
+        });
+      } catch (err) {
+        console.error("Error adding favorite:", err);
+      }
+    }
+  };
+
+  useEffect(() => {
+    setIsLoggedIn(!!localStorage.getItem("userToken"));
+  }, []);
 
   return (
-    <div className = 'item'>
-        {isLoggedIn && <Link to={`/product/${props.id}`}><img src = { props.image } alt = " "/></Link> }
-        {!isLoggedIn && <Link to={'/login'}><img src = { props.image } alt = " "/></Link> }
-        <p>{props.name}</p>
-        <div className="item-prices">
-        <div className="item-price-old">
-                ${props.old_price}
-            </div>
-            <div className="item-price-new">
-                ${props.new_price}
-            </div>
-            {isLoggedIn && <button type="button" 
-                className={`favorite-btn ${fav.has(props.id) ? "favorited" : ""}`}   
-                onClick={() => {toggleFavorite(props.id) ;
-                 isFavorited ? removeFromFavorites(props.id) : addToFavorites(props.id)}}>
-                  <img src={fav.has(props.id) ? favoriteFilledIcon : favoriteIcon} alt="Favorite Icon" className="favorite-icon" />
-              </button>
-            }
+    <div className='item'>
+      {isLoggedIn && (
+        <div className="favorite-button" onClick={toggleFavorite}>
+          <img
+            src={isFavorited ? favoriteFilledIcon : favoriteIcon}
+            alt="Favorite"
+            className="favorite-icon"
+          />
         </div>
+      )}
+      <Link to={isLoggedIn ? `/product/${id}` : '/login'}>
+        <img src={image} alt={name} className="item-image" />
+      </Link>
+      <p>{name}</p>
+      <div className="item-prices">
+        <div className="item-price-old">${old_price}</div>
+        <div className="item-price-new">${new_price}</div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Item
+export default Item;
+
+
+
