@@ -203,13 +203,25 @@ const CheckOutAddress = () => {
           </button>
         </form>
       </div>
+          </button>
+        </form>
+      </div>
 
       {/* Right Side - Cart Summary */}
       <div className="checkout-right">
         <h3 className="cart-title">Review Cart</h3>
         <div>
           <CheckOutItems />
+      {/* Right Side - Cart Summary */}
+      <div className="checkout-right">
+        <h3 className="cart-title">Review Cart</h3>
+        <div>
+          <CheckOutItems />
         </div>
+      </div>
+    </div>
+  );
+};
       </div>
     </div>
   );
