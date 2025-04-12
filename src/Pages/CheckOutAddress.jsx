@@ -1,8 +1,8 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "../Styles/CheckOutAddress.css";
 import CheckOutItems from "../Components/CheckOutItems/CheckOutItems";
 import { useNavigate } from "react-router-dom";
-import { jwtDecode } from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
 
 const CheckOutAddress = () => {
   const navigate = useNavigate();
@@ -22,25 +22,18 @@ const CheckOutAddress = () => {
     Save_Info: false,
   });
 
-  
-  
-    useEffect(() => {
-          const token = localStorage.getItem("token");
-          if (token) {
-            try {
-              const decoded = jwtDecode(token);
-              setUserId(decoded.userId || decoded.id || decoded.sub);
-              setIsLoggedIn(true);
-            } catch (err) {
-              console.error("Invalid token:", err);
-            }
-          }
-        }, []);
-
-  // const userId = 1; // 🔒 Hardcoded for now
-  
-
-
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        const decoded = jwtDecode(token);
+        setUserId(decoded.userId || decoded.id || decoded.sub);
+        setIsLoggedIn(true);
+      } catch (err) {
+        console.error("Invalid token:", err);
+      }
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -203,15 +196,7 @@ const CheckOutAddress = () => {
           </button>
         </form>
       </div>
-          </button>
-        </form>
-      </div>
 
-      {/* Right Side - Cart Summary */}
-      <div className="checkout-right">
-        <h3 className="cart-title">Review Cart</h3>
-        <div>
-          <CheckOutItems />
       {/* Right Side - Cart Summary */}
       <div className="checkout-right">
         <h3 className="cart-title">Review Cart</h3>
@@ -222,10 +207,5 @@ const CheckOutAddress = () => {
     </div>
   );
 };
-      </div>
-    </div>
-  );
-};
 
 export default CheckOutAddress;
-
