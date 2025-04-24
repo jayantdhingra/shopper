@@ -37,6 +37,26 @@ const AdminDashboard = () => {
   const [uploadColor, setUploadColor] = useState("");
   const [createdProductId, setCreatedProductId] = useState(null);
 
+  const [message, setMessage] = useState("");
+
+  const handleSendNotification = async () => {
+    try {
+      const res = await axios.post("http://localhost:8081/api/auth/offer-notifications", {
+        message,
+      });
+      if (res.data.success) {
+        alert(res.data.message || "Notification sent successfull to all subscribers!");
+        setMessage(""); // Clear textarea after sending
+      } else {
+        alert("Failed to send notification.");
+      }
+    } catch (err) {
+      console.error("Error sending notification", err);
+      alert("Failed to send notification.");
+    }
+  };
+
+
   useEffect(() => {
     fetchSellers();
   }, []);
@@ -192,6 +212,32 @@ const AdminDashboard = () => {
           </div>
         </div>
       )}
+
+      {/* Admin Notification Message Box */}
+      <div className="admin-card">
+        <h3>Send Notification / Offer</h3>
+        <textarea
+          placeholder="Type your offer or announcement here..."
+          rows={4}
+          style={{
+            width: "100%",
+            padding: "10px",
+            marginBottom: "10px",
+            border: "1px solid #ccc",
+            borderRadius: "5px",
+            fontSize: "16px",
+          }}
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+        />
+        <button
+          className="submit-button"
+          onClick={handleSendNotification}
+          style={{ marginTop: "10px" }}
+        >
+          Send Message
+        </button>
+      </div>
     </div>
   );
 };

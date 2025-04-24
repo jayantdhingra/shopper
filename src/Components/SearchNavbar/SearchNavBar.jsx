@@ -81,6 +81,7 @@ export const SearchNavBar = ({ onSearch }) => {
                     <Link style={{ textDecoration: 'none' }} to="/user-settings">Settings</Link>
                     {menu === "Settings" && <hr />}
                 </li>
+                <li onClick={() => setMenu("chat")}><Link style={{ textDecoration: 'none' }}  to="/chat">Chat</Link> {menu === "chat" && <hr />}</li>
             </ul>
 
             <div className="searchbar">
