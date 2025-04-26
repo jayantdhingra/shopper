@@ -146,14 +146,27 @@ export const SearchNavBar = () => {
             </div>
 
             <ul className="nav-menu">
-                {["shop", "men", "women", "kid", "Settings"].map((item) => (
-                    <li key={item} onClick={() => { setMenu(item); localStorage.setItem('menu', item); }}>
-                        <Link style={{ textDecoration: 'none' }} to={`/${item === 'shop' ? '' : item}`}>
-                            {item.charAt(0).toUpperCase() + item.slice(1)}
-                        </Link>
-                        {menu === item && <hr />}
-                    </li>
-                ))}
+                <li onClick={() => {setMenu("shop"); localStorage.setItem('menu','shop')}}>
+                    <Link style={{ textDecoration: 'none' }} to='/'>Shop</Link> 
+                    {menu === "shop" && <hr />}
+                </li>
+                <li onClick={() => {setMenu("men"); localStorage.setItem('menu','men')}}>
+                    <Link style={{ textDecoration: 'none' }} to="/men">Men</Link> 
+                    {menu === "men" && <hr />}
+                </li>
+                <li onClick={() => {setMenu("women"); localStorage.setItem('menu','women')}}>
+                    <Link style={{ textDecoration: 'none' }} to="/women">Women</Link>  
+                    {menu === "women" && <hr />}
+                </li>
+                <li onClick={() => {setMenu("kid"); localStorage.setItem('menu','kid')}}>
+                    <Link style={{ textDecoration: 'none' }} to="/kids">Kids</Link>
+                    {menu === "kid" && <hr />}
+                </li>
+                <li onClick={() => {setMenu("Settings"); localStorage.setItem('menu','Settings')}}>
+                    <Link style={{ textDecoration: 'none' }} to="/user-settings">Settings</Link>
+                    {menu === "Settings" && <hr />}
+                </li>
+                <li onClick={() => setMenu("chat")}><Link style={{ textDecoration: 'none' }}  to="/chat">Chat</Link> {menu === "chat" && <hr />}</li>
             </ul>
 
             <div className="searchbar">

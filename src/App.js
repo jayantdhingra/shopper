@@ -30,6 +30,7 @@ import Confirmation from './Components/NewsLetter/Confirmation';
 import HomeNavBar from './Components/HomeNavBar/HomeNavBar';
 import AdminDashboard from './Components/AdminDashboard/AdminDashboard';
 import SearchPage from './Components/SearchNavbar/SearchPage';
+import ChatApp from './Pages/ChatApp';
 
 
 function App() {
@@ -84,6 +85,7 @@ function MainContent({ searchQuery, setSearchQuery }) {
         <Route path="/confirmation" element={<Confirmation />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
         <Route path="/search" element={<SearchPage />} />
+        <Route path="/chat" element={<ChatApp />} />
       </Routes>
       <Footer/>
     </div>

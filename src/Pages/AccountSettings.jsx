@@ -23,7 +23,7 @@ const AccountSettings = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/auth/account-settings", {
+        const res = await axios.get("http://localhost:8081/api/auth/account-settings", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUserData((prev) => ({
@@ -66,7 +66,7 @@ const AccountSettings = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/auth/account-settings",
+        "http://localhost:8081/api/auth/account-settings",
         {
           fullName: userData.fullName,
           phone: userData.phone,

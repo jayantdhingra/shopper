@@ -7,18 +7,40 @@ import { useNavigate } from "react-router-dom";
 
 const CartItems = () => {
     const navigate = useNavigate();
-    const { cartItems, addProduct, removeFromCart, getTotalCartAmount } = useContext(ShopContext);
-    const [totalAmount, setTotalAmount] = useState("0.00");
+    const { 
+        cartItems, 
+        addProduct, 
+        removeFromCart, 
+        getTotalCartAmount, 
+        getTotalCartAmountBeforeDiscount, 
+        applyPromoCode,
+        promo
+    } = useContext(ShopContext);
+
+    const [cartTotal, setCartTotal] = useState("0.00");
+    const [discountedAmount, setDiscountedAmount] = useState("0.00");
+    const [promoCode, setPromoCode] = useState("");
+
 
     const isCartEmpty = Object.keys(cartItems).filter(key => cartItems[key].quantity > 0).length === 0;
 
     useEffect(() => {
         const fetchTotal = async () => {
-            const total = await getTotalCartAmount();
-            setTotalAmount(total);
+            const total = await getTotalCartAmountBeforeDiscount();
+            setCartTotal(total);
         };
         fetchTotal();
-    }, [cartItems]);
+
+        const fetchDiscountedTotal = async () => {
+            const discount = await getTotalCartAmount();
+            setDiscountedAmount(discount);
+        };
+        fetchDiscountedTotal();
+    }, [cartItems,promo]);
+
+    const handleApplyPromo = () => {
+        applyPromoCode(promoCode);
+    };
 
     return (
         <div className='cartitems'>
@@ -76,9 +98,18 @@ const CartItems = () => {
                             <div>
                                 <div className="cartitems-total-item">
                                     <p>Subtotal</p>
-                                    <p>${totalAmount}</p>
+                                    <p>${parseFloat(cartTotal).toFixed(2)}</p>
                                 </div>
                                 <hr />
+                                {promo.applied && (
+                                    <>
+                                        <div className="cartitems-total-item">
+                                            <p>Promo Discount</p>
+                                            <p>-10%</p>
+                                        </div>
+                                        <hr />
+                                    </>
+                                )}
                                 <div className="cartitems-total-item">
                                     <p>Shipping Fee</p>
                                     <p>Free</p>
@@ -86,17 +117,26 @@ const CartItems = () => {
                                 <hr />
                                 <div className="cartitems-total-item">
                                     <h3>Total</h3>
-                                    <h3>${totalAmount}</h3>
+                                    <h3>${discountedAmount}</h3>
                                 </div>
                             </div>
                             <button onClick={() => navigate('/checkout-address')}>Proceed to Checkout</button>
                         </div>
+
                         <div className="cartitems-promocode">
                             <p>If you have a promo code, enter it here</p>
                             <div className="cartitems-promobox">
-                                <input type="text" placeholder='Enter Promo Code' />
-                                <button>Apply</button>
+                                <input
+                                    type="text"
+                                    placeholder="Enter Promo Code"
+                                    value={promoCode}
+                                    onChange={(e) => setPromoCode(e.target.value)}
+                                    disabled={promo.applied?true:false}
+                                />
+                                <button onClick={handleApplyPromo}>Apply</button>
                             </div>
+                            {!promo.applied && <p style={{ color: 'red' }} className="promo-error">Invalid Promo Code</p>}
+                            {promo.applied && <p style={{ color: 'green' }} className="promo-success">Promo code applied successfully!</p>}
                         </div>
                     </div>
                 </>
