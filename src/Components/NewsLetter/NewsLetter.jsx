@@ -12,8 +12,14 @@ const NewsLetter = () => {
   
     if (emailRegex.test(email)) {
       try {
-        await axios.post("http://localhost:5000/api/auth/subscribe", { email });
-        navigate('/confirmation', { state: { email } });
+        const res = await axios.post("http://localhost:8081/api/auth/subscribe", { email });
+       
+        if (res.data.success) {
+          alert(res.data.message); // "Subscription successful and email sent!"
+          navigate('/confirmation', { state: { email } });
+        } else {
+          alert(res.data.message); // "User not found with this email" or any other custom message
+        }
       } catch (err) {
         console.error("Failed to subscribe:", err);
         alert("Subscription failed. Please try again later.");
