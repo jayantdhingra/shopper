@@ -36,6 +36,7 @@ const Popular = () => {
         const enriched = await Promise.all(data.slice(0, 4).map(async (product) => {
           const imgRes = await fetch(`http://localhost:8081/api/products/images/${product.Product_ID}`);
           const imgData = await imgRes.json();
+          console.log(imgData);
           return {
             ...product,
             image: imgData.images?.[0] || null,

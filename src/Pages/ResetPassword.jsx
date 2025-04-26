@@ -16,7 +16,7 @@ const ResetPassword = () => {
         const verifyToken = async () => {
             try {
                 // Call the backend to verify the token
-                await axios.get(`http://localhost:5000/api/auth/verify-reset-token/${resetToken}`);
+                await axios.get(`http://localhost:8081/api/auth/verify-reset-token/${resetToken}`);
                 setLoading(false); // Token is valid, proceed to allow password reset
             } catch (error) {
                 setLoading(false);
@@ -35,7 +35,7 @@ const ResetPassword = () => {
         }
 
         try {
-            const response = await axios.post("http://localhost:5000/api/auth/reset-password", { resetToken, password });
+            const response = await axios.post("http://localhost:8081/api/auth/reset-password", { resetToken, password });
             console.log('RESPONSE:',response)
             alert(response.data.message);
             setTimeout(() => navigate("/login"), 2000); // Redirect to login after successful reset

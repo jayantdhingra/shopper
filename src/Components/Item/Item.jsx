@@ -15,7 +15,6 @@ const Item = ({ id, name, image, new_price, old_price }) => {
     removeFromFavorites
   } = useContext(ShopContext);
 
-  // const userId = 1; // 🔒 Replace later with dynamic user
   // ✅ Get user ID from token
   useEffect(() => {
     const token = localStorage.getItem("token");
