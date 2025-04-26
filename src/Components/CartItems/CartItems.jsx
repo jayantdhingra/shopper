@@ -135,7 +135,7 @@ const CartItems = () => {
                                 />
                                 <button onClick={handleApplyPromo}>Apply</button>
                             </div>
-                            {!promo.applied && <p style={{ color: 'red' }} className="promo-error">Invalid Promo Code</p>}
+                            {promo.error && <p style={{ color: 'red' }} className="promo-error">Invalid Promo Code</p>}
                             {promo.applied && <p style={{ color: 'green' }} className="promo-success">Promo code applied successfully!</p>}
                         </div>
                     </div>

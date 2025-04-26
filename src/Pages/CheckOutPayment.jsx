@@ -105,6 +105,7 @@ import PayPal from "../Components/Assets/PayPal.png";
 import { ShopContext } from "../Context/ShopContext";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from 'jwt-decode';
+import axios from "axios";
 
 const CheckOutPayment = () => {
   const [paymentMethod, setPaymentMethod] = useState("credit");
@@ -131,7 +132,7 @@ const CheckOutPayment = () => {
               }
             }, []);
 
-  const { cartItems, all_product, getTotalCartAmount } = useContext(ShopContext);
+  const { cartItems, all_product, getTotalCartAmount,promo } = useContext(ShopContext);
   // const userId = 1;
 
   const validateCardDetails = () => {
@@ -191,8 +192,21 @@ const CheckOutPayment = () => {
       const result = await orderRes.json();
 
       if (orderRes.ok) {
-        alert("✅ Payment and order placed successfully!");
-        navigate("/orders");
+        try {
+            const res = await axios.post(
+              "http://localhost:8081/api/auth/deactivate-promoCode",
+              {
+                promocode: promo.code,
+              }
+            );
+      
+            alert("✅ Promo Code Applied, Payment and order placed successfully!");
+            navigate("/orders");
+            console.log("Response:", res.data);
+          } catch (err) {
+            console.error("Update failed:", err.response?.data || err.message);
+            alert(err.response?.data?.message || "Something went wrong.");
+          }
       } else {
         alert("❌ Order placement failed: " + result.error);
       }

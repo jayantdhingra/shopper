@@ -33,16 +33,28 @@ const Popular = () => {
       try {
         const res = await fetch("http://localhost:8081/api/products/category/2"); // women category
         const data = await res.json();
-        const enriched = await Promise.all(data.slice(0, 4).map(async (product) => {
-          const imgRes = await fetch(`http://localhost:8081/api/products/images/${product.Product_ID}`);
-          const imgData = await imgRes.json();
-          console.log(imgData);
-          return {
-            ...product,
-            image: imgData.images?.[0] || null,
-          };
-        }));
+        console.log('data:',data)
+        const enriched = await Promise.all(
+          data.slice(0, 4).map(async (product) => {
+            try {
+              const imgRes = await fetch(`http://localhost:8081/api/products/images/${product.Product_ID}`);          
+              const imgData = await imgRes.json();
+              console.log(imgData);
+              return {
+                ...product,
+                image: imgData.images?.[0] || null,
+              };
+            } catch (error) {
+              console.error('Error fetching image for product', product.Product_ID, error);
+              return {
+                ...product,
+                image: null, // at least return product with no image
+              };
+            }
+          })
+        );
         setPopularProducts(enriched);
+        
       } catch (err) {
         console.error("Error fetching popular products:", err);
       }

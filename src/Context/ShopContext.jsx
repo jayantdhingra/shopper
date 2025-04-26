@@ -19,6 +19,7 @@ const ShopContextProvider = (props) => {
   const [discountAmount, setDiscountAmount] = useState(0); // discount in dollars
   const [promo, setPromo] = useState({
     applied: false,
+    error:false,
     code: "",
     discount: 0,
   });
@@ -53,12 +54,13 @@ const ShopContextProvider = (props) => {
   
         setPromo({
           applied: true,
+          error:false,
           code,
           discount: discountPercentage,
         });
       } else {
         console.log('Entering else')
-        setPromo({ applied: false, code: "", discount: 0 });
+        setPromo({ applied: false,error:true, code: "", discount: 0 });
       }      
     } catch (error) {
       console.log('err:',error)
