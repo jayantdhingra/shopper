@@ -20,14 +20,14 @@
 
 //   // ✅ Fetch products and images
 //   const fetchProductsByCategory = async (categoryId) => {
-//     const res = await fetch(`http://localhost:8081/api/products/category/${categoryId}`);
+//     const res = await fetch(`https://wdm-backend.onrender.com/api/products/category/${categoryId}`);
 //     const data = await res.json();
 //     console.log(data);
 
 //     const enriched = await Promise.all(
 //       data.map(async (product) => {
 //         try {
-//           const imgRes = await fetch(`http://localhost:8081/api/products/images/${product.Product_ID}`);
+//           const imgRes = await fetch(`https://wdm-backend.onrender.com/api/products/images/${product.Product_ID}`);
 //           const imgData = await imgRes.json();
 //           const firstImage = imgData.images?.[0] || null;
 
@@ -159,13 +159,13 @@ const ShopCategory = ({ category, banner, searchQuery }) => {
   // ✅ Fetch products and their images
   const fetchProductsByCategory = async (categoryId) => {
     try {
-      const res = await fetch(`http://localhost:8081/api/products/category/${categoryId}`);
+      const res = await fetch(`https://wdm-backend.onrender.com/api/products/category/${categoryId}`);
       const data = await res.json();
 
       const enriched = await Promise.all(
         data.map(async (product) => {
           try {
-            const imgRes = await fetch(`http://localhost:8081/api/products/images/${product.Product_ID}`);
+            const imgRes = await fetch(`https://wdm-backend.onrender.com/api/products/images/${product.Product_ID}`);
             const imgData = await imgRes.json();
             const firstImage = imgData.images?.[0] || null;
 

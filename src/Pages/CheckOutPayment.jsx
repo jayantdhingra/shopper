@@ -167,7 +167,7 @@ const CheckOutPayment = () => {
     });
 
     try {
-      const shippingResponse = await fetch(`http://localhost:8081/api/shipping/${userId}`);
+      const shippingResponse = await fetch(`https://wdm-backend.onrender.com/api/shipping/${userId}`);
       const shippingData = await shippingResponse.json();
 
       if (!shippingData.Shipping_ID) {
@@ -175,7 +175,7 @@ const CheckOutPayment = () => {
         return;
       }
 
-      const orderRes = await fetch("http://localhost:8081/api/orders", {
+      const orderRes = await fetch("https://wdm-backend.onrender.com/api/orders", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

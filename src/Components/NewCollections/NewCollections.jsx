@@ -39,7 +39,7 @@ const NewCollections = () => {
         const allProducts = [];
 
         for (const catId of categories) {
-          const res = await fetch(`http://localhost:8081/api/products/category/${catId}`);
+          const res = await fetch(`https://wdm-backend.onrender.com/api/products/category/${catId}`);
           const data = await res.json();
           allProducts.push(...data);
         }
@@ -47,7 +47,7 @@ const NewCollections = () => {
         const top8 = allProducts.slice(0, 8);
 
         const enriched = await Promise.all(top8.map(async (product) => {
-          const imgRes = await fetch(`http://localhost:8081/api/products/images/${product.Product_ID}`);
+          const imgRes = await fetch(`https://wdm-backend.onrender.com/api/products/images/${product.Product_ID}`);
           const imgData = await imgRes.json();
           return {
             ...product,

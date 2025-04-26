@@ -42,7 +42,7 @@ const Favorites = () => {
       const enriched = await Promise.all(
         favorites.map(async (item) => {
           try {
-            const res = await fetch(`http://localhost:8081/api/products/images/${item.Product_ID}`);
+            const res = await fetch(`https://wdm-backend.onrender.com/api/products/images/${item.Product_ID}`);
             const data = await res.json();
             const firstImage = data.images?.[0] || null;
 

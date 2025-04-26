@@ -41,7 +41,7 @@ const AdminDashboard = () => {
 
   const handleSendNotification = async () => {
     try {
-      const res = await axios.post("http://localhost:8081/api/auth/offer-notifications", {
+      const res = await axios.post("https://wdm-backend.onrender.com/api/auth/offer-notifications", {
         message,
       });
       if (res.data.success) {
@@ -63,7 +63,7 @@ const AdminDashboard = () => {
 
   const fetchSellers = async () => {
     try {
-      const res = await axios.get("http://localhost:8081/api/sellers");
+      const res = await axios.get("https://wdm-backend.onrender.com/api/sellers");
       setSellers(res.data);
     } catch (err) {
       console.error("Error fetching sellers", err);
@@ -72,7 +72,7 @@ const AdminDashboard = () => {
 
   const handleAddSeller = async () => {
     try {
-      const res = await axios.post("http://localhost:8081/api/sellers", newSeller);
+      const res = await axios.post("https://wdm-backend.onrender.com/api/sellers", newSeller);
       alert("Seller added successfully!");
       setNewSeller({ User_ID: 1, Store_Name: "", Store_Description: "", Contact_Number: "", Rating: "" });
       setShowNewSellerForm(false);
@@ -98,7 +98,7 @@ const AdminDashboard = () => {
         Stock_Quantity: parseInt(product.Stock_Quantity),
       };
 
-      const res = await axios.post("http://localhost:8081/api/products", payload);
+      const res = await axios.post("https://wdm-backend.onrender.com/api/products", payload);
       setCreatedProductId(res.data.Product_ID || res.data.productId);
       alert("Product added successfully!");
     } catch (err) {
@@ -113,7 +113,7 @@ const AdminDashboard = () => {
       formData.append("Color", uploadColor);
       formData.append("image", uploadedImage);
 
-      await axios.post("http://localhost:8081/api/products/upload-image", formData);
+      await axios.post("https://wdm-backend.onrender.com/api/products/upload-image", formData);
       alert("Image uploaded successfully!");
     } catch (err) {
       console.error("Error uploading image", err);

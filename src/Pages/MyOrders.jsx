@@ -26,14 +26,14 @@ const MyOrders = () => {
     if (!userId) return;
     const fetchOrders = async () => {
       try {
-        const ordersRes = await fetch(`http://localhost:8081/api/orders/user/${userId}`);
+        const ordersRes = await fetch(`https://wdm-backend.onrender.com/api/orders/user/${userId}`);
         const ordersData = await ordersRes.json();
         setOrders(ordersData);
 
         // Fetch items for each order
         const itemsMap = {};
         for (const order of ordersData) {
-          const itemsRes = await fetch(`http://localhost:8081/api/orders/${order.Order_ID}/items`);
+          const itemsRes = await fetch(`https://wdm-backend.onrender.com/api/orders/${order.Order_ID}/items`);
           const itemsData = await itemsRes.json();
           itemsMap[order.Order_ID] = itemsData;
         }

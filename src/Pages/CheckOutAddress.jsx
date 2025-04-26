@@ -52,7 +52,7 @@ const CheckOutAddress = () => {
     };
 
     try {
-      const res = await fetch("http://localhost:8081/api/shipping", {
+      const res = await fetch("https://wdm-backend.onrender.com/api/shipping", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

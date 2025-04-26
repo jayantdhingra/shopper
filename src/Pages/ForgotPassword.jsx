@@ -10,7 +10,7 @@ const ForgotPassword = () => {
 
     const handleForgotPassword = async () => {
         try {
-            const response = await axios.post("http://localhost:8081/api/auth/forgot-password", { email });
+            const response = await axios.post("https://wdm-backend.onrender.com/api/auth/forgot-password", { email });
             console.log('response: ',response)
             alert(response.data.message);
         } catch (error) {

@@ -36,7 +36,7 @@ const Item = ({ id, name, image, new_price, old_price }) => {
     if (isFavorited) {
       removeFromFavorites(id);
       try {
-        await fetch('http://localhost:8081/api/favourites', {
+        await fetch('https://wdm-backend.onrender.com/api/favourites', {
           method: 'DELETE',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ User_ID: userId, Product_ID: id }),
@@ -47,7 +47,7 @@ const Item = ({ id, name, image, new_price, old_price }) => {
     } else {
       addToFavorites(id);
       try {
-        await fetch('http://localhost:8081/api/favourites', {
+        await fetch('https://wdm-backend.onrender.com/api/favourites', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ User_ID: userId, Product_ID: id }),
