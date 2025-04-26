@@ -15,6 +15,15 @@ const ShopContextProvider = (props) => {
   const [favorites, setFavorites] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setUserId] = useState(null);
+  const [promoCode, setPromoCode] = useState('');
+  const [discountAmount, setDiscountAmount] = useState(0); // discount in dollars
+  const [promo, setPromo] = useState({
+    applied: false,
+    code: "",
+    discount: 0,
+  });
+  
+
 
   useEffect(() => {
         const token = localStorage.getItem("token");
@@ -29,6 +38,43 @@ const ShopContextProvider = (props) => {
         }
       }, []);
 
+  const applyPromoCode = async (code) => {
+    if (!code || !userId) return;
+  
+    try {
+      const res = await axios.post("http://localhost:8081/api/auth/validate-promo", { promoCode:code });
+      console.log('RES:',res)
+      if (res.data.success) {        
+        const { discountPercentage } = res.data;
+        toast.success(`Promo applied! Discount: $${discountPercentage.toFixed(2)}`, {
+          position: "top-right",
+          autoClose: 1500,
+        });
+  
+        setPromo({
+          applied: true,
+          code,
+          discount: discountPercentage,
+        });
+      } else {
+        console.log('Entering else')
+        setPromo({ applied: false, code: "", discount: 0 });
+      }      
+    } catch (error) {
+      console.log('err:',error)
+      toast.error(`Promo error: ${err.response?.data?.message || err.message}`, {
+        position: "top-right",
+        autoClose: 2000,
+      });
+    }
+  };
+      
+  
+  const clearPromoCode = () => {
+    setPromoCode('');
+    setDiscountAmount(0);
+  };
+      
   // 🛒 Fetch cart items
   const fetchCartItems = async () => {
     try {
@@ -132,16 +178,35 @@ const ShopContextProvider = (props) => {
   //   }
   // };
 
-  const getTotalCartAmount = async () => {
+  const getTotalCartAmountBeforeDiscount = async () => {
     if (!userId) return "0.00";
     try {
       const res = await axios.get(`http://localhost:8081/api/cart/${userId}/total`);
-      return parseFloat(res.data.total).toFixed(2);
+      return parseFloat(res.data.total);
     } catch (err) {
       console.error("Error getting total cart amount:", err.message);
       return "0.00";
     }
   };
+
+  const getTotalCartAmount = async () => {
+    if (!userId) return "0.00";
+    try {
+      const res = await axios.get(`http://localhost:8081/api/cart/${userId}/total`);
+      let total = parseFloat(res.data.total);
+  
+      if (promo.applied) {
+        total -= (total * promo.discount / 100).toFixed(2);
+      }
+  
+      return total.toFixed(2);
+    } catch (err) {
+      console.error("Error getting total cart amount:", err.message);
+      return "0.00";
+    }
+  };
+  
+  
   
 
   // 🧮 Total items
@@ -211,6 +276,14 @@ const ShopContextProvider = (props) => {
     addToFavorites,
     removeFromFavorites,
     getTotalFavoriteItems,
+    fetchCartItems,
+    applyPromoCode,
+    clearPromoCode,
+    promoCode,
+    discountAmount,
+    isLoggedIn,
+    promo,
+    getTotalCartAmountBeforeDiscount
   };
 
   return (
