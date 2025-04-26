@@ -1,0 +1,38 @@
+.complementaryproducts {
+    margin-top: 50px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  .complementaryproducts h1 {
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .complementaryproducts hr {
+    width: 80px;
+    height: 3px;
+    background-color: #ff6f61;
+    border: none;
+    margin: 0 auto 30px;
+  }
+  
+  .complementaryproducts-item {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .complementaryproducts-item p {
+    font-size: 16px;
+    color: #777;
+    text-align: center;
+    width: 100%;
+  }
+  
