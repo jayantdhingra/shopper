@@ -4,7 +4,15 @@ import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import '../Styles/ChatApp.css'
 
-const socket = io('http://localhost:8081');
+const socket = io('http://localhost:8081', {
+  transports: ['websocket', 'polling']
+});
+socket.on('connect', () => {
+  console.log('🟢 Successfully connected to Socket.IO server!');
+});
+socket.on('connect_error', (err) => {
+  console.log('🔴 Connection error:', err);
+});
 axios.defaults.baseURL = 'http://localhost:8081';
 
 const ChatApp = () => {
@@ -21,14 +29,14 @@ const ChatApp = () => {
         if (!token) return;
 
         // Get current user details
-        const userRes = await axios.get('/api/users/currentUser', {
+        const userRes = await axios.get('http://localhost:8081/api/users/currentUser', {
             headers: { Authorization: `Bearer ${token}` },
           });
         setCurrentUser(userRes.data);
         // console.log('USER:',userRes.data);
 
         // Get all other users
-        const usersRes = await axios.get('/api/messages/users', {
+        const usersRes = await axios.get('http://localhost:8081/api/messages/users', {
             headers: { Authorization: `Bearer ${token}` },
         });
           const filteredUsers = usersRes.data.filter((u) => u.User_ID !== userRes.data.User_ID);
@@ -62,7 +70,7 @@ const ChatApp = () => {
     const token = localStorage.getItem('token');
 
     setSelectedUser(user);
-    const res = await axios.get(`/api/messages/${user.User_ID}?currentUserId=${currentUser.User_ID}`, {
+    const res = await axios.get(`http://localhost:8081/api/messages/${user.User_ID}?currentUserId=${currentUser.User_ID}`, {
         headers: { Authorization: `Bearer ${token}` },
     });
     console.log('Messages:',res.data)
