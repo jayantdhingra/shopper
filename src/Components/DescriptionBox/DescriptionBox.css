@@ -61,3 +61,16 @@
     padding-bottom: 15px;
     border-bottom: 1px solid #eee;
   }
+
+  .submit-review {
+    margin-top: 20px;
+  }
+  .submit-review textarea {
+    width: 100%;
+    height: 100px;
+    margin: 10px 0;
+  }
+  .submit-review select, .submit-review button {
+    margin: 5px 0;
+  }
+  

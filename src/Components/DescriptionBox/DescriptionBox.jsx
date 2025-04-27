@@ -12,6 +12,60 @@ const DescriptionBox = () => {
 
   const { productId } = useParams();
 
+  const [canReview, setCanReview] = useState(false);
+  const [newReview, setNewReview] = useState("");
+  const [newRating, setNewRating] = useState(0);
+
+  // Check if user can review
+  useEffect(() => {
+    const checkCanReview = async () => {
+      try {
+        const token = localStorage.getItem('token'); // Assuming you saved it
+        const res = await axios.get(`http://localhost:8081/api/products/${productId}/can-review`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        setCanReview(res.data.canReview);
+      } catch (err) {
+        console.error('Error checking review eligibility:', err.message);
+      }
+    };
+
+    if (productId) {
+      checkCanReview();
+    }
+  }, [productId]);
+
+  // Handle submit review
+  const handleSubmitReview = async () => {
+    if (newRating === 0 || newReview.trim() === "") {
+      alert("Please provide both a rating and a review text.");
+      return; 
+    }
+    try {
+      const token = localStorage.getItem('token');
+      await axios.post(`http://localhost:8081/api/products/${productId}/reviews`, 
+        {
+          rating: newRating,
+          reviewText: newReview
+        }, 
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      );
+
+      alert('Review submitted!');
+      setNewReview('');
+      setNewRating(0);
+
+      // 🟰 Refresh the reviews after submitting
+      fetchReviews();
+    } catch (err) {
+      console.error('Error submitting review:', err.message);
+      alert('Failed to submit review.');
+    }
+  };
+
+
   // Star rating component
   const StarRating = ({ rating }) => {
     return (
@@ -26,22 +80,23 @@ const DescriptionBox = () => {
   };
 
   // Fetch reviews
-  useEffect(() => {
-    const fetchReviews = async () => {
-      try {
-        const res = await axios.get(`http://localhost:8081/api/products/${productId}/reviews`);
-        setReviews(res.data);
-      } catch (err) {
-        console.error('Error fetching reviews:', err.message);
-      } finally {
-        setLoadingReviews(false);
-      }
-    };
+  const fetchReviews = async () => {
+    try {
+      const res = await axios.get(`http://localhost:8081/api/products/${productId}/reviews`);
+      setReviews(res.data);
+    } catch (err) {
+      console.error('Error fetching reviews:', err.message);
+    } finally {
+      setLoadingReviews(false);
+    }
+  };
 
+  useEffect(() => {
     if (productId) {
       fetchReviews();
     }
   }, [productId]);
+
 
   // Fetch product details
   useEffect(() => {
@@ -109,6 +164,24 @@ const DescriptionBox = () => {
           )}
         </div>
       )}
+      {canReview && (
+        <div className="submit-review">
+          <h3 className="descriptionbox-nav-box review">Write a Review</h3>
+          <select value={newRating} onChange={(e) => setNewRating(parseInt(e.target.value))}>
+            <option value={0}>Select Rating</option>
+            {[1,2,3,4,5].map(num => (
+              <option key={num} value={num}>{num} Star{num > 1 && 's'}</option>
+            ))}
+          </select>
+          <textarea 
+            value={newReview} 
+            onChange={(e) => setNewReview(e.target.value)}
+            placeholder="Write your review..."
+          />
+          <button onClick={handleSubmitReview}>Submit Review</button>
+        </div>
+      )}
+
     </div>
   );
 };
