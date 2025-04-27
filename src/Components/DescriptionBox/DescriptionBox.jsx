@@ -165,22 +165,41 @@ const DescriptionBox = () => {
         </div>
       )}
       {canReview && (
-        <div className="submit-review">
-          <h3 className="descriptionbox-nav-box review">Write a Review</h3>
-          <select value={newRating} onChange={(e) => setNewRating(parseInt(e.target.value))}>
-            <option value={0}>Select Rating</option>
-            {[1,2,3,4,5].map(num => (
-              <option key={num} value={num}>{num} Star{num > 1 && 's'}</option>
-            ))}
-          </select>
-          <textarea 
-            value={newReview} 
-            onChange={(e) => setNewReview(e.target.value)}
-            placeholder="Write your review..."
-          />
-          <button onClick={handleSubmitReview}>Submit Review</button>
-        </div>
-      )}
+  <div className="submit-review">
+    <h3>Write a Review</h3>
+
+    <div className="review-form-group">
+      <label htmlFor="rating">Rating:</label>
+      <select 
+        id="rating"
+        className="review-rating-dropdown"
+        value={newRating} 
+        onChange={(e) => setNewRating(parseInt(e.target.value))}
+      >
+        <option value={0}>Select Rating</option>
+        {[1, 2, 3, 4, 5].map(num => (
+          <option key={num} value={num}>{num} Star{num > 1 && 's'}</option>
+        ))}
+      </select>
+    </div>
+
+    <div className="review-form-group">
+      <label htmlFor="reviewText">Review:</label>
+      <textarea 
+        id="reviewText"
+        className="review-textarea"
+        value={newReview} 
+        onChange={(e) => setNewReview(e.target.value)}
+        placeholder="Write your detailed review here..."
+      />
+    </div>
+
+    <button className="review-submit-button" onClick={handleSubmitReview}>
+      Submit Review
+    </button>
+  </div>
+)}
+
 
     </div>
   );

@@ -63,14 +63,66 @@
   }
 
   .submit-review {
-    margin-top: 20px;
+    margin-top: 30px;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
-  .submit-review textarea {
+  
+  .submit-review h3 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .review-form-group {
+    margin-bottom: 20px;
+  }
+  
+  .review-form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .review-rating-dropdown {
     width: 100%;
-    height: 100px;
-    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    background: white;
+    appearance: none; /* Remove default dropdown arrow in some browsers */
+    background-image: url("data:image/svg+xml;utf8,<svg fill='%23333' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position-x: 95%;
+    background-position-y: center;
   }
-  .submit-review select, .submit-review button {
-    margin: 5px 0;
+  
+  .review-textarea {
+    width: 100%;
+    height: 120px;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    resize: vertical;
+  }
+  
+  .review-submit-button {
+    margin-top: 10px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .review-submit-button:hover {
+    background-color: #45a049;
   }
   
