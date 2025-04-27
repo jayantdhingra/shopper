@@ -64,7 +64,7 @@ const ShopContextProvider = (props) => {
       }      
     } catch (error) {
       console.log('err:',error)
-      toast.error(`Promo error: ${err.response?.data?.message || err.message}`, {
+      toast.error(`Promo error: ${error.response?.data?.message || error.message}`, {
         position: "top-right",
         autoClose: 2000,
       });
@@ -138,7 +138,32 @@ const ShopContextProvider = (props) => {
       console.error("Error adding to cart:", err.message);
     }
   };
-
+  const addItemToCartLocal = (productId, size, color = "Default") => {
+    const cartKey = `${productId}_${size}`;
+    setCartItems((prevCartItems) => {
+      const existingItem = prevCartItems[cartKey];
+      if (existingItem) {
+        return {
+          ...prevCartItems,
+          [cartKey]: {
+            ...existingItem,
+            quantity: existingItem.quantity + 1,
+          },
+        };
+      } else {
+        return {
+          ...prevCartItems,
+          [cartKey]: {
+            Product_ID: productId,
+            Size: size,
+            Color: color,
+            quantity: 1,
+          },
+        };
+      }
+    });
+  };
+  
   const addProduct = async (productId, size) => {
     const cartKey = `${productId}_${size}`;
     const existing = cartItems[cartKey] || { quantity: 0, Color: "Default" };
@@ -269,6 +294,7 @@ const ShopContextProvider = (props) => {
   const contextValue = {
     cartItems,
     addToCart,
+    addItemToCartLocal,
     addProduct,
     removeFromCart,
     getTotalCartAmount,

@@ -4,13 +4,15 @@ import star_icon from '../Assets/star_icon.png';
 import star_dull_icon from '../Assets/star_dull_icon.png';
 import { ShopContext } from "../../Context/ShopContext";
 import { useParams } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; // ✅ Must import the styles
+
 import favorite_filled from '../Assets/filled-heart.svg';
 import favorite_outline from '../Assets/unfilled-favIcon.svg';
 import { jwtDecode } from 'jwt-decode';
 
 const ProductDisplay = () => {
-  const { addToCart, addToFavorites, removeFromFavorites, favorites = [] } = useContext(ShopContext);
+  const { addToCart, addToFavorites, removeFromFavorites,addItemToCartLocal, favorites = [] } = useContext(ShopContext);
   const { productId } = useParams();
 
   const [product, setProduct] = useState(null);
@@ -21,7 +23,6 @@ const ProductDisplay = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setUserId] = useState(null);
 
-  // ✅ Get user ID from token
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -35,7 +36,38 @@ const ProductDisplay = () => {
     }
   }, []);
 
-  const isFavorited = favorites.find((item) => item.id === parseInt(productId));
+  const isFavorited = favorites.some(product => product.Product_ID === Number(productId));
+
+  const toggleFavorite = async () => {
+    if (!userId) {
+      alert("Please login to add to favorites.");
+      return;
+    }
+
+    if (isFavorited) {
+      removeFromFavorites(Number(productId));
+      try {
+        await fetch('http://localhost:8081/api/favourites', {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ User_ID: userId, Product_ID: Number(productId) }),
+        });
+      } catch (err) {
+        console.error("Error removing favorite:", err);
+      }
+    } else {
+      addToFavorites({ Product_ID: Number(productId) });
+      try {
+        await fetch('http://localhost:8081/api/favourites', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ User_ID: userId, Product_ID: Number(productId) }),
+        });
+      } catch (err) {
+        console.error("Error adding favorite:", err);
+      }
+    }
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -44,7 +76,6 @@ const ProductDisplay = () => {
       try {
         const res = await fetch(`http://localhost:8081/api/products/${productId}`);
         const data = await res.json();
-        console.log(data);
         setProduct(data);
 
         const sizes = data.Size ? data.Size.split(",").map(s => s.trim()) : [];
@@ -69,10 +100,10 @@ const ProductDisplay = () => {
 
   const handleAddToCart = async () => {
     if (!selectedSize || !selectedColor) {
-      alert("Please select both size and color.");
+      toast.error("Please select both size and color.");
       return;
     }
-
+  
     const payload = {
       User_ID: userId,
       Product_ID: parseInt(productId),
@@ -80,25 +111,31 @@ const ProductDisplay = () => {
       Size: selectedSize,
       Color: selectedColor
     };
-
+  
     try {
       const res = await fetch('http://localhost:8081/api/cart', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
-
+  
       if (res.ok) {
-        alert('Item added to cart!');
+              toast.success("🛒 Item added to cart!", {
+                position: "top-right",
+                autoClose: 1000,
+                style: { width: "450px", height: "50px", marginRight: "-100px" },
+              });
+              addItemToCartLocal(parseInt(productId), selectedSize, selectedColor);
       } else {
         const error = await res.json();
-        alert(`Error: ${error.message || "Add to cart failed"}`);
+        toast.error(`❌ ${error.message || "Add to cart failed"}`);
       }
     } catch (err) {
-      alert("Server error. Try again.");
       console.error(err);
+      toast.error("❌ Server error. Try again.");
     }
   };
+  
 
   if (!product) return <div>Loading product...</div>;
 
@@ -119,20 +156,18 @@ const ProductDisplay = () => {
           ))}
         </div>
         <div className="productdisplay-img">
-          <div
-            className="favorite-button"
-            onClick={() =>
-              isFavorited
-                ? removeFromFavorites(parseInt(productId))
-                : addToFavorites({ id: parseInt(productId), name: product.Name })
-            }
-          >
-            <img
-              src={isFavorited ? favorite_filled : favorite_outline}
-              alt="Favorite Icon"
-              className="favorite-icon"
-            />
-          </div>
+          {isLoggedIn && (
+            <div
+              className="favorite-button"
+              onClick={toggleFavorite}
+            >
+              <img
+                src={isFavorited ? favorite_filled : favorite_outline}
+                alt="Favorite Icon"
+                className="favorite-icon"
+              />
+            </div>
+          )}
           <img className="productdisplay-main-img" src={mainImage} alt="main" />
         </div>
       </div>
@@ -224,6 +259,3 @@ const ProductDisplay = () => {
 };
 
 export default ProductDisplay;
-
-
-

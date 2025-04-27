@@ -101,7 +101,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import "../Styles/CheckOutPayment.css";
 import CheckOutItems from "../Components/CheckOutItems/CheckOutItems";
-import PayPal from "../Components/Assets/PayPal.png";
 import { ShopContext } from "../Context/ShopContext";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from 'jwt-decode';
@@ -227,24 +226,11 @@ const CheckOutPayment = () => {
           <span className="active-step"> Payment</span>
         </div>
 
-        <div className="payment-method">
-          <button className={paymentMethod === "paypal" ? "active" : ""} onClick={() => setPaymentMethod("paypal")}>
-            <img src={PayPal} alt="PayPal Logo" className="paypal-logo" />
-          </button>
+        <div className="payment-method">         
           <button className={paymentMethod === "credit" ? "active" : ""} onClick={() => setPaymentMethod("credit")}>
             Credit Card
           </button>
         </div>
-
-        {paymentMethod === "paypal" && (
-          <div className="payment-form">
-            <h3 className="section-title">Payment Details</h3>
-            <input type="email" placeholder="Email" className="input-field full-width" />
-            <input type="text" placeholder="Card Number" className="input-field full-width" />
-            <button className="pay-button" onClick={handlePay}>Pay Now</button>
-          </div>
-        )}
-
         {paymentMethod === "credit" && (
           <div className="payment-form">
             <h3 className="section-title">Payment Details</h3>

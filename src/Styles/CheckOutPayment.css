@@ -60,13 +60,7 @@ body {
   .payment-method button:first-child {
     border-right: none;
   }
-  
-  .paypal-logo {
-    width: 150px;
-    margin-right: 8px;
-    vertical-align: middle;
-  }
-  
+
   /* Payment Form */
   .payment-form {
     margin-top: 20px;
