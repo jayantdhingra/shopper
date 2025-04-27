@@ -31,7 +31,7 @@ import HomeNavBar from './Components/HomeNavBar/HomeNavBar';
 import AdminDashboard from './Components/AdminDashboard/AdminDashboard';
 import SearchPage from './Components/SearchNavbar/SearchPage';
 import ChatApp from './Pages/ChatApp';
-
+import ProtectedRoute from './ProtectedRoute';
 
 function App() {
 
@@ -60,32 +60,32 @@ function MainContent({ searchQuery, setSearchQuery }) {
         <HomeNavBar />
       )}
       <Routes>
-      <Route path="/orders" element={<MyOrders/>}></Route>
+      <Route path="/orders" element={<ProtectedRoute><MyOrders/></ProtectedRoute>}></Route>
         <Route path='/' element={<Shop searchQuery={searchQuery} />}/>
-        <Route path='/men' element={<ShopCategory banner={men_banner} category="Men" searchQuery={searchQuery}/>}/>
-        <Route path='/women' element={<ShopCategory banner={women_banner}category="Women" searchQuery={searchQuery}/>}/>
-        <Route path='/kids' element={<ShopCategory banner={kid_banner} category="Kids" searchQuery={searchQuery}/>}/>
-        <Route path="/product" element={<Product/>}>
+        <Route path='/men' element={<ProtectedRoute><ShopCategory banner={men_banner} category="Men" searchQuery={searchQuery}/></ProtectedRoute>}/>
+        <Route path='/women' element={<ProtectedRoute><ShopCategory banner={women_banner}category="Women" searchQuery={searchQuery}/></ProtectedRoute>}/>
+        <Route path='/kids' element={<ProtectedRoute><ShopCategory banner={kid_banner} category="Kids" searchQuery={searchQuery}/></ProtectedRoute>}/>
+        <Route path="/product" element={<ProtectedRoute><Product/></ProtectedRoute>}>
           <Route path=':productId' element={<Product/>}/>
         </Route>
-        <Route path='/cart' element={<Cart/>}/>
+        <Route path='/cart' element={<ProtectedRoute><Cart/></ProtectedRoute>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/signup' element={<Signup/>}/>
         <Route path='/forgot-password' element={<ForgotPassword/>}/>
         <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
         <Route path='/contact-us' element={<ContactUs/>}/>
-        <Route path="/favorites" element={<Favorites />} />
-        <Route path="/checkout-address" element={<CheckOutAddress />} />
-        <Route path="/checkout-shipping" element={<CheckOutShipping />} />
-        <Route path="/checkout-payment" element={<CheckOutPayment />} />
-        <Route path="/user-settings" element={<AccountSettings />} />
+        <Route path="/favorites" element={<ProtectedRoute><Favorites /></ProtectedRoute>} />
+        <Route path="/checkout-address" element={<ProtectedRoute><CheckOutAddress /></ProtectedRoute>} />
+        <Route path="/checkout-shipping" element={<ProtectedRoute><CheckOutShipping /></ProtectedRoute>} />
+        <Route path="/checkout-payment" element={<ProtectedRoute><CheckOutPayment /></ProtectedRoute>} />
+        <Route path="/user-settings" element={<ProtectedRoute><AccountSettings /></ProtectedRoute>} />
         <Route path="/company" element={<Company />} />
         <Route path="/offices" element={<Offices />} />
         <Route path="/about" element={<About />} />
         <Route path="/confirmation" element={<Confirmation />} />
-        <Route path="/admin-dashboard" element={<AdminDashboard />} />
-        <Route path="/search" element={<SearchPage />} />
-        <Route path="/chat" element={<ChatApp />} />
+        <Route path="/admin-dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
+        <Route path="/search" element={<ProtectedRoute><SearchPage /></ProtectedRoute>} />
+        <Route path="/chat" element={<ProtectedRoute><ChatApp /></ProtectedRoute>} />
       </Routes>
       <Footer/>
     </div>
