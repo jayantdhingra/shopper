@@ -177,6 +177,20 @@ const ShopContextProvider = (props) => {
     fetchCartItems();
   };
 
+  const clearCart = async () => {
+    try {
+      await axios.delete(`http://localhost:8081/api/cart/user/${userId}`);
+      setCartItems({}); // Clear the cartItems locally too
+      toast.success("✅ Order placed successfully!", {
+        position: "bottom-right",
+        autoClose: 1500,
+      });
+    } catch (err) {
+      console.error("Error clearing cart:", err.message);
+      toast.error("❌ Failed to place order. Please try after sometime.");
+    }
+  };
+  
   const removeFromCart = async (productId, size) => {
     const cartKey = `${productId}_${size}`;
     const existing = cartItems[cartKey];
@@ -302,6 +316,7 @@ const ShopContextProvider = (props) => {
     all_product,
     favorites,
     addToFavorites,
+    clearCart,
     removeFromFavorites,
     getTotalFavoriteItems,
     fetchCartItems,
