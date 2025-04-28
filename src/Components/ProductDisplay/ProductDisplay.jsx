@@ -1,3 +1,8 @@
+/* Dhingra, Jayant – 1002105531
+Hakkinalu Somashekaraiah, Durgashree - 1002197918
+Singh, Dimple - 1002248368
+Shetty, Ananya Sri – 1002184482
+Tsavalam, Sashank - 1002234210 */
 import React, { useContext, useEffect, useState } from "react";
 import './ProductDisplay.css';
 import star_icon from '../Assets/star_icon.png';
@@ -120,12 +125,20 @@ const ProductDisplay = () => {
       });
   
       if (res.ok) {
-              toast.success("🛒 Item added to cart!", {
-                position: "top-right",
-                autoClose: 1000,
-                style: { width: "450px", height: "50px", marginRight: "-100px" },
-              });
-              addItemToCartLocal(parseInt(productId), selectedSize, selectedColor);
+        toast.success("🛒 Item added to cart!", {
+          position: "top-right",
+          autoClose: 1000,
+          style: { width: "450px", height: "50px", marginRight: "-100px" },
+        });
+  
+        // 🟰 Pass Name and Price too into addItemToCartLocal
+        addItemToCartLocal(
+          parseInt(productId),
+          selectedSize,
+          selectedColor,
+          product.Name,
+          product.Price
+        );
       } else {
         const error = await res.json();
         toast.error(`❌ ${error.message || "Add to cart failed"}`);

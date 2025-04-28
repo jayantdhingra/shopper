@@ -1,3 +1,8 @@
+/* Dhingra, Jayant – 1002105531
+Hakkinalu Somashekaraiah, Durgashree - 1002197918
+Singh, Dimple - 1002248368
+Shetty, Ananya Sri – 1002184482
+Tsavalam, Sashank - 1002234210 */
 import React, { useState, useEffect, createContext } from "react";
 import axios from "axios";
 import all_product from "../Components/Assets/all_product";
@@ -138,7 +143,7 @@ const ShopContextProvider = (props) => {
       console.error("Error adding to cart:", err.message);
     }
   };
-  const addItemToCartLocal = (productId, size, color = "Default") => {
+  const addItemToCartLocal = (productId, size, color = "Default", name = "", price = 0) => {
     const cartKey = `${productId}_${size}`;
     setCartItems((prevCartItems) => {
       const existingItem = prevCartItems[cartKey];
@@ -157,12 +162,15 @@ const ShopContextProvider = (props) => {
             Product_ID: productId,
             Size: size,
             Color: color,
+            Name: name,
+            Price: price,
             quantity: 1,
           },
         };
       }
     });
   };
+  
   
   const addProduct = async (productId, size) => {
     const cartKey = `${productId}_${size}`;
