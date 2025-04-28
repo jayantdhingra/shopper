@@ -51,6 +51,10 @@
     gap: 45px;
 }
 
+ul{
+    list-style-type: none;
+}
+
 .nav-login-cart button {
     width: 157px;
     height: 58px;
